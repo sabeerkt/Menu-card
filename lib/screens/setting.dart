@@ -66,6 +66,7 @@ class _SettingState extends State<Setting> {
                         ),
                         title: Text(
                           pages.name,
+                          
                           style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
