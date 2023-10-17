@@ -15,13 +15,13 @@ class OnboardingPage extends StatelessWidget {
       body: PageView(
         children: [
           OnboardingScreen(
-            title: 'Welcome to MyApp',
-            description: 'This is an introduction to our app.',
+            title: 'Welcome to MenuCard',
+            description: '"Snap, Crackle, Pop." ',
             imagePath: 'assets/Illustration.png',
           ),
           OnboardingScreen(
             title: 'Get Started',
-            description: 'Start using our app now!',
+            description: 'Click!',
             imagePath: 'assets/Illustrations.png',
             // Add a callback function to handle navigation
             onTap: () {

@@ -20,19 +20,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor:
           Color(0xFF043D5E), // Set the background color to dark blue
       body: Center(
         child: Container(
-          width: double.infinity, // Take up all available width
-          height: double.infinity, // Take up all available height
-          padding: const EdgeInsets.only(
-            top: 320,
-            left: 89,
-            right: 89,
-            bottom: 398,
-          ),
+          width: screenWidth,
+          height: screenHeight,
+          padding: const EdgeInsets.all(16.0), // Adjust padding
           clipBehavior: Clip.antiAlias,
           decoration: ShapeDecoration(
             color: Color(0xFF043D5E),
@@ -41,6 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'YUMMMY',
@@ -52,18 +51,20 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 0,
                 ),
               ),
-              const SizedBox(height: 99),
+              const SizedBox(height: 42.0), // Adjust the spacing
               SizedBox(
-                width: double.infinity,
+                width:
+                    screenWidth * 0.9, // Adjust the width based on screen width
                 child: Text(
                   'Someone with discerning taste and expertise in food.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFFE7E7E7),
-                    fontSize: 20,
+                    color: Colors.black,
+                    fontSize: screenWidth *
+                        0.04, // Adjust font size based on screen width
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w500,
-                    height: 0.08,
+                    height: 1.2, // Adjust line height
                   ),
                 ),
               ),
