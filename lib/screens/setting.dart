@@ -72,7 +72,7 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                         onTap: () {
-                          _handleItemTap(pages);
+                          Tap(pages);
                         },
                       ),
                     ],
@@ -86,24 +86,27 @@ class _SettingState extends State<Setting> {
     );
   }
 
-  void _handleItemTap(ItemData pages) {
+  // ignore: non_constant_identifier_names
+  void Tap(ItemData pages) {
     switch (pages.name) {
       case 'Terms and Conditions':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const term()),
         );
+        break; // Add 'break' to exit the switch statement
       case 'New  dish':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const newdish()),
         );
+        break; // Add 'break' to exit the switch statement
       case 'about':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const about()),
         );
-        break;
+        break; // Add 'break' to exit the switch statement
       case 'Exit':
       // exitDB(context);
       case 'Reset App':

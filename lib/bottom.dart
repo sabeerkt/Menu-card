@@ -17,7 +17,7 @@ class _BottomBarState extends State<BottomBar> {
   final List<Widget> bottomBarPages = [
     const home(),
     const Cart(),
-     chart(),
+    chart(),
     const Setting(),
   ];
 
@@ -31,6 +31,9 @@ class _BottomBarState extends State<BottomBar> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
+        backgroundColor: Colors.black, // Set the background color to black
+        selectedItemColor: Colors.white, // Set the selected item color to white
+        unselectedItemColor: Colors.white,
         onTap: (i) => setState(() => _currentIndex = i),
         items: const [
           BottomNavigationBarItem(
@@ -39,28 +42,28 @@ class _BottomBarState extends State<BottomBar> {
               // Icons.home_sharp,
               Icons.house,
 
-              color: Color.fromARGB(255, 85, 84, 84),
+              color: Color.fromARGB(255, 244, 239, 239),
             ),
           ),
           BottomNavigationBarItem(
             label: "item",
             icon: Icon(
               Icons.restaurant,
-              color: Color.fromARGB(255, 85, 84, 84),
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
           ),
           BottomNavigationBarItem(
             label: "chart",
             icon: Icon(
               Icons.pie_chart,
-              color: Color.fromARGB(255, 85, 84, 84),
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
           ),
           BottomNavigationBarItem(
             label: "setting",
             icon: Icon(
               Icons.settings,
-              color: Color.fromARGB(255, 85, 84, 84),
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
           ),
         ],

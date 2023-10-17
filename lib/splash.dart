@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/bottom.dart';
 import 'package:foodmenu/unboard.dart';
 
 class SplashScreen extends StatefulWidget {

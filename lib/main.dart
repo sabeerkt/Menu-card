@@ -1,7 +1,7 @@
 // ignore: unused_import
 
 import 'package:flutter/material.dart';
-import 'package:foodmenu/spash.dart';
+import 'package:foodmenu/splash.dart';
 
 void main() async {
   runApp(MyApp());
