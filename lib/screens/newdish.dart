@@ -35,21 +35,19 @@ class _newdishState extends State<newdish> {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: 100,
-                  height: 80,
-                  color: Colors.amber,
-                  child: Icon(Icons.image),
-                ),
-                TextFormField()
-              ],
-            ),
-          ],
+        body: Center(
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 65,
+              ),
+              Positioned(
+                child: IconButton(onPressed: () {}, icon: Icon(Icons.abc)),
+                bottom: 10,
+                left: 80,
+              )
+            ],
+          ),
         ),
       ),
     );
