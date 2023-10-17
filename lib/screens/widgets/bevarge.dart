@@ -7,13 +7,19 @@ Widget bevarge() {
     itemBuilder: (context, index) {
       // Return a Card widget for each item
       return Card(
+        color: Colors.black, // Set the background color to black
         child: ListTile(
+          contentPadding:
+              EdgeInsets.all(10), // Add some padding for better appearance
           leading: Container(
-            height: 50,
-            width: 50,
+            height: 60,
+            width: 100, // Adjust the width to your preference
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              // Add any other styling here
+              image: DecorationImage(
+                image: AssetImage("assets/juice.jfif"), // Add your image path
+                fit: BoxFit.cover, // Image fully covers the Container
+              ),
             ),
           ),
           onTap: () {
@@ -21,9 +27,18 @@ Widget bevarge() {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => detailpage()));
           },
-          title: Text("7up"),
-          subtitle: Text("drinks"),
-          trailing: Text("50"),
+          title: Text(
+            "juice",
+            style: TextStyle(color: Colors.white), // Set text color to white
+          ),
+          subtitle: Text(
+            "lime",
+            style: TextStyle(color: Colors.white), // Set text color to white
+          ),
+          trailing: Text(
+            "RS 15",
+            style: TextStyle(color: Colors.white), // Set text color to white
+          ),
         ),
       );
     },
