@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/detial.dart';
 
-Widget bevarge() {
+Widget all() {
   return ListView.builder(
     itemCount: 10,
     itemBuilder: (context, index) {
@@ -17,7 +17,7 @@ Widget bevarge() {
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               image: DecorationImage(
-                image: AssetImage("assets/juice.jfif"), // Add your image path
+                image: AssetImage("assets/undoaed.png"), // Add your image path
                 fit: BoxFit.cover, // Image fully covers the Container
               ),
             ),
@@ -28,15 +28,15 @@ Widget bevarge() {
                 context, MaterialPageRoute(builder: (context) => detailpage()));
           },
           title: Text(
-            "juice",
+            "Chicken",
             style: TextStyle(color: Colors.white), // Set text color to white
           ),
           subtitle: Text(
-            "lime",
+            "Biryani",
             style: TextStyle(color: Colors.white), // Set text color to white
           ),
           trailing: Text(
-            "RS 15",
+            "RS 900",
             style: TextStyle(color: Colors.white), // Set text color to white
           ),
         ),

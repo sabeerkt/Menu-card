@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:foodmenu/screens/search.dart';
+
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -12,9 +12,9 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   final List<String> imageList = [
-    'assets/SLID1.jpg',
-    'assets/SLID2.jpg',
-    'assets/SLID3.jpg',
+    'assets/slide3.jpg',
+    'assets/slide3.jpg',
+    'assets/slide3.jpg',
     // Add more image paths here
   ];
 
@@ -168,7 +168,7 @@ class _homeState extends State<home> {
               borderRadius:
                   BorderRadius.circular(20), // Adjust the radius as needed
               child: Image.asset(
-                'assets/SLID3.jpg',
+                'assets/undoaed.png',
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,

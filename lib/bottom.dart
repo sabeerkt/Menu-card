@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/screens/cart.dart';
 import 'package:foodmenu/screens/item.dart';
-import 'package:foodmenu/screens/chart.dart';
+
 import 'package:foodmenu/screens/home.dart';
 import 'package:foodmenu/screens/setting.dart';
+import 'package:foodmenu/screens/widgets/chart.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -16,7 +18,8 @@ class _BottomBarState extends State<BottomBar> {
 
   final List<Widget> bottomBarPages = [
     const home(),
-    const Cart(),
+    cart(),
+    const item(),
     chart(),
     const Setting(),
   ];
@@ -42,6 +45,13 @@ class _BottomBarState extends State<BottomBar> {
               // Icons.home_sharp,
               Icons.house,
 
+              color: Color.fromARGB(255, 244, 239, 239),
+            ),
+          ),
+          BottomNavigationBarItem(
+            label: "cart",
+            icon: Icon(
+              Icons.shopping_bag_sharp,
               color: Color.fromARGB(255, 244, 239, 239),
             ),
           ),

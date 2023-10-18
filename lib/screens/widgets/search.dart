@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Search extends StatelessWidget {
-  const Search({Key? key});
+  const Search({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
         child: TextFormField(
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(10),

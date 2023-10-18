@@ -40,7 +40,7 @@ class detailpage extends StatelessWidget {
                 height: 250,
                 decoration: ShapeDecoration(
                   image: const DecorationImage(
-                    image: AssetImage("assets/SLID2.jpg"),
+                    image: AssetImage("assets/juice.jfif"),
                     fit: BoxFit.fill,
                   ),
                   shape: RoundedRectangleBorder(
@@ -118,30 +118,51 @@ class detailpage extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      Container(
-                        width: 450,
-                        height: 80,
-                        padding: const EdgeInsets.only(
-                            top: 15, left: 10, bottom: 10),
-                        decoration: BoxDecoration(color: Color(0xFF9775FA)),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'add ',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 36, 30, 30),
-                                fontSize: 17,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0.06,
-                              ),
-                            ),
-                          ],
-                        ),
+                      // Container(
+                      //   width: 450,
+                      //   height: 80,
+                      //   padding: const EdgeInsets.only(
+                      //       top: 15, left: 10, bottom: 10),
+                      //   decoration: BoxDecoration(color: Color(0xFF9775FA)),
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Text(
+                      //         'add ',
+                      //         style: TextStyle(
+                      //           color: Color.fromARGB(255, 36, 30, 30),
+                      //           fontSize: 17,
+                      //           fontFamily: 'Inter',
+                      //           fontWeight: FontWeight.w500,
+                      //           height: 0.06,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      SizedBox(
+                        height: 230,
                       ),
+                      Container(
+                        width: double.infinity, // Full width of the screen
+                        height: 70, // Height of 70
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => cart(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF043D5E), // Dark blue color
+                          ),
+                          child: Text("add"),
+                        ),
+                      )
                     ],
                   ),
                 ),

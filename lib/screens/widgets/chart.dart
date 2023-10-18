@@ -1,8 +1,5 @@
-
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
 
 class chart extends StatelessWidget {
   const chart({Key? key}) : super(key: key);
@@ -14,32 +11,33 @@ class chart extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF043D5E),
           title: Text(
             'chart',
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true, // Center-align the title text
           elevation: 0,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.topRight,
-                colors: [
-                  Color.fromARGB(255, 178, 171, 171),
-                  Color(0xFF043D5E),
-                ],
-              ),
-            ),
-          ),
+          // flexibleSpace: Container(
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //       begin: Alignment.topLeft,
+          //       end: Alignment.topRight,
+          //       colors: [
+          //         Color.fromARGB(255, 178, 171, 171),
+          //         Color(0xFF043D5E),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           bottom: TabBar(
             tabs: <Widget>[
               Tab(text: 'food'),
               Tab(text: 'price'),
             ],
             labelColor: Colors.white, // Set the selected tab text color
-            unselectedLabelColor:
-                Colors.white, // Set the unselected tab text color
+            unselectedLabelColor: const Color.fromARGB(
+                255, 155, 149, 149), // Set the unselected tab text color
             labelStyle: TextStyle(
               fontSize: 16, // You can adjust the font size if needed
             ),

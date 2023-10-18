@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/screens/about.dart';
-import 'package:foodmenu/screens/newdish.dart';
-import 'package:foodmenu/screens/term.dart';
+
+import 'package:foodmenu/screens/subscreens/about.dart';
+import 'package:foodmenu/screens/subscreens/newdish.dart';
+import 'package:foodmenu/screens/subscreens/term.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -13,9 +14,9 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   final List<ItemData> itemsList = [
     ItemData(Icons.notes, 'Terms and Conditions'),
-    ItemData(Icons.food_bank_outlined, ' New  dish'),
+    ItemData(Icons.food_bank_outlined, 'New dish'),
     ItemData(Icons.restore, 'Reset App'),
-    ItemData(Icons.info, ' about '),
+    ItemData(Icons.info, 'About'),
     ItemData(Icons.exit_to_app, 'Exit'),
   ];
 
@@ -23,25 +24,14 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF043D5E),
         elevation: 0,
-        centerTitle: true, // Center-align the title
+        centerTitle: true,
         title: const Text(
-          "setting",
+          "Settings",
           style: TextStyle(
-            color: Colors.black, // Set the text color to black
-            fontSize: 16, // Set the text size to 16
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 178, 171, 171),
-                Color(0xFF043D5E),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-            ),
+            color: Colors.black,
+            fontSize: 16,
           ),
         ),
       ),
@@ -53,7 +43,7 @@ class _SettingState extends State<Setting> {
             itemCount: itemsList.length,
             separatorBuilder: (context, index) => const Divider(),
             itemBuilder: (BuildContext context, int index) {
-              final ItemData pages = itemsList[index];
+              final ItemData item = itemsList[index];
               return Container(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -61,19 +51,18 @@ class _SettingState extends State<Setting> {
                     children: [
                       ListTile(
                         leading: Icon(
-                          pages.icon,
+                          item.icon,
                           color: Colors.black,
                         ),
                         title: Text(
-                          pages.name,
-                          
+                          item.name,
                           style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                         onTap: () {
-                          Tap(pages);
+                          tap(item);
                         },
                       ),
                     ],
@@ -87,31 +76,31 @@ class _SettingState extends State<Setting> {
     );
   }
 
-  // ignore: non_constant_identifier_names
-  void Tap(ItemData pages) {
-    switch (pages.name) {
+  void tap(ItemData item) {
+    switch (item.name) {
       case 'Terms and Conditions':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const term()),
         );
-        break; // Add 'break' to exit the switch statement
-      case 'New  dish':
+        break;
+      case 'New dish':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const newdish()),
+          MaterialPageRoute(builder: (context) => newdish()),
         );
-        break; // Add 'break' to exit the switch statement
-      case 'about':
+        break;
+      case 'About':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const about()),
         );
-        break; // Add 'break' to exit the switch statement
+        break;
       case 'Exit':
-      // exitDB(context);
+        // Handle exit logic here
+        break;
       case 'Reset App':
-        //  resetDB(context);
+        // Handle reset app logic here
         break;
       default:
         break;

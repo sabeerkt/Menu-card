@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/screens/widgets/all.dart';
+import 'package:foodmenu/screens/widgets/search.dart';
+import 'package:foodmenu/screens/widgets/tabs/all.dart';
+import 'package:foodmenu/screens/widgets/tabs/bevarge.dart';
+import 'package:foodmenu/screens/widgets/tabs/breakfast.dart';
+import 'package:foodmenu/screens/widgets/tabs/desrt.dart';
 
-import 'package:foodmenu/screens/widgets/bevarge.dart';
-import 'package:foodmenu/screens/widgets/breakfast.dart';
-import 'package:foodmenu/screens/widgets/desrt.dart';
-
-class Cart extends StatelessWidget {
-  const Cart({Key? key}) : super(key: key);
+class item extends StatelessWidget {
+  const item({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +15,15 @@ class Cart extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF043D5E),
           title: Text(
-            'Cart',
-            style:
-                TextStyle(color: Colors.white), // Set the text color to white
+            'item',
+            style: TextStyle(
+                color: const Color.fromARGB(
+                    255, 255, 255, 255)), // Set the text color to white
           ),
           centerTitle: true,
           elevation: 0,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  const Color.fromARGB(255, 178, 171, 171),
-                  Color(0xFF043D5E)
-                ], // Define the gradient colors
-                begin: Alignment.topLeft,
-                end: Alignment.topRight,
-              ),
-            ),
-          ),
           bottom: TabBar(
             tabs: <Widget>[
               Tab(text: 'all'),
@@ -41,10 +31,22 @@ class Cart extends StatelessWidget {
               Tab(text: 'desserts'),
               Tab(text: 'beverage'),
             ],
-            labelColor:
-                Colors.black, // Set the selected tab text color to black
-            unselectedLabelColor: Colors.black,
+
+            labelColor: const Color.fromARGB(
+                255, 255, 255, 255), // Set the selected tab text color to black
+            unselectedLabelColor: Color.fromARGB(255, 126, 123, 123),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Search(),
+                      ));
+                },
+                icon: Icon(Icons.search))
+          ],
         ),
         body: TabBarView(
           children: [
