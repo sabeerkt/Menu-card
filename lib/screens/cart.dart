@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/screens/home.dart';
 
 class cart extends StatelessWidget {
   const cart({Key? key});
@@ -26,68 +25,74 @@ class cart extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: ListTile(
-                  tileColor: const Color.fromARGB(255, 6, 6, 6),
-                  leading: Container(
-                    height: 50,
-                    width: 50,
-                    child: Image.asset('assets/Illustrations.png'),
-                  ),
-                  title: const Text(
-                    "7up",
-                    style: TextStyle(
-                      color: Colors.white,
+              child: ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(15.0), // Adjust the radius as needed
+                child: Card(
+                  child: ListTile(
+                    tileColor: const Color.fromARGB(255, 6, 6, 6),
+                    leading: Container(
+                      height: 50,
+                      width: 50,
+                      child: Image.asset('assets/Illustrations.png'),
                     ),
-                  ),
-                  subtitle: const Text(
-                    "beverage",
-                    style: TextStyle(
-                      color: Colors.white,
+                    title: const Text(
+                      "7up",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.remove, color: Colors.white),
-                        onPressed: () {
-                          // Add logic to decrease item count
-                        },
+                    subtitle: const Text(
+                      "beverage",
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
-                      const Text(
-                        "1",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove, color: Colors.white),
+                          onPressed: () {
+                            // Add logic to decrease item count
+                          },
                         ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.add, color: Colors.white),
-                        onPressed: () {
-                          // Add logic to increase item count
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.white),
-                        onPressed: () {
-                          // Add logic to delete item
-                        },
-                      ),
-                      const Text(
-                        "\$99.99",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF65B31D),
+                        const Text(
+                          "1",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    ],
+                        IconButton(
+                          icon: const Icon(Icons.add, color: Colors.white),
+                          onPressed: () {
+                            // Add logic to increase item count
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.white),
+                          onPressed: () {
+                            // Add logic to delete item
+                          },
+                        ),
+                        const Text(
+                          "\$99.99",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF65B31D),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            ), 
+            
+             //billl
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black, width: 2),
@@ -140,7 +145,7 @@ class cart extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            )
           ],
         ),
       ),

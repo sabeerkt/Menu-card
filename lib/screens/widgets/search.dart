@@ -6,7 +6,20 @@ class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "search",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
+        ),
+        flexibleSpace: Container(
+          color: const Color(0xFF043D5E),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
         child: TextFormField(
