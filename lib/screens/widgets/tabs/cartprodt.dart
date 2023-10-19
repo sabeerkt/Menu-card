@@ -7,16 +7,16 @@ Widget cartprodt() {
     itemBuilder: (context, index) {
       // Replace the Card with a Container for custom styling
       return Container(
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.symmetric(vertical: 8),
         color: Colors.black, // Set the background color to black
         child: ListTile(
           contentPadding:
-              EdgeInsets.all(10), // Add some padding for better appearance
+              const EdgeInsets.all(10), // Add some padding for better appearance
           leading: Container(
             height: 60,
             width: 100, // Adjust the width to your preference
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
               image: DecorationImage(
                 image: AssetImage("assets/SLID1.jpg"), // Add your image path
@@ -27,13 +27,13 @@ Widget cartprodt() {
           onTap: () {
             // Navigate to the detail page when the ListTile is tapped
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => detailpage()));
+                context, MaterialPageRoute(builder: (context) => const detailpage()));
           },
-          title: Text(
+          title: const Text(
             "Chicken",
             style: TextStyle(color: Colors.white), // Set text color to white
           ),
-          subtitle: Text(
+          subtitle: const Text(
             "Biryani",
             style: TextStyle(color: Colors.white), // Set text color to white
           ),
@@ -41,7 +41,7 @@ Widget cartprodt() {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                icon: Icon(Icons.add), // Icon for increasing quantity
+                icon: const Icon(Icons.add), // Icon for increasing quantity
                 color: Colors.white,
                 onPressed: () {
                   // Increase the quantity of the product
@@ -49,7 +49,7 @@ Widget cartprodt() {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.delete), // Icon for deleting the item
+                icon: const Icon(Icons.delete), // Icon for deleting the item
                 color: Colors.white,
                 onPressed: () {
                   // Delete the product item

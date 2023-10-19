@@ -11,7 +11,7 @@ Widget desrets() {
           leading: Container(
             height: 50,
             width: 50,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
               // Add any other styling here
             ),
@@ -19,11 +19,11 @@ Widget desrets() {
           onTap: () {
             // Navigate to the detail page when the ListTile is tapped
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => detailpage()));
+                context, MaterialPageRoute(builder: (context) => const detailpage()));
           },
-          title: Text("blackforest"),
-          subtitle: Text("desrts"),
-          trailing: Text("250"),
+          title: const Text("blackforest"),
+          subtitle: const Text("desrts"),
+          trailing: const Text("250"),
         ),
       );
     },

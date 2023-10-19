@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:foodmenu/screens/subscreens/about.dart';
-import 'package:foodmenu/screens/subscreens/newdish.dart';
-import 'package:foodmenu/screens/subscreens/term.dart';
+import 'package:foodmenu/screens/sub_screens/about.dart';
+import 'package:foodmenu/screens/sub_screens/newdish.dart';
+import 'package:foodmenu/screens/sub_screens/term.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);

@@ -34,12 +34,12 @@ class Search extends StatelessWidget {
             ),
             filled: true,
             fillColor: Colors.white,
-            suffixIcon: Icon(
+            suffixIcon: const Icon(
               Icons.search_sharp,
               color: Colors.orange, // Set the icon color to orange
             ),
             hintText: "Search",
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: Color(0xFF636262), // Set the hint text color
             ),
           ),

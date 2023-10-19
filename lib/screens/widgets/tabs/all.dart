@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/detial.dart';
-
+//change alliteam
 Widget all() {
   return ListView.builder(
     itemCount: 10,
@@ -10,11 +10,11 @@ Widget all() {
         color: Colors.black, // Set the background color to black
         child: ListTile(
           contentPadding:
-              EdgeInsets.all(10), // Add some padding for better appearance
+              const EdgeInsets.all(10), // Add some padding for better appearance
           leading: Container(
             height: 60,
             width: 100, // Adjust the width to your preference
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
               image: DecorationImage(
                 image: AssetImage("assets/undoaed.png"), // Add your image path
@@ -25,17 +25,17 @@ Widget all() {
           onTap: () {
             // Navigate to the detail page when the ListTile is tapped
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => detailpage()));
+                context, MaterialPageRoute(builder: (context) => const detailpage()));
           },
-          title: Text(
+          title: const Text(
             "Chicken",
             style: TextStyle(color: Colors.white), // Set text color to white
           ),
-          subtitle: Text(
+          subtitle: const Text(
             "Biryani",
             style: TextStyle(color: Colors.white), // Set text color to white
           ),
-          trailing: Text(
+          trailing: const Text(
             "RS 900",
             style: TextStyle(color: Colors.white), // Set text color to white
           ),

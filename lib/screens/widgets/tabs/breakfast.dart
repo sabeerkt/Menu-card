@@ -11,7 +11,7 @@ Widget breakfast() {
           leading: Container(
             height: 50,
             width: 50,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
               // Add any other styling here
             ),
@@ -19,11 +19,11 @@ Widget breakfast() {
           onTap: () {
             // Navigate to the detail page when the ListTile is tapped
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => detailpage()));
+                context, MaterialPageRoute(builder: (context) => const detailpage()));
           },
-          title: Text("dosha"),
-          subtitle: Text("breakfast"),
-          trailing: Text("100"),
+          title: const Text("dosha"),
+          subtitle: const Text("breakfast"),
+          trailing: const Text("100"),
         ),
       );
     },

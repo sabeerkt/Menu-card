@@ -15,16 +15,16 @@ class item extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF043D5E),
-          title: Text(
+          backgroundColor: const Color(0xFF043D5E),
+          title: const Text(
             'item',
             style: TextStyle(
-                color: const Color.fromARGB(
+                color: Color.fromARGB(
                     255, 255, 255, 255)), // Set the text color to white
           ),
           centerTitle: true,
           elevation: 0,
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: <Widget>[
               Tab(text: 'all'),
               Tab(text: 'breakfast'),
@@ -32,7 +32,7 @@ class item extends StatelessWidget {
               Tab(text: 'beverage'),
             ],
 
-            labelColor: const Color.fromARGB(
+            labelColor: Color.fromARGB(
                 255, 255, 255, 255), // Set the selected tab text color to black
             unselectedLabelColor: Color.fromARGB(255, 126, 123, 123),
           ),
@@ -42,10 +42,10 @@ class item extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Search(),
+                        builder: (context) => const Search(),
                       ));
                 },
-                icon: Icon(Icons.search))
+                icon: const Icon(Icons.search))
           ],
         ),
         body: TabBarView(

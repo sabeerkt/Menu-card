@@ -114,7 +114,7 @@ class detailpage extends StatelessWidget {
                   onTap: () {
                     // Navigate to another page or perform the desired action here
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => cart()));
+                        MaterialPageRoute(builder: (context) => const cart()));
                   },
                   child: Column(
                     children: [
@@ -142,7 +142,7 @@ class detailpage extends StatelessWidget {
                       //     ],
                       //   ),
                       // ),
-                      SizedBox(
+                      const SizedBox(
                         height: 230,
                       ),
                       Container(
@@ -153,14 +153,14 @@ class detailpage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => cart(),
+                                builder: (context) => const cart(),
                               ),
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Color(0xFF043D5E), // Dark blue color
+                            primary: const Color(0xFF043D5E), // Dark blue color
                           ),
-                          child: Text("add"),
+                          child: const Text("add"),
                         ),
                       )
                     ],

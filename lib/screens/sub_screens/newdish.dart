@@ -44,7 +44,7 @@ class _newdishState extends State<newdish> {
                             color: const Color.fromARGB(255, 255, 255, 255),
                             width: 2.0), // Customize border properties
                       ),
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         radius: 65,
                         backgroundImage: AssetImage(
                             'assets/juice.jfif'), // Provide the image path
@@ -94,6 +94,7 @@ class _newdishState extends State<newdish> {
                           maxLines:
                               3, // Allowing multiple lines for description
                         ),
+                        
                       ),
                     ],
                   ),
@@ -108,7 +109,7 @@ class _newdishState extends State<newdish> {
                     // },
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                         ),
                         Container(
@@ -119,14 +120,14 @@ class _newdishState extends State<newdish> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => cart(),
+                                  builder: (context) => const cart(),
                                 ),
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF043D5E), // Dark blue color
+                              primary: const Color(0xFF043D5E), // Dark blue color
                             ),
-                            child: Text("submit"),
+                            child: const Text("submit"),
                           ),
                         )
                       ],
