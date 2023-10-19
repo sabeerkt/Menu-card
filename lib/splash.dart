@@ -11,9 +11,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Add any initialization code here
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => OnboardingPage()),
+        MaterialPageRoute(builder: (_) => const OnboardingPage()),
       );
     });
   }
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       backgroundColor:
-          Color(0xFF043D5E), // Set the background color to dark blue
+          const Color(0xFF043D5E), // Set the background color to dark blue
       body: Center(
         child: Container(
           width: screenWidth,
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
           padding: const EdgeInsets.all(16.0), // Adjust padding
           clipBehavior: Clip.antiAlias,
           decoration: ShapeDecoration(
-            color: Color(0xFF043D5E),
+            color: const Color(0xFF043D5E),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0), // Remove border radius
             ),
@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'YUMMMY',
                 style: TextStyle(
                   color: Colors.white,
