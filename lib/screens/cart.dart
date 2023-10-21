@@ -13,12 +13,12 @@ class cart extends StatelessWidget {
           title: const Text(
             "Cart",
             style: TextStyle(
-              color: Colors.black,
+              color: Color.fromARGB(255, 255, 255, 255),
               fontSize: 16,
             ),
           ),
           flexibleSpace: Container(
-            color: const Color(0xFF043D5E),
+            color: const Color.fromARGB(255, 129, 44, 226),
           ),
         ),
         body: Column(

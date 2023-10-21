@@ -9,25 +9,16 @@ class detailpage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true, // Center-align the title
+        centerTitle: true,
         title: const Text(
-          "details",
+          "Details",
           style: TextStyle(
-            color: Colors.black, // Set the text color to black
-            fontSize: 16, // Set the text size to 16
+            color: Color.fromARGB(255, 255, 255, 255),
+            fontSize: 16,
           ),
         ),
         flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 178, 171, 171),
-                Color(0xFF043D5E),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-            ),
-          ),
+          color: const Color.fromARGB(255, 129, 44, 226),
         ),
       ),
       body: SingleChildScrollView(
@@ -158,7 +149,8 @@ class detailpage extends StatelessWidget {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFF043D5E), // Dark blue color
+                            primary: const Color.fromARGB(
+                                255, 129, 44, 226), // Dark blue color
                           ),
                           child: const Text("add"),
                         ),

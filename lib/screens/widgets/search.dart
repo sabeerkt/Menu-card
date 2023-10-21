@@ -12,12 +12,12 @@ class Search extends StatelessWidget {
         title: const Text(
           "search",
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 246, 246, 246),
             fontSize: 16,
           ),
         ),
         flexibleSpace: Container(
-          color: const Color(0xFF043D5E),
+          color: const Color.fromARGB(255, 129, 44, 226),
         ),
       ),
       body: Padding(

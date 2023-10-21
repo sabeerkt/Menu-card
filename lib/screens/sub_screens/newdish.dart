@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/cart.dart';
 
-import 'package:foodmenu/screens/item.dart';
-
 class newdish extends StatefulWidget {
   const newdish({super.key});
 
@@ -26,114 +24,145 @@ class _newdishState extends State<newdish> {
             ),
           ),
           flexibleSpace: Container(
-            color: const Color(0xFF043D5E),
+            color: const Color.fromARGB(255, 129, 44, 226),
           ),
         ),
         body: SingleChildScrollView(
-          child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 150, // Adjust the width and height as needed
-                      height: 150,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            width: 2.0), // Customize border properties
-                      ),
-                      child: const CircleAvatar(
-                        radius: 65,
-                        backgroundImage: AssetImage(
-                            'assets/juice.jfif'), // Provide the image path
-                      ),
-                    )),
-                Positioned(
-                  child:
-                      IconButton(onPressed: () {}, icon: const Icon(Icons.abc)),
-                  bottom: 10,
-                  left: 80,
-                ),
-                Container(
-                  padding:
-                      const EdgeInsets.all(16.0), // Add padding for spacing
-
-                  child: const Column(
+                MaterialButton(
+                  height: 150.0,
+                  color: const Color.fromARGB(255, 255, 255,
+                      254), // Use the Colors.orange constant for the orange color
+                  onPressed: () {},
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextField(
-                          decoration: InputDecoration(labelText: 'Name'),
-                        ),
+                      Icon(
+                        Icons
+                            .image, // You can change this to the desired image icon
+                        color: Color.fromARGB(255, 0, 0, 0), // Icon color
                       ),
                       SizedBox(
-                          height:
-                              16.0), // Add vertical spacing between the text fields
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextField(
-                          decoration: InputDecoration(labelText: 'Cost'),
-                        ),
-                      ),
-                      SizedBox(height: 16.0),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              labelText: 'Category',
-                              suffixIcon: Icon(Icons.arrow_drop_down)),
-                        ),
-                      ),
-                      SizedBox(height: 16.0),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextField(
-                          decoration: InputDecoration(labelText: 'Description'),
-                          maxLines:
-                              3, // Allowing multiple lines for description
-                        ),
-                        
+                          width:
+                              8.0), // Add some spacing between the icon and text
+                      Text(
+                        "Add Image",
+                        style: TextStyle(color: Colors.white), // Text color
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    // onTap: () {
-                    //     // Navigate to another page or perform the desired action here
-                    //   Navigator.push(context,
-                    //       MaterialPageRoute(builder: (context) => cart()));
-                    // },
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Container(
-                          width: double.infinity, // Full width of the screen
-                          height: 70, // Height of 70
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const cart(),
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFF043D5E), // Dark blue color
-                            ),
-                            child: const Text("submit"),
-                          ),
-                        )
-                      ],
+                Container(),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    labelStyle: const TextStyle(
+                        color: Colors
+                            .pink), // Change label (hint text) color to pink
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Set border radius to make it curved
+                      borderSide: const BorderSide(
+                          color: Color.fromARGB(
+                              255, 11, 11, 11)), // Set border color to pink
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Set focused border radius to make it curved
+                      borderSide: const BorderSide(
+                          color:
+                              Colors.pink), // Set focused border color to pink
                     ),
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Category',
+                    labelStyle: const TextStyle(
+                        color: Colors
+                            .pink), // Change label (hint text) color to pink
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Set border radius to make it curved
+                      borderSide: const BorderSide(
+                          color: Color.fromARGB(
+                              255, 11, 11, 11)), // Set border color to pink
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Set focused border radius to make it curved
+                      borderSide: const BorderSide(
+                          color:
+                              Colors.pink), // Set focused border color to pink
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Cost',
+                    labelStyle: const TextStyle(
+                        color: Colors
+                            .pink), // Change label (hint text) color to pink
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Set border radius to make it curved
+                      borderSide: const BorderSide(
+                          color: Color.fromARGB(
+                              255, 11, 11, 11)), // Set border color to pink
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Set focused border radius to make it curved
+                      borderSide: const BorderSide(
+                          color:
+                              Colors.pink), // Set focused border color to pink
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    labelStyle: const TextStyle(
+                        color: Colors
+                            .pink), // Change label (hint text) color to pink
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Set border radius to make it curved
+                      borderSide: const BorderSide(
+                          color: Color.fromARGB(
+                              255, 11, 11, 11)), // Set border color to pink
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Set focused border radius to make it curved
+                      borderSide: const BorderSide(
+                          color:
+                              Colors.pink), // Set focused border color to pink
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                MaterialButton(
+                  color: Color.fromARGB(255, 120, 82, 150),
+                  onPressed: () {},
+                  child: const Text('Save'),
+                ),
               ],
             ),
           ),

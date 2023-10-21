@@ -17,7 +17,7 @@ class term extends StatelessWidget {
             ),
           ),
           flexibleSpace: Container(
-            color: const Color(0xFF043D5E),
+            color: const Color.fromARGB(255, 129, 44, 226),
           ),
         ),
         body: const Padding(

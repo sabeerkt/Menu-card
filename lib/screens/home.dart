@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:foodmenu/screens/widgets/tabs/All_item.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -21,35 +22,6 @@ class _homeState extends State<home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   elevation: 0,
-        //   centerTitle: true, // Center-align the title
-        //   title: const Text(
-        //     "home",
-        //     style: TextStyle(
-        //       color: Colors.black, // Set the text color to black
-        //       fontSize: 16, // Set the text size to 16
-        //     ),
-        //   ),
-        //   flexibleSpace: Container(
-        //     decoration: const BoxDecoration(
-        //       gradient: LinearGradient(
-        //         colors: [
-        //           Color.fromARGB(255, 178, 171, 171),
-        //           Color(0xFF043D5E),
-        //         ],
-        //         begin: Alignment.topLeft,
-        //         end: Alignment.topRight,
-        //       ),
-        //     ),
-        //     child: Center(
-        //       child: CircleAvatar(
-        //         backgroundImage: AssetImage("your_image_path.png"),
-        //         radius: 30, // Set the radius to your preferred size
-        //       ),
-        //     ),
-        //   ),
-        // ),
         body: Column(
           children: [
             Padding(
@@ -128,12 +100,17 @@ class _homeState extends State<home> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: foodlist(),
-            ),
-          ],
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: All_iteam(),
+            // ),
+          ], 
+          
+
+
+      
         ),
+        
       ),
     );
   }

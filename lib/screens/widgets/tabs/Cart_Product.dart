@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/detial.dart';
 
-Widget cartprodt() {
+Widget Cart_prodt() {
   return ListView.builder(
     itemCount: 10,
     itemBuilder: (context, index) {
@@ -11,8 +11,8 @@ Widget cartprodt() {
         margin: const EdgeInsets.symmetric(vertical: 8),
         color: Colors.black, // Set the background color to black
         child: ListTile(
-          contentPadding:
-              const EdgeInsets.all(10), // Add some padding for better appearance
+          contentPadding: const EdgeInsets.all(
+              10), // Add some padding for better appearance
           leading: Container(
             height: 60,
             width: 100, // Adjust the width to your preference
@@ -26,8 +26,8 @@ Widget cartprodt() {
           ),
           onTap: () {
             // Navigate to the detail page when the ListTile is tapped
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => const detailpage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const detailpage()));
           },
           title: const Text(
             "Chicken",

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/detial.dart';
+
 //change alliteam
-Widget all() {
+Widget All_iteam() {
   return ListView.builder(
     itemCount: 10,
     itemBuilder: (context, index) {
       // Return a Card widget for each item
       return Card(
-        color: Colors.black, // Set the background color to black
+        color: Color.fromARGB(
+            255, 210, 144, 108), // Set the background color to black
         child: ListTile(
-          contentPadding:
-              const EdgeInsets.all(10), // Add some padding for better appearance
+          contentPadding: const EdgeInsets.all(
+              10), // Add some padding for better appearance
           leading: Container(
             height: 60,
             width: 100, // Adjust the width to your preference
@@ -24,8 +26,8 @@ Widget all() {
           ),
           onTap: () {
             // Navigate to the detail page when the ListTile is tapped
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => const detailpage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const detailpage()));
           },
           title: const Text(
             "Chicken",

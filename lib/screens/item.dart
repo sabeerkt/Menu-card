@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/widgets/search.dart';
-import 'package:foodmenu/screens/widgets/tabs/all.dart';
-import 'package:foodmenu/screens/widgets/tabs/bevarge.dart';
-import 'package:foodmenu/screens/widgets/tabs/breakfast.dart';
-import 'package:foodmenu/screens/widgets/tabs/desrt.dart';
+import 'package:foodmenu/screens/widgets/tabs/All_item.dart';
+import 'package:foodmenu/screens/widgets/tabs/drinks.dart';
+import 'package:foodmenu/screens/widgets/tabs/Breakfast.dart';
+import 'package:foodmenu/screens/widgets/tabs/Deserts.dart';
 
 class item extends StatelessWidget {
   const item({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class item extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFF043D5E),
+          backgroundColor: const Color.fromARGB(255, 129, 44, 226),
           title: const Text(
             'item',
             style: TextStyle(
@@ -50,7 +50,7 @@ class item extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            all(),
+            All_iteam(),
             breakfast(),
             desrets(),
             bevarge(),
