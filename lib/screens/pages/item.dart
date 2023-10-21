@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/screens/pages/cart.dart';
 import 'package:foodmenu/screens/widgets/search.dart';
 import 'package:foodmenu/screens/widgets/tabs/All_item.dart';
 import 'package:foodmenu/screens/widgets/tabs/drinks.dart';
@@ -37,15 +38,30 @@ class item extends StatelessWidget {
             unselectedLabelColor: Color.fromARGB(255, 126, 123, 123),
           ),
           actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Search(),
-                      ));
-                },
-                icon: const Icon(Icons.search))
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Search(),
+                        ));
+                  },
+                  icon: const Icon(Icons.search),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const cart(),
+                        ));
+                  },
+                  icon: const Icon(Icons.shopify_sharp),
+                )
+              ],
+            )
           ],
         ),
         body: TabBarView(

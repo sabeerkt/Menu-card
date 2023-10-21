@@ -104,13 +104,8 @@ class _homeState extends State<home> {
             //   padding: const EdgeInsets.all(8.0),
             //   child: All_iteam(),
             // ),
-          ], 
-          
-
-
-      
+          ],
         ),
-        
       ),
     );
   }

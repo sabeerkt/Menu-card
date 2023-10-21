@@ -30,7 +30,7 @@ class cart extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(
-                          15.0), // Adjust the radius as needed
+                          25), // Adjust the radius as needed
                       child: Card(
                         child: ListTile(
                           tileColor: const Color.fromARGB(255, 6, 6, 6),
