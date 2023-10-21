@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/screens/cart.dart';
-import 'package:foodmenu/screens/item.dart';
 
-import 'package:foodmenu/screens/home.dart';
-import 'package:foodmenu/screens/setting.dart';
+import 'package:foodmenu/screens/pages/cart.dart';
+import 'package:foodmenu/screens/pages/home.dart';
+import 'package:foodmenu/screens/pages/item.dart';
+import 'package:foodmenu/screens/pages/setting.dart';
+
 import 'package:foodmenu/screens/widgets/chart.dart';
 
 class BottomBar extends StatefulWidget {
@@ -18,9 +19,9 @@ class _BottomBarState extends State<BottomBar> {
 
   final List<Widget> bottomBarPages = [
     const home(),
-    cart(),
+    const cart(),
     const item(),
-    chart(),
+    const chart(),
     const Setting(),
   ];
 
@@ -30,12 +31,14 @@ class _BottomBarState extends State<BottomBar> {
       body: IndexedStack(
         index: _currentIndex,
         children: bottomBarPages,
+        
       ),
+      
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         backgroundColor:
-            Color.fromARGB(255, 0, 0, 0), // Set the background color to black
+            const Color.fromARGB(255, 0, 0, 0), // Set the background color to black
         selectedItemColor: Colors.white, // Set the selected item color to white
         unselectedItemColor: Colors.white,
         onTap: (i) => setState(() => _currentIndex = i),

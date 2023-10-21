@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/screens/detial.dart';
+
+import 'package:foodmenu/screens/pages/detial.dart';
 
 Widget breakfast() {
   return ListView.builder(

@@ -104,9 +104,10 @@ class cart extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 2),
+                border: Border.all(
+                    color: const Color.fromARGB(255, 255, 255, 255), width: 2),
                 borderRadius: BorderRadius.circular(12),
-                color: const Color.fromARGB(255, 190, 179, 179),
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
               padding: const EdgeInsets.all(16),
               child: const Row(

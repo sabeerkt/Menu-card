@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/screens/cart.dart';
+import 'package:foodmenu/screens/pages/cart.dart';
+
 
 class detailpage extends StatelessWidget {
   const detailpage({super.key});
