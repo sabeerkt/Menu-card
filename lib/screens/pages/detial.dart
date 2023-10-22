@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/pages/cart.dart';
-
+import 'package:foodmenu/screens/widgets/search.dart';
 
 class detailpage extends StatelessWidget {
   const detailpage({super.key});
@@ -21,6 +21,18 @@ class detailpage extends StatelessWidget {
         flexibleSpace: Container(
           color: const Color.fromARGB(255, 129, 44, 226),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Search(),
+                  ));
+            },
+            icon: const Icon(Icons.edit),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -110,30 +122,6 @@ class detailpage extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      // Container(
-                      //   width: 450,
-                      //   height: 80,
-                      //   padding: const EdgeInsets.only(
-                      //       top: 15, left: 10, bottom: 10),
-                      //   decoration: BoxDecoration(color: Color(0xFF9775FA)),
-                      //   child: Row(
-                      //     mainAxisSize: MainAxisSize.min,
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       Text(
-                      //         'add ',
-                      //         style: TextStyle(
-                      //           color: Color.fromARGB(255, 36, 30, 30),
-                      //           fontSize: 17,
-                      //           fontFamily: 'Inter',
-                      //           fontWeight: FontWeight.w500,
-                      //           height: 0.06,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       const SizedBox(
                         height: 230,
                       ),

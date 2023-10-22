@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Components/bottom.dart';
 
-
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key});
 
@@ -12,24 +11,24 @@ class OnboardingPage extends StatelessWidget {
       //   title: Text('Onboarding Page'),
       // ),
 
-      backgroundColor: Color(0xFF053E5E),
+      backgroundColor: const Color(0xFF053E5E),
       body: PageView(
         children: [
-          OnboardingScreen(
+          const OnboardingScreen(
             title: 'Welcome to MenuCard',
             description: '"Snap, Crackle, Pop." ',
-            imagePath: 'assets/Illustration.png',
+            imagePath: 'assets/Order food-rafiki.pngassets/Illustration.png',
           ),
           OnboardingScreen(
             title: 'Get Started',
             description: 'Click!',
-            imagePath: 'assets/Illustrations.png',
+            imagePath: 'assets/Order food-bro.png',
             // Add a callback function to handle navigation
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) =>
-                      BottomBar(), // Replace 'NextPage' with your desired next page
+                      const BottomBar(), // Replace 'NextPage' with your desired next page
                 ),
               );
             },
@@ -65,15 +64,15 @@ class OnboardingScreen extends StatelessWidget {
               height: 200,
               width: 200,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               title,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               description,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ],

@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_glow/flutter_glow.dart';
 import 'package:foodmenu/screens/widgets/tabs/All_item.dart';
 
 class home extends StatefulWidget {
@@ -35,23 +36,22 @@ class _homeState extends State<home> {
                 child: Align(
                   alignment: Alignment.centerLeft, // Align text to the left
                   child: ShaderMask(
-                    shaderCallback: (Rect bounds) {
-                      return const LinearGradient(
-                        colors: [
-                          Colors.black,
-                          Colors.red
-                        ], // Specify the gradient colors
-                      ).createShader(bounds);
-                    },
-                    child: const Text(
-                      "Satisfy your cravings!",
-                      style: TextStyle(
-                        fontSize: 25, // Adjust the font size as needed
-                        fontWeight: FontWeight.bold, // Make the text bold
-                        color: Colors.white, // Set the text color to white
-                      ),
-                    ),
-                  ),
+                      shaderCallback: (Rect bounds) {
+                        return const LinearGradient(
+                          colors: [
+                            Colors.black,
+                            Color.fromARGB(255, 124, 115, 115)
+                          ], // Specify the gradient colors
+                        ).createShader(bounds);
+                      },
+                      //Satisfy your cravings!
+                      child: GlowText(
+                        'Satisfy your cravings!',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      )),
                 ),
               ),
             ),

@@ -50,6 +50,10 @@ class item extends StatelessWidget {
                   },
                   icon: const Icon(Icons.search),
                 ),
+                
+
+
+
                 IconButton(
                   onPressed: () {
                     Navigator.push(
@@ -59,7 +63,7 @@ class item extends StatelessWidget {
                         ));
                   },
                   icon: const Icon(Icons.shopify_sharp),
-                )
+                ),
               ],
             )
           ],

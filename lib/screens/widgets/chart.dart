@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class chart extends StatelessWidget {
   const chart({Key? key}) : super(key: key);
@@ -70,39 +71,32 @@ Widget chart1() {
 }
 
 Widget chart2() {
-  return AspectRatio(
-    aspectRatio: 1,
-    child: PieChart(
-      PieChartData(
-        sections: [
-          PieChartSectionData(
-            color: const Color.fromARGB(255, 172, 20, 20),
-            title: 'food',
-            titleStyle: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold),
-            radius: 150,
-          ),
-          PieChartSectionData(
-            color: const Color.fromARGB(255, 0, 0, 0),
-            title: 'food1',
-            titleStyle: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold),
-            radius: 150,
-          ),
-          PieChartSectionData(
-            color: const Color.fromARGB(255, 104, 85, 85),
-            title: 'food2',
-            titleStyle: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold),
-            radius: 150,
-          ),
-        ],
-        centerSpaceRadius: 0,
-        sectionsSpace: 0,
-        borderData: FlBorderData(
-          show: false,
-        ),
-      ),
-    ),
-  );
+  return SfCircularChart(
+      title: ChartTitle(text: 'Sales of the day'),
+      legend: const Legend(isVisible: true),
+      series: <PieSeries<_PieData, String>>[
+        PieSeries<_PieData, String>(
+            explode: true,
+            explodeIndex: 0,
+            dataSource: pieData,
+            xValueMapper: (_PieData data, _) => data.xData,
+            yValueMapper: (_PieData data, _) => data.yData,
+            dataLabelMapper: (_PieData data, _) => data.text,
+            dataLabelSettings: const DataLabelSettings(isVisible: true)),
+      ]);
 }
+
+class _PieData {
+  _PieData(this.xData, this.yData, this.text);
+  final String xData;
+  final num yData;
+  final String text;
+}
+
+final List<_PieData> pieData = [
+  _PieData('Category A', 30, '30%'),
+  _PieData('Category B', 20, '20%'),
+  _PieData('Category C', 15, '15%'),
+  _PieData('Category D', 10, '10%'),
+  _PieData('Category E', 25, '25%'),
+];
