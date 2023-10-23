@@ -2,22 +2,24 @@ import 'package:hive/hive.dart';
 
 part 'model.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 0)
 class Food {
-  Food(
-      {required this.name,
-      required this.model,
-      required this.color,
-      required this.image});
+ 
   @HiveField(0)
   String name;
 
-  @HiveField(1)
-  int model;
+  // @HiveField(1)
+  // int category;
 
   @HiveField(2)
-  String color;
+  String cost;
 
-  @HiveField(3)
-  dynamic image;
+  // @HiveField(3)
+  // dynamic image;
+   Food({
+    required this.name,
+    //  required this.category,
+    required this.cost,
+    //  required this.image
+  });
 }

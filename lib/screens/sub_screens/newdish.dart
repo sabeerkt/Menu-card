@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_glow/flutter_glow.dart';
+import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/Database/model/model.dart';
+import 'package:foodmenu/screens/pages/item.dart';
 import 'package:foodmenu/utility/utilty.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -14,6 +17,8 @@ class newdish extends StatefulWidget {
 }
 
 class _newdishState extends State<newdish> {
+  TextEditingController _namecontroller = TextEditingController();
+  TextEditingController _costcontroller = TextEditingController();
   List<String> options = <String>['all', 'biryani', 'drinks', 'desrts'];
   String dropdownValue = 'One';
   XFile? pickedImage;
@@ -143,6 +148,7 @@ class _newdishState extends State<newdish> {
                   height: 10,
                 ),
                 TextField(
+                  controller: _namecontroller,
                   decoration: InputDecoration(
                     labelText: 'Name',
                     labelStyle: const TextStyle(
@@ -197,40 +203,51 @@ class _newdishState extends State<newdish> {
                 //       }).toList();
                 //     },
                 //     items:
-                //         options.map<DropdownMenuItem<String>>((String value) {
+                //         options.map<DropdownMenuItem<String>>((String? value) {
                 //       return DropdownMenuItem<String>(
-                //         value: value,
+                //         value: value!,
                 //         child: Text(value),
                 //       );
                 //     }).toList(),
                 //   ),
                 // ),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Category',
-                    labelStyle: const TextStyle(
-                        color: Colors
-                            .pink), // Change label (hint text) color to pink
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Set border radius to make it curved
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(
-                              255, 11, 11, 11)), // Set border color to pink
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Set focused border radius to make it curved
-                      borderSide: const BorderSide(
-                          color:
-                              Colors.pink), // Set focused border color to pink
-                    ),
-                  ),
+                // TextField(
+                //   decoration: InputDecoration(
+                //     labelText: 'Category',
+                //     labelStyle: const TextStyle(
+                //         color: Colors
+                //             .pink), // Change label (hint text) color to pink
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(
+                //           10.0), // Set border radius to make it curved
+                //       borderSide: const BorderSide(
+                //           color: Color.fromARGB(
+                //               255, 11, 11, 11)), // Set border color to pink
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(
+                //           10.0), // Set focused border radius to make it curved
+                //       borderSide: const BorderSide(
+                //           color:
+                //               Colors.pink), // Set focused border color to pink
+                //     ),
+                //   ),
+                // ),
+                DropdownButton<String>(
+                  items: ['breakfast', 'desrts', 'juice'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {},
+                  value: null,
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 TextField(
+                  controller: _costcontroller,
                   decoration: InputDecoration(
                     labelText: 'Cost',
                     labelStyle: TextStyle(color: Colors.pink),
@@ -299,7 +316,9 @@ class _newdishState extends State<newdish> {
                 const SizedBox(height: 16),
                 MaterialButton(
                   color: Color.fromARGB(255, 120, 82, 150),
-                  onPressed: () {},
+                  onPressed: () {
+                    onnAddDishButton();
+                  },
                   child: GlowText(
                     'save',
                     style: TextStyle(
@@ -314,5 +333,17 @@ class _newdishState extends State<newdish> {
         ),
       ),
     );
+  }
+
+  Future<void> onnAddDishButton() async {
+    final _name = _namecontroller.text.trim();
+    final _cost = _costcontroller.text.trim();
+    if (_name.isEmpty || _cost.isEmpty) {
+      return;
+    }
+    print('$_name $_cost');
+    final _foodd = Food(name: _name, cost: _cost);
+    addFood(_foodd);
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => item()));
   }
 }

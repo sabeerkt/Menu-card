@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/screens/pages/cart.dart';
 import 'package:foodmenu/screens/widgets/search.dart';
 import 'package:foodmenu/screens/widgets/tabs/All_item.dart';
@@ -11,6 +12,7 @@ class item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getfood();
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
@@ -50,10 +52,6 @@ class item extends StatelessWidget {
                   },
                   icon: const Icon(Icons.search),
                 ),
-                
-
-
-
                 IconButton(
                   onPressed: () {
                     Navigator.push(
