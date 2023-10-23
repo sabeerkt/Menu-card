@@ -14,12 +14,21 @@ class Food {
   @HiveField(2)
   String cost;
 
-  // @HiveField(3)
-  // dynamic image;
+  @HiveField(3)
+  dynamic image;
+@HiveField(4)
+  dynamic description;
+
+
+
    Food({
     required this.name,
     //  required this.category,
     required this.cost,
-    //  required this.image
+    // required this.image,
+     required this.description
+
+
+
   });
 }

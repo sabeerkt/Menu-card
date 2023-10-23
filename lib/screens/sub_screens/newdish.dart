@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_glow/flutter_glow.dart';
+import 'package:foodmenu/Components/bottom.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/screens/pages/item.dart';
@@ -19,8 +20,9 @@ class newdish extends StatefulWidget {
 class _newdishState extends State<newdish> {
   TextEditingController _namecontroller = TextEditingController();
   TextEditingController _costcontroller = TextEditingController();
-  List<String> options = <String>['all', 'biryani', 'drinks', 'desrts'];
-  String dropdownValue = 'One';
+  TextEditingController _descriptioncontroller = TextEditingController();
+
+  String dropdownValue = 'all';
   XFile? pickedImage;
   Future<void> _pickImage() async {
     showDialog(
@@ -282,6 +284,7 @@ class _newdishState extends State<newdish> {
                   height: 5,
                 ),
                 TextField(
+                  controller: _descriptioncontroller,
                   decoration: InputDecoration(
                     labelText: 'Description',
                     labelStyle: const TextStyle(
@@ -338,12 +341,14 @@ class _newdishState extends State<newdish> {
   Future<void> onnAddDishButton() async {
     final _name = _namecontroller.text.trim();
     final _cost = _costcontroller.text.trim();
+    final _Description = _descriptioncontroller.text.trim();
     if (_name.isEmpty || _cost.isEmpty) {
       return;
     }
     print('$_name $_cost');
-    final _foodd = Food(name: _name, cost: _cost);
+    final _foodd = Food(name: _name, cost: _cost, description: _Description);
     addFood(_foodd);
-    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => item()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => BottomBar()));
   }
 }

@@ -19,17 +19,22 @@ class FoodAdapter extends TypeAdapter<Food> {
     return Food(
       name: fields[0] as String,
       cost: fields[2] as String,
-    );
+      description: fields[4] as dynamic,
+    )..image = fields[3] as dynamic;
   }
 
   @override
   void write(BinaryWriter writer, Food obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.cost);
+      ..write(obj.cost)
+      ..writeByte(3)
+      ..write(obj.image)
+      ..writeByte(4)
+      ..write(obj.description);
   }
 
   @override

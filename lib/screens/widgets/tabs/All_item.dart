@@ -33,7 +33,12 @@ Widget All_iteam() {
                 // Navigate to the detail page when the ListTile is tapped
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const detailpage()),
+                  MaterialPageRoute(builder: (context) =>  detailpage(
+                  Name: data.name,
+                  cost:data.cost ,
+
+
+                  )),
                 );
               },
               title: Column(

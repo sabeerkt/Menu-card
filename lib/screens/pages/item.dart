@@ -69,9 +69,9 @@ class item extends StatelessWidget {
         body: TabBarView(
           children: [
             All_iteam(),
-            breakfast(),
-            desrets(),
-            bevarge(),
+            // breakfast(),
+            // desrets(),
+            // bevarge(),
           ],
         ),
       ),

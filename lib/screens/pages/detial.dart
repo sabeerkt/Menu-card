@@ -1,9 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:foodmenu/screens/pages/cart.dart';
 import 'package:foodmenu/screens/widgets/search.dart';
 
 class detailpage extends StatelessWidget {
-  const detailpage({super.key});
+  final String Name;
+  final String cost;
+
+ 
+
+  const detailpage({
+    Key? key,
+    required this.Name,
+    required this.cost,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +91,7 @@ class detailpage extends StatelessWidget {
                 child: const Column(
                   children: [
                     Align(
+                      //Text('Name: ${car.name}'),
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Product Name", // Main Heading
