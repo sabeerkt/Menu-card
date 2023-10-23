@@ -8,8 +8,8 @@ class Food {
   @HiveField(0)
   String name;
 
-  // @HiveField(1)
-  // int category;
+  @HiveField(1)
+  int? category;
 
   @HiveField(2)
   String cost;
@@ -23,9 +23,9 @@ class Food {
 
    Food({
     required this.name,
-    //  required this.category,
+      this.category,
     required this.cost,
-    // required this.image,
+      this.image,
      required this.description
 
 

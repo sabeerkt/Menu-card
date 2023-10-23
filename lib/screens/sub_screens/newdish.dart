@@ -345,8 +345,12 @@ class _newdishState extends State<newdish> {
     if (_name.isEmpty || _cost.isEmpty) {
       return;
     }
-    print('$_name $_cost');
-    final _foodd = Food(name: _name, cost: _cost, description: _Description);
+    print('$_name $_cost  $_Description');
+    final _foodd = Food(
+      name: _name,
+      cost: _cost,
+      description: _Description,
+    );
     addFood(_foodd);
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (ctx) => BottomBar()));
