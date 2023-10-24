@@ -8,8 +8,11 @@ import 'package:foodmenu/screens/widgets/tabs/Breakfast.dart';
 import 'package:foodmenu/screens/widgets/tabs/Deserts.dart';
 
 class item extends StatelessWidget {
+  
   const item({Key? key}) : super(key: key);
-
+Future<void> _deleteFood(name) async {
+  deleteFood(name); // Call the deleteFood function from db_function.dart
+}
   @override
   Widget build(BuildContext context) {
     getfood();
@@ -57,7 +60,7 @@ class item extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const cart(),
+                          builder: (context) => const cart(name: '', cost: '',),
                         ));
                   },
                   icon: const Icon(Icons.shopify_sharp),

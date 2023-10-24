@@ -1,19 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:foodmenu/screens/pages/cart.dart';
 import 'package:foodmenu/screens/widgets/search.dart';
 
 class detailpage extends StatelessWidget {
-  final String Name;
+  final String name;
   final String cost;
-
- 
+  final String description;
 
   const detailpage({
     Key? key,
-    required this.Name,
+    required this.name,
     required this.cost,
+    required this.description,
   }) : super(key: key);
 
   @override
@@ -36,10 +34,11 @@ class detailpage extends StatelessWidget {
           IconButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Search(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Search(),
+                ),
+              );
             },
             icon: const Icon(Icons.edit),
           ),
@@ -76,10 +75,9 @@ class detailpage extends StatelessWidget {
                     //     "dish",
                     //     style: TextStyle(
                     //       fontSize: 24,
-                    //       fontWeight: FontWeight.bold,
+                    //       fontWeight: FontWeight bold,
                     //     ),
                     //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -88,13 +86,12 @@ class detailpage extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.all(16.0),
-                child: const Column(
+                child: Column(
                   children: [
                     Align(
-                      //Text('Name: ${car.name}'),
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "Product Name", // Main Heading
+                        name, // Main Heading
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -104,18 +101,17 @@ class detailpage extends StatelessWidget {
                     Align(
                       alignment: Alignment.topRight,
                       child: Text(
-                        "\$99.99", // Price
+                        cost, // Price
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors
-                              .green, // You can change the color as needed
+                          color: Colors.green,
                         ),
                       ),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "This is a sample product description. You can add details about the product here, such as its features and benefits. This container can hold a lot of information about the product.",
+                      description, // Description
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 10),
@@ -123,14 +119,16 @@ class detailpage extends StatelessWidget {
                 ),
               ),
 
-              //button
+              // Button
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
                     // Navigate to another page or perform the desired action here
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const cart()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  cart(name: name, cost:cost,)),
+                    );
                   },
                   child: Column(
                     children: [
@@ -145,15 +143,14 @@ class detailpage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const cart(),
+                                builder: (context) =>  cart(name: name, cost:cost,),
                               ),
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(
-                                255, 129, 44, 226), // Dark blue color
+                            primary: const Color.fromARGB(255, 129, 44, 226),
                           ),
-                          child: const Text("add"),
+                          child: const Text("Add to Cart"),
                         ),
                       )
                     ],

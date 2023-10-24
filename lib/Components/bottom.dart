@@ -8,6 +8,7 @@ import 'package:foodmenu/screens/pages/setting.dart';
 import 'package:foodmenu/screens/widgets/chart.dart';
 
 class BottomBar extends StatefulWidget {
+
   const BottomBar({Key? key}) : super(key: key);
 
   @override
@@ -19,8 +20,8 @@ class _BottomBarState extends State<BottomBar> {
 
   final List<Widget> bottomBarPages = [
     const home(),
-    const cart(),
-    const item(),
+     cart(name: '', cost: '',),
+     item(),
     const chart(),
     const Setting(),
   ];

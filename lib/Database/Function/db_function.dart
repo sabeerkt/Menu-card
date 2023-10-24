@@ -20,3 +20,8 @@ Future<void> getfood() async {
   FoodListNotifier.notifyListeners();
   
 }
+void deleteFood( id) async {
+  final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
+  await Fooddb.deleteAt(id);
+  getfood(); // Refresh the list after deletion
+}

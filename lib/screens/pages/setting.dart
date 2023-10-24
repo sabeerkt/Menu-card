@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:foodmenu/screens/sub_screens/about.dart';
 import 'package:foodmenu/screens/sub_screens/newdish.dart';
+import 'package:foodmenu/screens/sub_screens/rest.dart';
 import 'package:foodmenu/screens/sub_screens/term.dart';
 
 class Setting extends StatefulWidget {
@@ -101,7 +102,7 @@ class _SettingState extends State<Setting> {
         // Handle exit logic here
         break;
       case 'Reset App':
-        // Handle reset app logic here
+        resetDB(context);
         break;
       default:
         break;

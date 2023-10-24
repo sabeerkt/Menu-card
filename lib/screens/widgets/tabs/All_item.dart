@@ -5,6 +5,9 @@ import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 
 import 'package:foodmenu/screens/pages/detial.dart';
+Future<void> _deleteFood(name) async {
+  deleteFood(name); // Call the deleteFood function from db_function.dart
+}
 
 //change alliteam
 Widget All_iteam() {
@@ -39,8 +42,9 @@ Widget All_iteam() {
                   context,
                   MaterialPageRoute(
                       builder: (context) => detailpage(
-                            Name: data.name,
+                            name: data.name,
                             cost: data.cost,
+                            description: data.description,
                           )),
                 );
               },
@@ -54,12 +58,17 @@ Widget All_iteam() {
                         style: TextStyle(color: Colors.white),
                       ),
                       const Spacer(), // Add spacer to push the checkbox to the right
-                      Checkbox(
-                        value: true, // Set the initial value as needed
-                        onChanged: (bool? value) {
-                          // Handle checkbox state change
-                        },
-                      ),
+                      // Checkbox(
+                      //   value: true, // Set the initial value as needed
+                      //   onChanged: (bool? value) {
+                      //     // Handle checkbox state change
+                      //   },
+                      // ),
+                      IconButton(
+                          onPressed: () {
+                          //  deleteFood(id);
+                          },
+                          icon: Icon(Icons.delete))
                     ],
                   ),
                   const Text(

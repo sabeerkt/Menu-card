@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/Database/Function/db_function.dart';
 
 class cart extends StatelessWidget {
-  const cart({Key? key});
+  final String name;
+  final String cost;
+
+  const cart({
+    Key? key,
+    required this.name,
+    required this.cost,
+  }) : super(key: key);
+
+ Future<void> _deleteFood(id) async {
+  deleteFood(id); // Call the deleteFood function from db_function.dart
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +52,8 @@ class cart extends StatelessWidget {
                             width: 50,
                             child: Image.asset('assets/Illustrations.png'),
                           ),
-                          title: const Text(
-                            "7up",
+                          title: Text(
+                            name,
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -80,11 +93,13 @@ class cart extends StatelessWidget {
                                 icon: const Icon(Icons.delete,
                                     color: Colors.white),
                                 onPressed: () {
-                                  // Add logic to delete item
+                                  _deleteFood(name);
+                                  Navigator.pop(context);
+                                  print("deleted");
                                 },
                               ),
-                              const Text(
-                                "\$99.99",
+                              Text(
+                                cost,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

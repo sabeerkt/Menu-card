@@ -4,24 +4,28 @@ part 'model.g.dart';
 
 @HiveType(typeId: 0)
 class Food {
- 
   @HiveField(0)
-  String name;
+  int? id;
+
 
   @HiveField(1)
-  int? category;
+  String name;
 
   @HiveField(2)
-  String cost;
+  int? category;
 
   @HiveField(3)
+  String cost;
+
+  @HiveField(4)
   dynamic image;
-@HiveField(4)
+@HiveField(5)
   dynamic description;
 
 
 
    Food({
+     this.id,
     required this.name,
       this.category,
     required this.cost,

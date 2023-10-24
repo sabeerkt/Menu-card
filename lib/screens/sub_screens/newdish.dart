@@ -118,33 +118,7 @@ class _newdishState extends State<newdish> {
                     ],
                   ),
                 ),
-                // MaterialButton(
-                //   height: 150.0,
-                //   color: const Color.fromARGB(255, 255, 255,
-                //       254), // Use the Colors.orange constant for the orange color
-                //   onPressed: () {
-                //     pickedImage;
-                //   },
-
-                //   child: const Row(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: <Widget>[
-                //       Icon(
-                //         Icons
-                //             .image, // You can change this to the desired image icon
-                //         color: Color.fromARGB(255, 0, 0, 0), // Icon color
-                //       ),
-                //       SizedBox(
-                //           width:
-                //               8.0), // Add some spacing between the icon and text
-                //       Text(
-                //         "Add Image",
-                //         style: TextStyle(
-                //             color: Color.fromARGB(255, 0, 0, 0)), // Text color
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                
                 Container(),
                 const SizedBox(
                   height: 10,
@@ -175,66 +149,7 @@ class _newdishState extends State<newdish> {
                 const SizedBox(
                   height: 5,
                 ),
-                // Container(
-                //   width: 200,
-                //   decoration: BoxDecoration(
-                //       color: Colors.white,
-                //       borderRadius: BorderRadius.circular(16)),
-                //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                //   child: DropdownButton<String>(
-                //     value: dropdownValue,
-                //     onChanged: (String? value) {
-                //       setState(() {
-                //         dropdownValue = value!;
-                //       });
-                //     },
-                //     underline: const SizedBox(),
-                //     isExpanded: true,
-                //     style: const TextStyle(color: Colors.black),
-                //     dropdownColor: Colors.white,
-                //     icon: const Icon(Icons.keyboard_arrow_down,
-                //         color: Colors.black),
-                //     selectedItemBuilder: (BuildContext context) {
-                //       return options.map((String value) {
-                //         return Align(
-                //           alignment: Alignment.centerLeft,
-                //           child: Text(
-                //             dropdownValue,
-                //           ),
-                //         );
-                //       }).toList();
-                //     },
-                //     items:
-                //         options.map<DropdownMenuItem<String>>((String? value) {
-                //       return DropdownMenuItem<String>(
-                //         value: value!,
-                //         child: Text(value),
-                //       );
-                //     }).toList(),
-                //   ),
-                // ),
-                // TextField(
-                //   decoration: InputDecoration(
-                //     labelText: 'Category',
-                //     labelStyle: const TextStyle(
-                //         color: Colors
-                //             .pink), // Change label (hint text) color to pink
-                //     enabledBorder: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(
-                //           10.0), // Set border radius to make it curved
-                //       borderSide: const BorderSide(
-                //           color: Color.fromARGB(
-                //               255, 11, 11, 11)), // Set border color to pink
-                //     ),
-                //     focusedBorder: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(
-                //           10.0), // Set focused border radius to make it curved
-                //       borderSide: const BorderSide(
-                //           color:
-                //               Colors.pink), // Set focused border color to pink
-                //     ),
-                //   ),
-                // ),
+                
                 DropdownButton<String>(
                   items: ['breakfast', 'desrts', 'juice'].map((String value) {
                     return DropdownMenuItem<String>(
