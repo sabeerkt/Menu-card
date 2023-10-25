@@ -8,11 +8,19 @@ import 'package:foodmenu/screens/widgets/tabs/Breakfast.dart';
 import 'package:foodmenu/screens/widgets/tabs/Deserts.dart';
 
 class item extends StatelessWidget {
+
+  final String name;
+  final String cost;
+  final String description;
+  final String image;
+  const item({Key? key, required this.name, required this.cost, required this.description, required this.image
   
-  const item({Key? key}) : super(key: key);
-Future<void> _deleteFood(name) async {
-  deleteFood(name); // Call the deleteFood function from db_function.dart
-}
+  }) : super(key: key);
+
+  Future<void> _deleteFood(name) async {
+    deleteFood(name); // Call the deleteFood function from db_function.dart
+  }
+
   @override
   Widget build(BuildContext context) {
     getfood();
@@ -60,7 +68,12 @@ Future<void> _deleteFood(name) async {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const cart(name: '', cost: '',),
+                          builder: (context) =>  cart(
+                            name: name,
+
+                                cost: cost,
+                                image: image,
+                          ),
                         ));
                   },
                   icon: const Icon(Icons.shopify_sharp),
@@ -72,9 +85,9 @@ Future<void> _deleteFood(name) async {
         body: TabBarView(
           children: [
             All_iteam(),
-            // breakfast(),
-            // desrets(),
-            // bevarge(),
+            breakfast(),
+            desrets(),
+            bevarge(),
           ],
         ),
       ),

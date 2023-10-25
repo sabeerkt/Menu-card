@@ -17,7 +17,7 @@ class OnboardingPage extends StatelessWidget {
           const OnboardingScreen(
             title: 'Welcome to MenuCard',
             description: '"Snap, Crackle, Pop." ',
-            imagePath: 'assets/Order food-rafiki.pngassets/Illustration.png',
+            imagePath: 'assets/Eating together-bro.png',
           ),
           OnboardingScreen(
             title: 'Get Started',
@@ -28,7 +28,13 @@ class OnboardingPage extends StatelessWidget {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) =>
-                      const BottomBar(), // Replace 'NextPage' with your desired next page
+                      const BottomBar(
+
+                        name: '', 
+        
+        
+        cost: '', image: '',
+                      ), // Replace 'NextPage' with your desired next page
                 ),
               );
             },

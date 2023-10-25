@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/pages/cart.dart';
 import 'package:foodmenu/screens/widgets/search.dart';
@@ -6,9 +8,11 @@ class detailpage extends StatelessWidget {
   final String name;
   final String cost;
   final String description;
+  final String image;
 
   const detailpage({
     Key? key,
+    required this.image,
     required this.name,
     required this.cost,
     required this.description,
@@ -53,8 +57,10 @@ class detailpage extends StatelessWidget {
                 width: 500,
                 height: 250,
                 decoration: ShapeDecoration(
-                  image: const DecorationImage(
-                    image: AssetImage("assets/juice.jfif"),
+                  image: DecorationImage(
+                    image: image != null
+                        ? FileImage(File(image))
+                        : AssetImage("assets/juice.jfif") as ImageProvider,
                     fit: BoxFit.fill,
                   ),
                   shape: RoundedRectangleBorder(
@@ -127,7 +133,12 @@ class detailpage extends StatelessWidget {
                     // Navigate to another page or perform the desired action here
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  cart(name: name, cost:cost,)),
+                      MaterialPageRoute(
+                          builder: (context) => cart(
+                                name: name,
+                                cost: cost,
+                                image: image,
+                              )),
                     );
                   },
                   child: Column(
@@ -143,7 +154,11 @@ class detailpage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  cart(name: name, cost:cost,),
+                                builder: (context) => cart(
+                                  name: name,
+                                  cost: cost,
+                                  image: image,
+                                ),
                               ),
                             );
                           },

@@ -5,6 +5,7 @@ import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 
 import 'package:foodmenu/screens/pages/detial.dart';
+late final String name;
 Future<void> _deleteFood(name) async {
   deleteFood(name); // Call the deleteFood function from db_function.dart
 }
@@ -30,7 +31,7 @@ Widget All_iteam() {
                   shape: BoxShape.rectangle,
                   image: data.image != null
                       ? DecorationImage(
-                          image: FileImage(File(data.image!)),
+                          image: FileImage(File(data.image)),
                           fit: BoxFit.cover,
                         )
                       : null,
@@ -45,6 +46,7 @@ Widget All_iteam() {
                             name: data.name,
                             cost: data.cost,
                             description: data.description,
+                            image: data.image,
                           )),
                 );
               },
@@ -66,7 +68,10 @@ Widget All_iteam() {
                       // ),
                       IconButton(
                           onPressed: () {
-                          //  deleteFood(id);
+                            //  deleteFood(id);
+                            _deleteFood(name);
+                                  Navigator.pop(context);
+                                  print("deleted");
                           },
                           icon: Icon(Icons.delete))
                     ],

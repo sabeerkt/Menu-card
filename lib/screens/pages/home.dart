@@ -1,8 +1,7 @@
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_glow/flutter_glow.dart';
-import 'package:foodmenu/screens/widgets/tabs/All_item.dart';
+import 'package:foodmenu/screens/pages/item.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -12,78 +11,62 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-  final List<String> imageList = [
+  List<String> imageList = [
     'assets/slide3.jpg',
-    'assets/slide3.jpg',
-    'assets/slide3.jpg',
-    // Add more image paths here
+    'assets/sliddish.jpg',
+    'assets/slidword.jpg',
   ];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                width: 420,
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(99, 255, 255, 255),
-                ),
-                child: Align(
-                  alignment: Alignment.centerLeft, // Align text to the left
-                  child: ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return const LinearGradient(
-                          colors: [
-                            Colors.black,
-                            Color.fromARGB(255, 124, 115, 115)
-                          ], // Specify the gradient colors
-                        ).createShader(bounds);
-                      },
-                      //Satisfy your cravings!
-                      child: GlowText(
-                        'Satisfy your cravings!',
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )),
+        appBar: AppBar(
+          backgroundColor: Colors.white, // Set the background color to white
+          elevation: 0, // Remove the elevation (border)
+          flexibleSpace: Container(
+            child: Center(
+              child: GlowText(
+                'Satisfy your cravings!',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(
+                      255, 48, 50, 51), // Set the text color to white
                 ),
               ),
             ),
+          ),
+        ),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
 
-            // const Search(),
-
-            const SizedBox(
-              height: 20,
-            ),
-
-            const SizedBox(
-              height: 5,
-            ),
-            //CarouselSlider
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 250,
-              child: Padding(
+              const SizedBox(
+                height: 5,
+              ),
+              //CarouselSlider
+              Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      20.0), // Adjust the radius as needed
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 250, // Set the height of the container to 250
                   child: CarouselSlider(
                     items: imageList.map((item) {
                       return Builder(
                         builder: (BuildContext context) {
                           return SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            height: 500,
+                            height:
+                                500, // Set the height of the CarouselSlider to 500
                             child: Image.asset(
                               item,
-                              fit: BoxFit.cover,
+                              fit: BoxFit
+                                  .cover, // Fit the image within the container
                             ),
                           );
                         },
@@ -92,86 +75,62 @@ class _homeState extends State<home> {
                     options: CarouselOptions(
                       autoPlay: true,
                       enlargeCenterPage: true,
-                      aspectRatio: MediaQuery.of(context).size.width / 500,
-                      viewportFraction: 1.0,
-                      initialPage: 5,
+                      aspectRatio: MediaQuery.of(context).size.width /
+                          500, // Match screen width and set height to 500
+                      viewportFraction:
+                          1.0, // Set this to 1.0 to occupy the full width
+                      initialPage: 0,
                     ),
                   ),
                 ),
               ),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: All_iteam(),
-            // ),
-          ],
-        ),
-      ),
-    );
-  }
+              SizedBox(
+                height: 10,
+              ),
+              Divider(
+                color: const Color.fromARGB(255, 0, 0, 0),
+              ),
+              Text("products"),
 
-  Container foodlist() {
-    return Container(
-      width: 407,
-      height: 101,
-      decoration: ShapeDecoration(
-        color: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        shadows: [
-          const BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 10,
-            offset: Offset(0, 4),
-            spreadRadius: 0,
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(20), // Adjust the radius as needed
-              child: Image.asset(
-                'assets/undoaed.png',
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Food',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 119, 116, 116),
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Biryani',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-              Text(
-                ' RS 900',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 222, 41, 41),
-                  fontSize: 16,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const item(
+                                name: '',
+                                cost: '',
+                                description: '',
+                                image: '',
+                              )));
+                },
+                child: Column(
+                  children: [
+                    Card(
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset("assets/slid2.jpg"),
+                          //Text(title),
+                        ],
+                      ),
+                    ),
+                    Card(
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/slid1.jpg",
+                          ),
+                          //Text(title),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-        ],
+        ),
+        backgroundColor: Colors.white,
       ),
     );
   }

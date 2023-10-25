@@ -9,7 +9,11 @@ import 'package:foodmenu/screens/widgets/chart.dart';
 
 class BottomBar extends StatefulWidget {
 
-  const BottomBar({Key? key}) : super(key: key);
+  final String name;
+  final String cost;
+final String image;
+
+  const BottomBar({Key? key, required this.name, required this.cost, required this.image}) : super(key: key);
 
   @override
   State<BottomBar> createState() => _BottomBarState();
@@ -20,8 +24,12 @@ class _BottomBarState extends State<BottomBar> {
 
   final List<Widget> bottomBarPages = [
     const home(),
-     cart(name: '', cost: '',),
-     item(),
+     cart( name: '',
+                                cost: '',
+                                image: '',),
+     item(name: '',
+                                cost: '',
+                                image: '', description: '',),
     const chart(),
     const Setting(),
   ];

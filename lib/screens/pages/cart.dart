@@ -4,17 +4,17 @@ import 'package:foodmenu/Database/Function/db_function.dart';
 class cart extends StatelessWidget {
   final String name;
   final String cost;
-
+  final String image;
   const cart({
     Key? key,
+    required this.image,
     required this.name,
     required this.cost,
   }) : super(key: key);
 
- Future<void> _deleteFood(id) async {
-  deleteFood(id); // Call the deleteFood function from db_function.dart
-}
-
+  Future<void> _deleteFood(id) async {
+    deleteFood(id); // Call the deleteFood function from db_function.dart
+  }
 
   @override
   Widget build(BuildContext context) {

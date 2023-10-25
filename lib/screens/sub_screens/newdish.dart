@@ -118,7 +118,7 @@ class _newdishState extends State<newdish> {
                     ],
                   ),
                 ),
-                
+
                 Container(),
                 const SizedBox(
                   height: 10,
@@ -149,7 +149,7 @@ class _newdishState extends State<newdish> {
                 const SizedBox(
                   height: 5,
                 ),
-                
+
                 DropdownButton<String>(
                   items: ['breakfast', 'desrts', 'juice'].map((String value) {
                     return DropdownMenuItem<String>(
@@ -262,12 +262,18 @@ class _newdishState extends State<newdish> {
     }
     print('$_name $_cost  $_Description');
     final _foodd = Food(
-      name: _name,
-      cost: _cost,
-      description: _Description,
-    );
+        name: _name,
+        cost: _cost,
+        description: _Description,
+        image: pickedImage!.path);
     addFood(_foodd);
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => BottomBar()));
+        .push(MaterialPageRoute(builder: (ctx) => BottomBar(name: '', 
+        
+        
+        cost: '', image: '',
+
+
+        )));
   }
 }
