@@ -1,26 +1,45 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_glow/flutter_glow.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:foodmenu/Components/bottom.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/screens/pages/item.dart';
 import 'package:foodmenu/utility/utilty.dart';
-import 'package:image_picker/image_picker.dart';
 
-class newdish extends StatefulWidget {
-  const newdish({super.key});
+class editdish extends StatefulWidget {
+  // final Food foodd;
+  // int index;
+  editdish({
+    Key? key,
+    // required this.foodd,
+    // required this.index,
+  }) : super(key: key);
 
   @override
-  State<newdish> createState() => _newdishState();
+  State<editdish> createState() => _editdishState();
 }
 
-class _newdishState extends State<newdish> {
+class _editdishState extends State<editdish> {
   TextEditingController _namecontroller = TextEditingController();
   TextEditingController _costcontroller = TextEditingController();
   TextEditingController _descriptioncontroller = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _namecontroller.text = widget.foodd.name;
+    // _costcontroller.text = widget.foodd.cost;
+    // _descriptioncontroller.text = widget.foodd.description;
+     
+
+
+  }
 
   String dropdownValue = 'all';
   XFile? pickedImage;
@@ -54,7 +73,7 @@ class _newdishState extends State<newdish> {
                     pickedImage = picked;
                   });
                 },
-                child: const Text('Gallery'),
+                child: const Text('memory'),
               ),
             ],
           ),
@@ -118,7 +137,6 @@ class _newdishState extends State<newdish> {
                     ],
                   ),
                 ),
-
                 Container(),
                 const SizedBox(
                   height: 10,
@@ -149,7 +167,6 @@ class _newdishState extends State<newdish> {
                 const SizedBox(
                   height: 5,
                 ),
-
                 DropdownButton<String>(
                   items: ['breakfast', 'desrts', 'juice'].map((String value) {
                     return DropdownMenuItem<String>(
@@ -220,29 +237,18 @@ class _newdishState extends State<newdish> {
                               Colors.pink), // Set focused border color to pink
                     ),
                   ),
+                  maxLines: 5,
                 ),
-                // TextField(
-                //   controller: TextEditingController(),
-                //   decoration: InputDecoration(
-                //       labelText: 'Label Textfield',
-                //       labelStyle: TextStyle(color: Colors.white),
-                //       enabledBorder: OutlineInputBorder(
-                //           borderSide: BorderSide(color: Colors.white)),
-                //       focusedBorder: OutlineInputBorder(
-                //           borderSide: BorderSide(color: Colors.white))),
-                // ),
                 const SizedBox(height: 16),
                 MaterialButton(
                   color: Color.fromARGB(255, 120, 82, 150),
-                  onPressed: () {
-                    onnAddDishButton();
-                  },
+                  onPressed: () {},
                   child: GlowText(
-                    'save',
+                    'Updated',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                        color: const Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
               ],
@@ -261,19 +267,17 @@ class _newdishState extends State<newdish> {
       return;
     }
     print('$_name $_cost  $_Description');
-    final foodd = Food(
+    final _foodd = Food(
         name: _name,
         cost: _cost,
         description: _Description,
         image: pickedImage!.path);
-    addFood(foodd);
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => BottomBar(name: '', 
-        
-        
-        cost: '', image: '',
-
-
-        )));
+    addFood(_foodd);
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (ctx) => BottomBar(
+              name: '',
+              cost: '',
+              image: '',
+            )));
   }
 }

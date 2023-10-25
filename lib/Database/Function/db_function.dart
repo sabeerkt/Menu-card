@@ -6,7 +6,8 @@ ValueNotifier<List<Food>> FoodListNotifier = ValueNotifier([]);
 
 Future<void> addFood(Food value) async {
   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
-  await Fooddb.add(value);
+  final _id = await Fooddb.add(value);
+
   FoodListNotifier.value.add(value);
 
   FoodListNotifier.notifyListeners();
@@ -18,10 +19,16 @@ Future<void> getfood() async {
   FoodListNotifier.value.clear();
   FoodListNotifier.value.addAll(Fooddb.values);
   FoodListNotifier.notifyListeners();
-  
 }
-void deleteFood( id) async {
+
+// void deleteFood(id) async {
+//   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
+//   await Fooddb.deleteAt(id);
+//   getfood(); // Refresh the list after deletion
+// }
+
+Future<void> deletfood(int index) async {
   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
-  await Fooddb.deleteAt(id);
-  getfood(); // Refresh the list after deletion
+  await Fooddb.deleteAt(index);
+  getfood();
 }

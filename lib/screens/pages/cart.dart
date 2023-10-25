@@ -12,9 +12,9 @@ class cart extends StatelessWidget {
     required this.cost,
   }) : super(key: key);
 
-  Future<void> _deleteFood(id) async {
-    deleteFood(id); // Call the deleteFood function from db_function.dart
-  }
+  // Future<void> _deleteFood(id) async {
+  //   deleteFood(id); // Call the deleteFood function from db_function.dart
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +93,9 @@ class cart extends StatelessWidget {
                                 icon: const Icon(Icons.delete,
                                     color: Colors.white),
                                 onPressed: () {
-                                  _deleteFood(name);
-                                  Navigator.pop(context);
-                                  print("deleted");
+                                  // _deleteFood(name);
+                                  // Navigator.pop(context);
+                                  // print("deleted");
                                 },
                               ),
                               Text(

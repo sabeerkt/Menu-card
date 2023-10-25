@@ -5,10 +5,11 @@ import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 
 import 'package:foodmenu/screens/pages/detial.dart';
+
 late final String name;
-Future<void> _deleteFood(name) async {
-  deleteFood(name); // Call the deleteFood function from db_function.dart
-}
+// Future<void> _deleteFood(name) async {
+//   deleteFood(name); // Call the deleteFood function from db_function.dart
+// }
 
 //change alliteam
 Widget All_iteam() {
@@ -69,9 +70,8 @@ Widget All_iteam() {
                       IconButton(
                           onPressed: () {
                             //  deleteFood(id);
-                            _deleteFood(name);
-                                  Navigator.pop(context);
-                                  print("deleted");
+
+                            deletfood(index);
                           },
                           icon: Icon(Icons.delete))
                     ],

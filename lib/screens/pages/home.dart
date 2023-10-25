@@ -92,39 +92,44 @@ class _homeState extends State<home> {
               ),
               Text("products"),
 
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const item(
-                                name: '',
-                                cost: '',
-                                description: '',
-                                image: '',
-                              )));
-                },
-                child: Column(
-                  children: [
-                    Card(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset("assets/slid2.jpg"),
-                          //Text(title),
-                        ],
-                      ),
-                    ),
-                    Card(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            "assets/slid1.jpg",
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const item(
+                                    name: '',
+                                    cost: '',
+                                    description: '',
+                                    image: '',
+                                  )));
+                    },
+                    child: Column(
+                      children: [
+                        Card(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset("assets/slid2.jpg"),
+                              //Text(title),
+                            ],
                           ),
-                          //Text(title),
-                        ],
-                      ),
+                        ),
+                        Card(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                "assets/slid1.jpg",
+                              ),
+                              //Text(title),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],

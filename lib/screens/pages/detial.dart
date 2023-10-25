@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:foodmenu/screens/pages/cart.dart';
+import 'package:foodmenu/screens/pages/edit.dart';
 import 'package:foodmenu/screens/widgets/search.dart';
 
 class detailpage extends StatelessWidget {
@@ -40,7 +41,10 @@ class detailpage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const Search(),
+                  builder: (context) =>  editdish (
+
+                    
+                  ),
                 ),
               );
             },

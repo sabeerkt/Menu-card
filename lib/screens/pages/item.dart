@@ -17,9 +17,9 @@ class item extends StatelessWidget {
   
   }) : super(key: key);
 
-  Future<void> _deleteFood(name) async {
-    deleteFood(name); // Call the deleteFood function from db_function.dart
-  }
+  // Future<void> _deleteFood(name) async {
+  //   deleteFood(name); // Call the deleteFood function from db_function.dart
+  // }
 
   @override
   Widget build(BuildContext context) {
