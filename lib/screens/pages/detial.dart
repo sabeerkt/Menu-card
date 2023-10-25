@@ -41,9 +41,14 @@ class detailpage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  editdish (
-
-                    
+                  builder: (context) => EditDish(
+                    imageController: TextEditingController(text: image),
+                    nameController: TextEditingController(text: name),
+                    costController: TextEditingController(text: cost),
+                    descriptionController:
+                        TextEditingController(text: description),
+                    isEditMode: true,
+                    index: 0, // You need to provide the correct index
                   ),
                 ),
               );

@@ -10,25 +10,25 @@ import 'package:foodmenu/screens/pages/item.dart';
 import 'package:foodmenu/utility/utilty.dart';
 import 'package:image_picker/image_picker.dart';
 
-class newdish extends StatefulWidget {
-  const newdish({super.key});
+class NewDish extends StatefulWidget {
+  const NewDish({Key? key}) : super(key: key);
 
   @override
-  State<newdish> createState() => _newdishState();
+  State<NewDish> createState() => _NewDishState();
 }
 
-class _newdishState extends State<newdish> {
-  TextEditingController _namecontroller = TextEditingController();
-  TextEditingController _costcontroller = TextEditingController();
-  TextEditingController _descriptioncontroller = TextEditingController();
+class _NewDishState extends State<NewDish> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _costController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
 
   String dropdownValue = 'all';
   XFile? pickedImage;
+
   Future<void> _pickImage() async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // Image
         return AlertDialog(
           title: const Text('Pick Image From...'),
           content: Row(
@@ -71,7 +71,7 @@ class _newdishState extends State<newdish> {
           elevation: 0,
           centerTitle: true,
           title: const Text(
-            "new dish",
+            "New Dish",
             style: TextStyle(
               color: Colors.black,
               fontSize: 16,
@@ -85,7 +85,7 @@ class _newdishState extends State<newdish> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   height: 100,
@@ -93,8 +93,9 @@ class _newdishState extends State<newdish> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     border: Border.all(
-                        width: 8,
-                        color: const Color.fromARGB(255, 255, 255, 255)),
+                      width: 8,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                    ),
                   ),
                   child: Stack(
                     children: [
@@ -118,131 +119,85 @@ class _newdishState extends State<newdish> {
                     ],
                   ),
                 ),
-
-                Container(),
-                const SizedBox(
-                  height: 10,
-                ),
                 TextField(
-                  controller: _namecontroller,
+                  controller: _nameController,
                   decoration: InputDecoration(
                     labelText: 'Name',
                     labelStyle: const TextStyle(
-                        color: Colors
-                            .pink), // Change label (hint text) color to pink
+                      color: Colors.pink,
+                    ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Set border radius to make it curved
+                      borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
-                          color: Color.fromARGB(
-                              255, 11, 11, 11)), // Set border color to pink
+                        color: Color.fromARGB(255, 11, 11, 11),
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Set focused border radius to make it curved
+                      borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
-                          color:
-                              Colors.pink), // Set focused border color to pink
+                        color: Colors.pink,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-
-                DropdownButton<String>(
-                  items: ['breakfast', 'desrts', 'juice'].map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (String? value) {},
-                  value: null,
-                ),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: 10,
                 ),
                 TextField(
-                  controller: _costcontroller,
+                  controller: _costController,
                   decoration: InputDecoration(
                     labelText: 'Cost',
-                    labelStyle: TextStyle(color: Colors.pink),
+                    labelStyle: const TextStyle(
+                      color: Colors.pink,
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 11, 11, 11)),
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 11, 11, 11),
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: Colors.pink),
+                      borderSide: const BorderSide(
+                        color: Colors.pink,
+                      ),
                     ),
                   ),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^\d+')),
-                    // This formatter allows only digits (0-9) and prevents other characters
-                    TextInputFormatter.withFunction((oldValue, newValue) {
-                      // Add a dollar symbol to the input
-                      if (newValue.text.isNotEmpty) {
-                        return TextEditingValue(
-                          text: '\$${newValue.text}',
-                          selection: TextSelection.fromPosition(
-                            TextPosition(offset: newValue.text.length + 10),
-                          ),
-                        );
-                      }
-                      return newValue;
-                    }),
-                  ],
                 ),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: 10,
                 ),
                 TextField(
-                  controller: _descriptioncontroller,
+                  controller: _descriptionController,
                   decoration: InputDecoration(
                     labelText: 'Description',
                     labelStyle: const TextStyle(
-                        color: Colors
-                            .pink), // Change label (hint text) color to pink
+                      color: Colors.pink,
+                    ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Set border radius to make it curved
+                      borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
-                          color: Color.fromARGB(
-                              255, 11, 11, 11)), // Set border color to pink
+                        color: Color.fromARGB(255, 11, 11, 11),
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Set focused border radius to make it curved
+                      borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
-                          color:
-                              Colors.pink), // Set focused border color to pink
+                        color: Colors.pink,
+                      ),
                     ),
                   ),
                 ),
-                // TextField(
-                //   controller: TextEditingController(),
-                //   decoration: InputDecoration(
-                //       labelText: 'Label Textfield',
-                //       labelStyle: TextStyle(color: Colors.white),
-                //       enabledBorder: OutlineInputBorder(
-                //           borderSide: BorderSide(color: Colors.white)),
-                //       focusedBorder: OutlineInputBorder(
-                //           borderSide: BorderSide(color: Colors.white))),
-                // ),
-                const SizedBox(height: 16),
                 MaterialButton(
                   color: Color.fromARGB(255, 120, 82, 150),
-                  onPressed: () {
-                    onnAddDishButton();
-                  },
+                  onPressed: onnAddDishButton,
                   child: GlowText(
-                    'save',
+                    'Save',
                     style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
@@ -254,26 +209,25 @@ class _newdishState extends State<newdish> {
   }
 
   Future<void> onnAddDishButton() async {
-    final _name = _namecontroller.text.trim();
-    final _cost = _costcontroller.text.trim();
-    final _Description = _descriptioncontroller.text.trim();
+    final _name = _nameController.text.trim();
+    final _cost = _costController.text.trim();
+    final _Description = _descriptionController.text.trim();
     if (_name.isEmpty || _cost.isEmpty) {
       return;
     }
-    print('$_name $_cost  $_Description');
+
     final foodd = Food(
-        name: _name,
-        cost: _cost,
-        description: _Description,
-        image: pickedImage!.path);
+      name: _name,
+      cost: _cost,
+      description: _Description,
+      image: pickedImage?.path ?? '',
+    );
+
     addFood(foodd);
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => BottomBar(name: '', 
-        
-        
-        cost: '', image: '',
-
-
-        )));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => BottomBar(name: '', cost: '', image: ''),
+      ),
+    );
   }
 }

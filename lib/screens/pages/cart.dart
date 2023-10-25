@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 
@@ -47,23 +49,26 @@ class cart extends StatelessWidget {
                       child: Card(
                         child: ListTile(
                           tileColor: const Color.fromARGB(255, 6, 6, 6),
-                          leading: Container(
-                            height: 50,
-                            width: 50,
-                            child: Image.asset('assets/Illustrations.png'),
-                          ),
+              //             leading:Container(
+              //   height: double.infinity,
+              //   width: 100,
+              //   decoration: BoxDecoration(
+              //     shape: BoxShape.rectangle,
+              //     image: data.image != null
+              //         ? DecorationImage(
+              //             image: FileImage(File(data.image)),
+              //             fit: BoxFit.cover,
+              //           )
+              //         : null,
+              //   ),
+              // ),
                           title: Text(
                             name,
                             style: TextStyle(
                               color: Colors.white,
                             ),
                           ),
-                          subtitle: const Text(
-                            "beverage",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
+                          
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

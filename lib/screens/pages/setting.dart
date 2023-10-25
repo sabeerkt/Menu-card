@@ -89,7 +89,11 @@ class _SettingState extends State<Setting> {
       case 'New dish':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => newdish()),
+          MaterialPageRoute(builder: (context) => NewDish(
+
+
+
+          )),
         );
         break;
       case 'About':

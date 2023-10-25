@@ -20,12 +20,13 @@ Future<void> getfood() async {
   FoodListNotifier.value.addAll(Fooddb.values);
   FoodListNotifier.notifyListeners();
 }
+Future<void> updateFood(int index, Food newValue) async {
+  final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
+  await Fooddb.putAt(index, newValue);
+  getfood(); // Refresh the list after update
+}
 
-// void deleteFood(id) async {
-//   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
-//   await Fooddb.deleteAt(id);
-//   getfood(); // Refresh the list after deletion
-// }
+
 
 Future<void> deletfood(int index) async {
   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');

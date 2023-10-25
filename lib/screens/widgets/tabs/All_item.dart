@@ -76,10 +76,10 @@ Widget All_iteam() {
                           icon: Icon(Icons.delete))
                     ],
                   ),
-                  const Text(
-                    "Biryani",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  // const Text(
+                  //   "Biryani",
+                  //   style: TextStyle(color: Colors.white),
+                  // ),
                 ],
               ),
               subtitle: Text(
