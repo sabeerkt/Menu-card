@@ -90,7 +90,13 @@ class _homeState extends State<home> {
               Divider(
                 color: const Color.fromARGB(255, 0, 0, 0),
               ),
-              Text("products"),
+              Text(
+                "products",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
 
               Container(
                 child: Padding(
@@ -110,10 +116,21 @@ class _homeState extends State<home> {
                     child: Column(
                       children: [
                         Card(
-                          child: Column(
+                          child: Stack(
                             children: <Widget>[
-                              Image.asset("assets/slid2.jpg"),
-                              //Text(title),
+                              Image.asset("assets/q1.JPG"),
+                              Positioned.fill(
+                                child: Center(
+                                  child: Text(
+                                    "Your Text Here",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -121,9 +138,28 @@ class _homeState extends State<home> {
                           child: Column(
                             children: <Widget>[
                               Image.asset(
-                                "assets/slid1.jpg",
+                                "assets/qq1.jpg",
                               ),
                               //Text(title),
+                            ],
+                          ),
+                        ),
+                        Card(
+                          child: Stack(
+                            children: <Widget>[
+                              Image.asset("assets/q2.JPG"),
+                              Positioned.fill(
+                                child: Center(
+                                  child: Text(
+                                    "Your Text Here",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

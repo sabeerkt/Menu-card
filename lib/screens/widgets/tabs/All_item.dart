@@ -22,7 +22,7 @@ Widget All_iteam() {
           final data = foodList[index];
           // Return a Card widget for each item
           return Card(
-            color: const Color.fromARGB(255, 210, 144, 108),
+            color: Color.fromARGB(255, 255, 255, 255),
             child: ListTile(
               contentPadding: const EdgeInsets.all(10),
               leading: Container(
@@ -58,7 +58,8 @@ Widget All_iteam() {
                     children: <Widget>[
                       Text(
                         data.name,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 0, 0, 0)),
                       ),
                       const Spacer(), // Add spacer to push the checkbox to the right
                       // Checkbox(
@@ -73,7 +74,10 @@ Widget All_iteam() {
 
                             deletfood(index);
                           },
-                          icon: Icon(Icons.delete))
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ))
                     ],
                   ),
                   // const Text(

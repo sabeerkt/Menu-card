@@ -8,14 +8,17 @@ import 'package:foodmenu/screens/widgets/tabs/Breakfast.dart';
 import 'package:foodmenu/screens/widgets/tabs/Deserts.dart';
 
 class item extends StatelessWidget {
-
   final String name;
   final String cost;
   final String description;
   final String image;
-  const item({Key? key, required this.name, required this.cost, required this.description, required this.image
-  
-  }) : super(key: key);
+  const item(
+      {Key? key,
+      required this.name,
+      required this.cost,
+      required this.description,
+      required this.image})
+      : super(key: key);
 
   // Future<void> _deleteFood(name) async {
   //   deleteFood(name); // Call the deleteFood function from db_function.dart
@@ -29,7 +32,7 @@ class item extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 129, 44, 226),
+          backgroundColor: Color.fromARGB(255, 0, 0, 0),
           title: const Text(
             'item',
             style: TextStyle(
@@ -68,11 +71,10 @@ class item extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  cart(
+                          builder: (context) => cart(
                             name: name,
-
-                                cost: cost,
-                                image: image,
+                            cost: cost,
+                            image: image,
                           ),
                         ));
                   },

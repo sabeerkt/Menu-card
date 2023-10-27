@@ -11,20 +11,20 @@ Future<void> resetDB(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text(
           "Confirm Reset",
           style: TextStyle(color: Color.fromARGB(255, 255, 0, 0)),
         ),
         content: const Text(
-          "Are you sure you want to reset all settings",
-          style: TextStyle(color: Colors.white),
+          "This will delete this record. This action is irreversible. Do you want to continue ?",
+          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
         actions: <Widget>[
           TextButton(
             child: const Text(
               "Cancel",
-              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              style: TextStyle(color: Color.fromARGB(255, 5, 5, 5)),
             ),
             onPressed: () {
               Navigator.of(context).pop(false);
@@ -52,11 +52,9 @@ Future<void> resetDB(
         context,
         MaterialPageRoute(
           builder: (context) => const BottomBar(
-
-            name: '', 
-        
-        
-        cost: '', image: '',
+            name: '',
+            cost: '',
+            image: '',
           ),
         ));
   }

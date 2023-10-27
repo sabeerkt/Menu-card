@@ -17,7 +17,7 @@ class Search extends StatelessWidget {
           ),
         ),
         flexibleSpace: Container(
-          color: const Color.fromARGB(255, 129, 44, 226),
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
       ),
       body: Padding(

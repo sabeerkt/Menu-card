@@ -254,7 +254,7 @@ class _EditDishState extends State<EditDish> {
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => BottomBar(name: '', cost: '', image: ''),
+        builder: (ctx) => const BottomBar(name: '', cost: '', image: ''),
       ),
     );
   }

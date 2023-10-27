@@ -23,6 +23,8 @@ class _NewDishState extends State<NewDish> {
   TextEditingController _descriptionController = TextEditingController();
 
   String dropdownValue = 'all';
+  String note = "Expence";
+  String type = "Income";
   XFile? pickedImage;
 
   Future<void> _pickImage() async {
@@ -73,12 +75,12 @@ class _NewDishState extends State<NewDish> {
           title: const Text(
             "New Dish",
             style: TextStyle(
-              color: Colors.black,
+              color: Color.fromARGB(255, 255, 252, 252),
               fontSize: 16,
             ),
           ),
           flexibleSpace: Container(
-            color: const Color.fromARGB(255, 129, 44, 226),
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         body: SingleChildScrollView(
@@ -111,7 +113,7 @@ class _NewDishState extends State<NewDish> {
                               onPressed: () {
                                 _pickImage();
                               },
-                              icon: const Icon(Icons.camera),
+                              icon: const Icon(Icons.image),
                               iconSize: 68,
                               color: const Color.fromARGB(255, 0, 0, 0),
                             )
@@ -167,6 +169,73 @@ class _NewDishState extends State<NewDish> {
                 SizedBox(
                   height: 10,
                 ),
+                DropdownButton<String>(
+                  value: 'breakfast', // Default selected value
+                  items: <DropdownMenuItem<String>>[
+                    DropdownMenuItem<String>(
+                      value: 'breakfast',
+                      child: Text('Breakfast'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'beverage',
+                      child: Text('Beverage'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'desserts',
+                      child: Text('Desserts'),
+                    ),
+                  ],
+                  onChanged: (String? newValue) {
+                    // Handle the selection of a new value
+                    // You can use this newValue to update the UI or perform actions based on the selection.
+                  },
+                ),
+                ChoiceChip(
+                  label: Text(
+                    "Income",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: type == "Income" ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  selectedColor: Colors.amber,
+                  onSelected: (val) {
+                    if (val) {
+                      setState(() {
+                        type = "Income";
+                        if (note.isEmpty || note == "Expense") {
+                          note = 'Income';
+                        }
+                      });
+                    }
+                  },
+                  selected: type == "Income" ? true : false,
+                ),
+                SizedBox(
+                  width: 8.0,
+                ),
+                ChoiceChip(
+                  label: Text(
+                    "Expense",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: type == "Expense" ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  selectedColor: Colors.black,
+                  onSelected: (val) {
+                    if (val) {
+                      setState(() {
+                        type = "Expense";
+
+                        if (note.isEmpty || note == "Income") {
+                          note = 'Expense';
+                        }
+                      });
+                    }
+                  },
+                  selected: type == "Expense" ? true : false,
+                ),
                 TextField(
                   controller: _descriptionController,
                   decoration: InputDecoration(
@@ -181,15 +250,14 @@ class _NewDishState extends State<NewDish> {
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.pink,
-                      ),
-                    ),
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.pink,
+                        )),
                   ),
                 ),
                 MaterialButton(
-                  color: Color.fromARGB(255, 120, 82, 150),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   onPressed: onnAddDishButton,
                   child: GlowText(
                     'Save',

@@ -12,12 +12,12 @@ class term extends StatelessWidget {
           title: const Text(
             "term and condtion ",
             style: TextStyle(
-              color: Colors.black,
+              color: Color.fromARGB(255, 255, 255, 255),
               fontSize: 16,
             ),
           ),
           flexibleSpace: Container(
-            color: const Color.fromARGB(255, 129, 44, 226),
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         body: const Padding(

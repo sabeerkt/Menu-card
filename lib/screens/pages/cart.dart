@@ -7,7 +7,7 @@ class cart extends StatelessWidget {
   final String name;
   final String cost;
   final String image;
-  const cart({
+  cart({
     Key? key,
     required this.image,
     required this.name,
@@ -33,7 +33,7 @@ class cart extends StatelessWidget {
             ),
           ),
           flexibleSpace: Container(
-            color: const Color.fromARGB(255, 129, 44, 226),
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         body: Column(
@@ -49,26 +49,26 @@ class cart extends StatelessWidget {
                       child: Card(
                         child: ListTile(
                           tileColor: const Color.fromARGB(255, 6, 6, 6),
-              //             leading:Container(
-              //   height: double.infinity,
-              //   width: 100,
-              //   decoration: BoxDecoration(
-              //     shape: BoxShape.rectangle,
-              //     image: data.image != null
-              //         ? DecorationImage(
-              //             image: FileImage(File(data.image)),
-              //             fit: BoxFit.cover,
-              //           )
-              //         : null,
-              //   ),
-              // ),
+                          //             leading:Container(
+                          //   height: double.infinity,
+                          //   width: 100,
+                          //   decoration: BoxDecoration(
+                          //     shape: BoxShape.rectangle,
+                          //     image: data.image != null
+                          //         ? DecorationImage(
+                          //             image: FileImage(File(data.image)),
+                          //             fit: BoxFit.cover,
+                          //           )
+                          //         : null,
+                          //   ),
+                          // ),
                           title: Text(
                             name,
                             style: TextStyle(
                               color: Colors.white,
                             ),
                           ),
-                          
+
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -130,7 +130,7 @@ class cart extends StatelessWidget {
                 color: Color.fromARGB(255, 255, 255, 255),
               ),
               padding: const EdgeInsets.all(16),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
@@ -164,7 +164,7 @@ class cart extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "\$100.00",
+                        cost,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

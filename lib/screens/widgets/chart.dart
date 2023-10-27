@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class chart extends StatelessWidget {
   const chart({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class chart extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 129, 44, 226),
+          backgroundColor: Color.fromARGB(255, 0, 0, 0),
           title: const Text(
             'chart',
             style: TextStyle(color: Colors.white),

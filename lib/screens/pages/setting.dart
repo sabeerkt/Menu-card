@@ -25,13 +25,13 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 129, 44, 226),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         elevation: 0,
         centerTitle: true,
         title: const Text(
           "Settings",
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontSize: 16,
           ),
         ),
@@ -66,7 +66,6 @@ class _SettingState extends State<Setting> {
                           tap(item);
                         },
                       ),
-                      
                     ],
                   ),
                 ),
@@ -89,11 +88,7 @@ class _SettingState extends State<Setting> {
       case 'New dish':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NewDish(
-
-
-
-          )),
+          MaterialPageRoute(builder: (context) => NewDish()),
         );
         break;
       case 'About':
