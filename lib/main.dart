@@ -7,6 +7,14 @@ import 'package:hive_flutter/adapters.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+
+
+
+  //  if (!Hive.isAdapterRegistered(categioryAdapter().typeId)) {
+  //   Hive.registerAdapter(categoryAdapter());
+  // }
+
+
   if (!Hive.isAdapterRegistered(FoodAdapter().typeId)) {
     Hive.registerAdapter(FoodAdapter());
   }

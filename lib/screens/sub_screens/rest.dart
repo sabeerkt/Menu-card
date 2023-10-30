@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Components/bottom.dart';
+
 import 'package:foodmenu/Database/model/model.dart';
+import 'package:foodmenu/Screens/Widgets/bottom.dart';
 import 'package:hive/hive.dart';
 
 Future<void> resetDB(

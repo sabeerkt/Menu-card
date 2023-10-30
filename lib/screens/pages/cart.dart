@@ -39,7 +39,9 @@ class cart extends StatelessWidget {
         body: Column(
           children: [
             Expanded(
-              child: ListView(
+              child:
+              
+               ListView(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -49,26 +51,25 @@ class cart extends StatelessWidget {
                       child: Card(
                         child: ListTile(
                           tileColor: const Color.fromARGB(255, 6, 6, 6),
-                          //             leading:Container(
-                          //   height: double.infinity,
-                          //   width: 100,
-                          //   decoration: BoxDecoration(
-                          //     shape: BoxShape.rectangle,
-                          //     image: data.image != null
-                          //         ? DecorationImage(
-                          //             image: FileImage(File(data.image)),
-                          //             fit: BoxFit.cover,
-                          //           )
-                          //         : null,
-                          //   ),
-                          // ),
+                          leading: Container(
+                            height: double.infinity,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              image: image != null
+                                  ? DecorationImage(
+                                      image: FileImage(File(image)),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : null,
+                            ),
+                          ),
                           title: Text(
                             name,
                             style: TextStyle(
                               color: Colors.white,
                             ),
                           ),
-
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

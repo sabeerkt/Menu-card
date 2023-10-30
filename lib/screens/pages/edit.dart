@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
+import 'package:foodmenu/Screens/Widgets/bottom.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:foodmenu/Components/bottom.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/utility/utilty.dart';

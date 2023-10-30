@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/unboard.dart';
+import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       backgroundColor:
-          const Color(0xFF043D5E), // Set the background color to dark blue
+          Color.fromARGB(255, 255, 255, 255), // Set the background color to dark blue
       body: Center(
         child: Container(
           width: screenWidth,
@@ -55,17 +56,22 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(
                 width:
                     screenWidth * 0.9, // Adjust the width based on screen width
-                child: Text(
-                  'Someone with discerning taste and expertise in food.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: screenWidth *
-                        0.04, // Adjust font size based on screen width
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w500,
-                    height: 1.2, // Adjust line height
-                  ),
+                child: Column(
+                  children: [
+                    Lottie.asset("assets/Animation - 1698586603854.json"),
+                    Text(
+                      'Someone with discerning taste and expertise in food.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: screenWidth *
+                            0.04, // Adjust font size based on screen width
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w500,
+                        height: 1.2, // Adjust line height
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

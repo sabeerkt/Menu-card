@@ -122,7 +122,7 @@ class _homeState extends State<home> {
                               Positioned.fill(
                                 child: Center(
                                   child: Text(
-                                    "Your Text Here",
+                                    "Delightful",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -151,7 +151,7 @@ class _homeState extends State<home> {
                               Positioned.fill(
                                 child: Center(
                                   child: Text(
-                                    "Your Text Here",
+                                    "Flavorsome",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,

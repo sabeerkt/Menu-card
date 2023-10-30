@@ -68,15 +68,15 @@ class item extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => cart(
-                            name: name,
-                            cost: cost,
-                            image: image,
-                          ),
-                        ));
+                    // Navigator.push(
+                    //     context,
+                        // MaterialPageRoute(
+                        //   builder: (context) => cart(
+                        //     name: name,
+                        //     cost: cost,
+                        //     image: image,
+                        //   ),
+                        // ));
                   },
                   icon: const Icon(Icons.shopify_sharp),
                 ),

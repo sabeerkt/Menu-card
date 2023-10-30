@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_glow/flutter_glow.dart';
-import 'package:foodmenu/Components/bottom.dart';
+
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
+import 'package:foodmenu/Screens/Widgets/bottom.dart';
 import 'package:foodmenu/screens/pages/item.dart';
 import 'package:foodmenu/utility/utilty.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,8 +24,8 @@ class _NewDishState extends State<NewDish> {
   TextEditingController _descriptionController = TextEditingController();
 
   String dropdownValue = 'all';
-  String note = "Expence";
-  String type = "Income";
+  String note = "desrts";
+  String type = "breakfast";
   XFile? pickedImage;
 
   Future<void> _pickImage() async {
@@ -80,7 +81,7 @@ class _NewDishState extends State<NewDish> {
             ),
           ),
           flexibleSpace: Container(
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: const Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         body: SingleChildScrollView(
@@ -142,7 +143,7 @@ class _NewDishState extends State<NewDish> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
@@ -166,75 +167,75 @@ class _NewDishState extends State<NewDish> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                DropdownButton<String>(
-                  value: 'breakfast', // Default selected value
-                  items: <DropdownMenuItem<String>>[
-                    DropdownMenuItem<String>(
-                      value: 'breakfast',
-                      child: Text('Breakfast'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'beverage',
-                      child: Text('Beverage'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'desserts',
-                      child: Text('Desserts'),
-                    ),
-                  ],
-                  onChanged: (String? newValue) {
-                    // Handle the selection of a new value
-                    // You can use this newValue to update the UI or perform actions based on the selection.
-                  },
-                ),
+                // DropdownButton<String>(
+                //   value: 'breakfast', // Default selected value
+                //   items: <DropdownMenuItem<String>>[
+                //     const DropdownMenuItem<String>(
+                //       value: 'breakfast',
+                //       child: Text('Breakfast'),
+                //     ),
+                //     const DropdownMenuItem<String>(
+                //       value: 'beverage',
+                //       child: Text('Beverage'),
+                //     ),
+                //     const DropdownMenuItem<String>(
+                //       value: 'desserts',
+                //       child: Text('Desserts'),
+                //     ),
+                //   ],
+                //   onChanged: (String? newValue) {
+                //     // Handle the selection of a new value
+                //     // You can use this newValue to update the UI or perform actions based on the selection.
+                //   },
+                // ),
                 ChoiceChip(
                   label: Text(
-                    "Income",
+                    "breakfast",
                     style: TextStyle(
                       fontSize: 18.0,
-                      color: type == "Income" ? Colors.white : Colors.black,
+                      color: type == "breakfast" ? Colors.white : Colors.black,
                     ),
                   ),
                   selectedColor: Colors.amber,
                   onSelected: (val) {
                     if (val) {
                       setState(() {
-                        type = "Income";
-                        if (note.isEmpty || note == "Expense") {
-                          note = 'Income';
+                        type = "breakfast";
+                        if (note.isEmpty || note == "desrts") {
+                          note = 'breakfast';
                         }
                       });
                     }
                   },
-                  selected: type == "Income" ? true : false,
+                  selected: type == "breakfast" ? true : false,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8.0,
                 ),
                 ChoiceChip(
                   label: Text(
-                    "Expense",
+                    "desrts",
                     style: TextStyle(
                       fontSize: 18.0,
-                      color: type == "Expense" ? Colors.white : Colors.black,
+                      color: type == "desrts" ? Colors.white : Colors.black,
                     ),
                   ),
                   selectedColor: Colors.black,
                   onSelected: (val) {
                     if (val) {
                       setState(() {
-                        type = "Expense";
+                        type = "desrts";
 
-                        if (note.isEmpty || note == "Income") {
-                          note = 'Expense';
+                        if (note.isEmpty || note == "breakfast") {
+                          note = 'desrts';
                         }
                       });
                     }
                   },
-                  selected: type == "Expense" ? true : false,
+                  selected: type == "desrts" ? true : false,
                 ),
                 TextField(
                   controller: _descriptionController,
@@ -257,9 +258,9 @@ class _NewDishState extends State<NewDish> {
                   ),
                 ),
                 MaterialButton(
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: const Color.fromARGB(255, 0, 0, 0),
                   onPressed: onnAddDishButton,
-                  child: GlowText(
+                  child: const GlowText(
                     'Save',
                     style: TextStyle(
                       fontSize: 20,
@@ -294,7 +295,7 @@ class _NewDishState extends State<NewDish> {
     addFood(foodd);
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => BottomBar(name: '', cost: '', image: ''),
+        builder: (ctx) => const BottomBar(name: '', cost: '', image: ''),
       ),
     );
   }
