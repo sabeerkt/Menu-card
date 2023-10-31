@@ -22,10 +22,10 @@ class _NewDishState extends State<NewDish> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _costController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
+  String? Selectedmoneytype;
 
-  String dropdownValue = 'all';
-  String note = "desrts";
-  String type = "breakfast";
+  final List<String> _moneytypelist = ['breakfast', 'desrts'];
+
   XFile? pickedImage;
 
   Future<void> _pickImage() async {
@@ -170,20 +170,85 @@ class _NewDishState extends State<NewDish> {
                 const SizedBox(
                   height: 10,
                 ),
+                DropdownButton<String>(
+                  value: Selectedmoneytype,
+                  items: _moneytypelist
+                      .map((e) => DropdownMenuItem(
+                            child: Row(
+                              children: [
+                                // Container(
+                                //   width: 40,
+                                //   child: Image.asset('imagesMoneyType/$e.png'),
+                                // ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(e, style: const TextStyle(fontSize: 18)),
+                              ],
+                            ),
+                            value: e,
+                          ))
+                      .toList(),
+                  selectedItemBuilder: (BuildContext context) => _moneytypelist
+                      .map((e) => Row(
+                            children: [
+                              // SizedBox(
+                              //   width: 42,
+                              //   child: Image.asset('imagesMoneyType/$e.png'),
+                              // ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(e, style: TextStyle(fontSize: 18)),
+                            ],
+                          ))
+                      .toList(),
+                  hint: Text(
+                    'Select',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  dropdownColor: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  isExpanded: true,
+                  underline: Container(),
+                  onChanged: (value) {
+                    setState(() {
+                      Selectedmoneytype = value;
+                    });
+                  },
+                ),
                 // DropdownButton<String>(
-                //   value: 'breakfast', // Default selected value
+                //   value: Selectedmoneytype, // Default selected value
                 //   items: <DropdownMenuItem<String>>[
-                //     const DropdownMenuItem<String>(
+                //     DropdownMenuItem<String>(
                 //       value: 'breakfast',
-                //       child: Text('Breakfast'),
+                //       child: Text(
+                //         'Breakfast',
+                //         style: TextStyle(
+                //           color: Colors.blue, // Change the text color here
+                //         ),
+                //       ),
                 //     ),
-                //     const DropdownMenuItem<String>(
+                //     DropdownMenuItem<String>(
                 //       value: 'beverage',
-                //       child: Text('Beverage'),
+                //       child: Text(
+                //         'Beverage',
+                //         style: TextStyle(
+                //           color: Colors.green, // Change the text color here
+                //         ),
+                //       ),
                 //     ),
-                //     const DropdownMenuItem<String>(
+                //     DropdownMenuItem<String>(
                 //       value: 'desserts',
-                //       child: Text('Desserts'),
+                //       child: Text(
+                //         'Desserts',
+                //         style: TextStyle(
+                //           color: Colors.red, // Change the text color here
+                //         ),
+                //       ),
                 //     ),
                 //   ],
                 //   onChanged: (String? newValue) {
@@ -191,52 +256,52 @@ class _NewDishState extends State<NewDish> {
                 //     // You can use this newValue to update the UI or perform actions based on the selection.
                 //   },
                 // ),
-                ChoiceChip(
-                  label: Text(
-                    "breakfast",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: type == "breakfast" ? Colors.white : Colors.black,
-                    ),
-                  ),
-                  selectedColor: Colors.amber,
-                  onSelected: (val) {
-                    if (val) {
-                      setState(() {
-                        type = "breakfast";
-                        if (note.isEmpty || note == "desrts") {
-                          note = 'breakfast';
-                        }
-                      });
-                    }
-                  },
-                  selected: type == "breakfast" ? true : false,
-                ),
-                const SizedBox(
-                  width: 8.0,
-                ),
-                ChoiceChip(
-                  label: Text(
-                    "desrts",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: type == "desrts" ? Colors.white : Colors.black,
-                    ),
-                  ),
-                  selectedColor: Colors.black,
-                  onSelected: (val) {
-                    if (val) {
-                      setState(() {
-                        type = "desrts";
+                // ChoiceChip(
+                //   label: Text(
+                //     "breakfast",
+                //     style: TextStyle(
+                //       fontSize: 18.0,
+                //       color: type == "breakfast" ? Colors.white : Colors.black,
+                //     ),
+                //   ),
+                //   selectedColor: Colors.amber,
+                //   onSelected: (val) {
+                //     if (val) {
+                //       setState(() {
+                //         type = "breakfast";
+                //         if (note.isEmpty || note == "desrts") {
+                //           note = 'breakfast';
+                //         }
+                //       });
+                //     }
+                //   },
+                //   selected: type == "breakfast" ? true : false,
+                // ),
+                // const SizedBox(
+                //   width: 8.0,
+                // ),
+                // ChoiceChip(
+                //   label: Text(
+                //     "desrts",
+                //     style: TextStyle(
+                //       fontSize: 18.0,
+                //       color: type == "desrts" ? Colors.white : Colors.black,
+                //     ),
+                //   ),
+                //   selectedColor: Colors.black,
+                //   onSelected: (val) {
+                //     if (val) {
+                //       setState(() {
+                //         type = "desrts";
 
-                        if (note.isEmpty || note == "breakfast") {
-                          note = 'desrts';
-                        }
-                      });
-                    }
-                  },
-                  selected: type == "desrts" ? true : false,
-                ),
+                //         if (note.isEmpty || note == "breakfast") {
+                //           note = 'desrts';
+                //         }
+                //       });
+                //     }
+                //   },
+                //   selected: type == "desrts" ? true : false,
+                // ),
                 TextField(
                   controller: _descriptionController,
                   decoration: InputDecoration(

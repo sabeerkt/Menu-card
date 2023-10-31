@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:foodmenu/screens/pages/item.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -26,14 +27,35 @@ class _homeState extends State<home> {
           elevation: 0, // Remove the elevation (border)
           flexibleSpace: Container(
             child: Center(
-              child: GlowText(
-                'Satisfy your cravings!',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(
-                      255, 48, 50, 51), // Set the text color to white
-                ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 30, // Adjust the radius as needed
+                    backgroundImage:
+                        AssetImage('assets/Eating together-bro.png'),
+                    backgroundColor: Colors.white,
+                  ),
+                  SizedBox(
+                      width:
+                          60), // Add some spacing between the image and the text
+                  GlowText(
+                    'Satisfy your cravings!',
+                    style:
+                    
+                    //  GoogleFonts.ubuntu(
+                    //   fontSize: 17,
+                    //   fontWeight: FontWeight.bold,
+                    // ),
+                    //
+                    TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(
+                          255, 48, 50, 51), // Set the text color to white
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -84,13 +106,13 @@ class _homeState extends State<home> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Divider(
-                color: const Color.fromARGB(255, 0, 0, 0),
+              const Divider(
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
-              Text(
+              const Text(
                 "products",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -119,7 +141,7 @@ class _homeState extends State<home> {
                           child: Stack(
                             children: <Widget>[
                               Image.asset("assets/q1.JPG"),
-                              Positioned.fill(
+                              const Positioned.fill(
                                 child: Center(
                                   child: Text(
                                     "Delightful",
@@ -148,7 +170,7 @@ class _homeState extends State<home> {
                           child: Stack(
                             children: <Widget>[
                               Image.asset("assets/q2.JPG"),
-                              Positioned.fill(
+                              const Positioned.fill(
                                 child: Center(
                                   child: Text(
                                     "Flavorsome",

@@ -39,9 +39,7 @@ class cart extends StatelessWidget {
         body: Column(
           children: [
             Expanded(
-              child:
-              
-               ListView(
+              child: ListView(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),

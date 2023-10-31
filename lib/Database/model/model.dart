@@ -3,18 +3,12 @@ import 'package:hive/hive.dart';
 part 'model.g.dart';
 
 
-@HiveType(typeId: 1)
-enum category{
-  @HiveField(0)
-  drinks,
-  @HiveField(1)
-  breakfast
-}
+
 
 
 
 @HiveType(typeId: 0)
-class Food {
+class    Food    extends HiveObject  {
   @HiveField(0)
   String name;
 
@@ -35,4 +29,6 @@ class Food {
       required this.cost,
       this.image,
       required this.description});
+
+  
 }
