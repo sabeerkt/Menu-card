@@ -1,13 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_glow/flutter_glow.dart';
-
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/Screens/Widgets/bottom.dart';
-import 'package:foodmenu/screens/pages/item.dart';
 import 'package:foodmenu/utility/utilty.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,9 +19,10 @@ class _NewDishState extends State<NewDish> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _costController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
-  String? Selectedmoneytype;
+  TextEditingController _categoryController = TextEditingController();
+  String Selectedmoneytype = 'breakfast';
 
-  final List<String> _moneytypelist = ['breakfast', 'desrts'];
+  final List<String> _moneytypelist = ['breakfast', 'desrts', "drinks"];
 
   XFile? pickedImage;
 
@@ -171,139 +169,69 @@ class _NewDishState extends State<NewDish> {
                 const SizedBox(
                   height: 10,
                 ),
-                DropdownButton<String>(
-                  value: Selectedmoneytype,
-                  items: _moneytypelist
-                      .map((e) => DropdownMenuItem(
-                            child: Row(
-                              children: [
-                                // Container(
-                                //   width: 40,
-                                //   child: Image.asset('imagesMoneyType/$e.png'),
-                                // ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(e, style: const TextStyle(fontSize: 18)),
-                              ],
-                            ),
-                            value: e,
-                          ))
-                      .toList(),
-                  selectedItemBuilder: (BuildContext context) => _moneytypelist
-                      .map((e) => Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: _categoryController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    DropdownButton<String>(
+                      value: Selectedmoneytype,
+                      items: _moneytypelist.map((e) {
+                        return DropdownMenuItem<String>(
+                          value: e,
+                          child: Row(
                             children: [
-                              // SizedBox(
-                              //   width: 42,
-                              //   child: Image.asset('imagesMoneyType/$e.png'),
-                              // ),
-                              const SizedBox(
-                                width: 10,
-                              ),
+                              // Add an Image widget if you have image assets
+                              const SizedBox(width: 10),
+                              Text(e, style: const TextStyle(fontSize: 18)),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                      selectedItemBuilder: (BuildContext context) {
+                        return _moneytypelist.map((e) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              // Add an Image widget if you have image assets
+                              const SizedBox(width: 10),
                               Text(e, style: TextStyle(fontSize: 18)),
                             ],
-                          ))
-                      .toList(),
-                  hint: Text(
-                    'Select',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                          );
+                        }).toList();
+                      },
+                      hint: Text(
+                        'Select',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      dropdownColor: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                      underline: Container(),
+                      onChanged: (value) {
+                        setState(() {
+                          Selectedmoneytype = value!;
+                          _categoryController.text = value;
+                        });
+                      },
                     ),
-                  ),
-                  dropdownColor: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  isExpanded: true,
-                  underline: Container(),
-                  onChanged: (value) {
-                    setState(() {
-                      Selectedmoneytype = value;
-                    });
-                  },
+                  ],
                 ),
-                // DropdownButton<String>(
-                //   value: Selectedmoneytype, // Default selected value
-                //   items: <DropdownMenuItem<String>>[
-                //     DropdownMenuItem<String>(
-                //       value: 'breakfast',
-                //       child: Text(
-                //         'Breakfast',
-                //         style: TextStyle(
-                //           color: Colors.blue, // Change the text color here
-                //         ),
-                //       ),
-                //     ),
-                //     DropdownMenuItem<String>(
-                //       value: 'beverage',
-                //       child: Text(
-                //         'Beverage',
-                //         style: TextStyle(
-                //           color: Colors.green, // Change the text color here
-                //         ),
-                //       ),
-                //     ),
-                //     DropdownMenuItem<String>(
-                //       value: 'desserts',
-                //       child: Text(
-                //         'Desserts',
-                //         style: TextStyle(
-                //           color: Colors.red, // Change the text color here
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                //   onChanged: (String? newValue) {
-                //     // Handle the selection of a new value
-                //     // You can use this newValue to update the UI or perform actions based on the selection.
-                //   },
-                // ),
-                // ChoiceChip(
-                //   label: Text(
-                //     "breakfast",
-                //     style: TextStyle(
-                //       fontSize: 18.0,
-                //       color: type == "breakfast" ? Colors.white : Colors.black,
-                //     ),
-                //   ),
-                //   selectedColor: Colors.amber,
-                //   onSelected: (val) {
-                //     if (val) {
-                //       setState(() {
-                //         type = "breakfast";
-                //         if (note.isEmpty || note == "desrts") {
-                //           note = 'breakfast';
-                //         }
-                //       });
-                //     }
-                //   },
-                //   selected: type == "breakfast" ? true : false,
-                // ),
-                // const SizedBox(
-                //   width: 8.0,
-                // ),
-                // ChoiceChip(
-                //   label: Text(
-                //     "desrts",
-                //     style: TextStyle(
-                //       fontSize: 18.0,
-                //       color: type == "desrts" ? Colors.white : Colors.black,
-                //     ),
-                //   ),
-                //   selectedColor: Colors.black,
-                //   onSelected: (val) {
-                //     if (val) {
-                //       setState(() {
-                //         type = "desrts";
-
-                //         if (note.isEmpty || note == "breakfast") {
-                //           note = 'desrts';
-                //         }
-                //       });
-                //     }
-                //   },
-                //   selected: type == "desrts" ? true : false,
-                // ),
-
+                SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   controller: _descriptionController,
                   decoration: InputDecoration(
@@ -348,15 +276,21 @@ class _NewDishState extends State<NewDish> {
   Future<void> onnAddDishButton() async {
     final _name = _nameController.text.trim();
     final _cost = _costController.text.trim();
-    final _Description = _descriptionController.text.trim();
-    if (_name.isEmpty || _cost.isEmpty) {
+    final _description = _descriptionController.text.trim();
+    final _category = _categoryController.text.trim();
+
+    if (_name.isEmpty ||
+        _cost.isEmpty ||
+        _description.isEmpty ||
+        _category.isEmpty) {
       return;
     }
 
     final foodd = Food(
       name: _name,
       cost: _cost,
-      description: _Description,
+      description: _description,
+      category: _category,
       image: pickedImage?.path ?? '',
     );
 

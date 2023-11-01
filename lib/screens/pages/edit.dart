@@ -14,7 +14,6 @@ class EditDish extends StatefulWidget {
   final TextEditingController costController;
   final TextEditingController descriptionController;
   final TextEditingController imageController;
-
   final bool isEditMode; // Set to true when editing an existing item
   final int index; // Pass the index if you're editing an existing item
 
@@ -25,6 +24,7 @@ class EditDish extends StatefulWidget {
     required this.isEditMode,
     required this.index,
     required this.imageController,
+
   });
 
   @override
@@ -243,6 +243,7 @@ class _EditDishState extends State<EditDish> {
     final _foodd = Food(
       name: _name,
       cost: _cost,
+      category: widget.descriptionController.text.trim(),
       description: _Description,
       image: pickedImage?.path ?? '',
     );

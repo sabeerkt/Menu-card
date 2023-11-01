@@ -6,7 +6,6 @@ import 'package:foodmenu/Database/model/model.dart';
 
 import 'package:foodmenu/screens/pages/detial.dart';
 
-late final String name;
 // Future<void> _deleteFood(name) async {
 //   deleteFood(name); // Call the deleteFood function from db_function.dart
 // }
@@ -20,11 +19,24 @@ Widget All_iteam() {
         itemCount: foodList.length,
         itemBuilder: (context, index) {
           final data = foodList[index];
-          // Return a Card widget for each item
+          // Create a custom item widget for each item
           return Card(
             color: Color.fromARGB(255, 255, 255, 255),
             child: ListTile(
               contentPadding: const EdgeInsets.all(10),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => detailpage(
+                      name: data.name,
+                      cost: data.cost,
+                      description: data.description,
+                      image: data.image,
+                    ),
+                  ),
+                );
+              },
               leading: Container(
                 height: double.infinity,
                 width: 100,
@@ -38,52 +50,34 @@ Widget All_iteam() {
                       : null,
                 ),
               ),
-              onTap: () {
-                // Navigate to the detail page when the ListTile is tapped
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => detailpage(
-                            name: data.name,
-                            cost: data.cost,
-                            description: data.description,
-                            image: data.image,
-                          )),
-                );
-              },
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Text(
-                        data.name,
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                      Column(
+                        children: [
+                          Text(data.name),
+                          Text(data.category ?? 'default')
+                        ],
                       ),
-                      const Spacer(), // Add spacer to push the checkbox to the right
-                      // Checkbox(
-                      //   value: true, // Set the initial value as needed
-                      //   onChanged: (bool? value) {
-                      //     // Handle checkbox state change
-                      //   },
-                      // ),
                       IconButton(
-                          onPressed: () {
-                            //  deleteFood(id);
-
-                            deletfood(index);
-                          },
-                          icon: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          ))
+                        onPressed: () {
+                          addToCart(data);
+                        },
+                        icon: Icon(Icons.shopping_cart),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          deletfood(index);
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                      ),
                     ],
                   ),
-                  // const Text(
-                  //   "Biryani",
-                  //   style: TextStyle(color: Colors.white),
-                  // ),
                 ],
               ),
               subtitle: Text(
@@ -98,8 +92,20 @@ Widget All_iteam() {
       );
     },
   );
+}
 
-  // ListView.separated(
+// class CustomFoodItem extends StatelessWidget {
+//   final Food data;
+
+//   CustomFoodItem({required this.data});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }
+
+ // ListView.separated(
   //   itemBuilder: (ctx, index) {
   //     return ListTile(
   //       title: Text("name $index"),
@@ -111,4 +117,3 @@ Widget All_iteam() {
   //   },
   //   itemCount: 10,
   // );
-}

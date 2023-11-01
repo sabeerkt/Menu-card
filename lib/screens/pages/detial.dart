@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/screens/pages/cart.dart';
 import 'package:foodmenu/screens/pages/edit.dart';
 import 'package:foodmenu/screens/widgets/search.dart';
 
-class detailpage extends StatelessWidget {
+class detailpage extends StatefulWidget {
   final String name;
   final String cost;
   final String description;
@@ -19,6 +20,12 @@ class detailpage extends StatelessWidget {
     required this.description,
   }) : super(key: key);
 
+  @override
+  State<detailpage> createState() => _detailpageState();
+}
+
+class _detailpageState extends State<detailpage> {
+  // final food = FoodListNotifier.value[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +49,11 @@ class detailpage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => EditDish(
-                    imageController: TextEditingController(text: image),
-                    nameController: TextEditingController(text: name),
-                    costController: TextEditingController(text: cost),
+                    imageController: TextEditingController(text: widget.image),
+                    nameController: TextEditingController(text: widget.name),
+                    costController: TextEditingController(text: widget.cost),
                     descriptionController:
-                        TextEditingController(text: description),
+                        TextEditingController(text: widget.description),
                     isEditMode: true,
                     index: 0, // You need to provide the correct index
                   ),
@@ -67,8 +74,8 @@ class detailpage extends StatelessWidget {
                 height: 250,
                 decoration: ShapeDecoration(
                   image: DecorationImage(
-                    image: image != null
-                        ? FileImage(File(image))
+                    image: widget.image != null
+                        ? FileImage(File(widget.image))
                         : AssetImage("assets/juice.jfif") as ImageProvider,
                     fit: BoxFit.fill,
                   ),
@@ -106,7 +113,7 @@ class detailpage extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        name, // Main Heading
+                        widget.name, // Main Heading
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -116,7 +123,7 @@ class detailpage extends StatelessWidget {
                     Align(
                       alignment: Alignment.topRight,
                       child: Text(
-                        "\$$cost", // Price
+                        "\$${widget.cost}", // Price
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -126,7 +133,7 @@ class detailpage extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      description, // Description
+                      widget.description, // Description
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 10),
@@ -140,15 +147,6 @@ class detailpage extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     // Navigate to another page or perform the desired action here
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => cart(
-                                name: name,
-                                cost: cost,
-                                image: image,
-                              )),
-                    );
                   },
                   child: Column(
                     children: [
@@ -159,18 +157,7 @@ class detailpage extends StatelessWidget {
                         width: double.infinity, // Full width of the screen
                         height: 70, // Height of 70
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => cart(
-                                  name: name,
-                                  cost: cost,
-                                  image: image,
-                                ),
-                              ),
-                            );
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             primary: Color.fromARGB(255, 0, 0, 0),
                           ),

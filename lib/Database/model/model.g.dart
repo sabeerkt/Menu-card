@@ -18,7 +18,7 @@ class FoodAdapter extends TypeAdapter<Food> {
     };
     return Food(
       name: fields[0] as String,
-      category: fields[1] as int?,
+      category: fields[1] as String?,
       cost: fields[2] as String,
       image: fields[3] as dynamic,
       description: fields[4] as dynamic,

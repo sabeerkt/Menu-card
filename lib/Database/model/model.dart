@@ -2,18 +2,13 @@ import 'package:hive/hive.dart';
 
 part 'model.g.dart';
 
-
-
-
-
-
 @HiveType(typeId: 0)
-class    Food    extends HiveObject  {
+class Food {
   @HiveField(0)
   String name;
 
   @HiveField(1)
-  int? category;
+  String? category;
 
   @HiveField(2)
   String cost;
@@ -25,10 +20,8 @@ class    Food    extends HiveObject  {
 
   Food(
       {required this.name,
-      this.category,
+      required this.category,
       required this.cost,
       this.image,
       required this.description});
-
-  
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
-import 'package:foodmenu/screens/pages/cart.dart';
+
 import 'package:foodmenu/screens/widgets/search.dart';
 import 'package:foodmenu/screens/widgets/tabs/All_item.dart';
 import 'package:foodmenu/screens/widgets/tabs/drinks.dart';
 import 'package:foodmenu/screens/widgets/tabs/Breakfast.dart';
 import 'package:foodmenu/screens/widgets/tabs/Deserts.dart';
 
-class item extends StatelessWidget {
+class item extends StatefulWidget {
   final String name;
   final String cost;
   final String description;
@@ -20,10 +20,12 @@ class item extends StatelessWidget {
       required this.image})
       : super(key: key);
 
-  // Future<void> _deleteFood(name) async {
-  //   deleteFood(name); // Call the deleteFood function from db_function.dart
-  // }
+  @override
+  State<item> createState() => _itemState();
+}
 
+class _itemState extends State<item> {
+  // Future<void> _deleteFood(name) async {
   @override
   Widget build(BuildContext context) {
     getfood();
@@ -65,20 +67,6 @@ class item extends StatelessWidget {
                         ));
                   },
                   icon: const Icon(Icons.search),
-                ),
-                IconButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    // MaterialPageRoute(
-                    //   builder: (context) => cart(
-                    //     name: name,
-                    //     cost: cost,
-                    //     image: image,
-                    //   ),
-                    // ));
-                  },
-                  icon: const Icon(Icons.shopify_sharp),
                 ),
               ],
             )
