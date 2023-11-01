@@ -83,12 +83,12 @@ class _EditDishState extends State<EditDish> {
           title: const Text(
             "Edit Dish",
             style: TextStyle(
-              color: Colors.black,
+              color: Color.fromARGB(255, 255, 255, 255),
               fontSize: 16,
             ),
           ),
           flexibleSpace: Container(
-            color: const Color.fromARGB(255, 129, 44, 226),
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         body: SingleChildScrollView(
@@ -121,7 +121,7 @@ class _EditDishState extends State<EditDish> {
                               onPressed: () {
                                 _pickImage();
                               },
-                              icon: const Icon(Icons.camera),
+                              icon: const Icon(Icons.image),
                               iconSize: 68,
                               color: const Color.fromARGB(255, 0, 0, 0),
                             )
@@ -205,6 +205,7 @@ class _EditDishState extends State<EditDish> {
                           ),
                         ),
                       ),
+                      maxLines: 5,
                     ),
                   ],
                 ),
@@ -212,14 +213,14 @@ class _EditDishState extends State<EditDish> {
                 // ... Other TextFields for cost and description
 
                 MaterialButton(
-                  color: Color.fromARGB(255, 120, 82, 150),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   onPressed: onnUpdateDishButton,
                   child: GlowText(
                     'Update',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 0, 0, 0),
+                      color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
                 ),

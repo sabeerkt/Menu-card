@@ -26,7 +26,7 @@ class _homeState extends State<home> {
           backgroundColor: Colors.white, // Set the background color to white
           elevation: 0, // Remove the elevation (border)
           flexibleSpace: Container(
-            child: Center(
+            child: const Center(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[

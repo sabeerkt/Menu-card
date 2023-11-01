@@ -153,6 +153,7 @@ class _NewDishState extends State<NewDish> {
                     labelStyle: const TextStyle(
                       color: Colors.pink,
                     ),
+                    prefixText: '\$', // Add the dollar sign as a prefix
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
@@ -302,6 +303,7 @@ class _NewDishState extends State<NewDish> {
                 //   },
                 //   selected: type == "desrts" ? true : false,
                 // ),
+
                 TextField(
                   controller: _descriptionController,
                   decoration: InputDecoration(
@@ -321,6 +323,7 @@ class _NewDishState extends State<NewDish> {
                           color: Colors.pink,
                         )),
                   ),
+                  maxLines: 5,
                 ),
                 MaterialButton(
                   color: const Color.fromARGB(255, 0, 0, 0),

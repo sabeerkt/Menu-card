@@ -87,8 +87,10 @@ Widget All_iteam() {
                 ],
               ),
               subtitle: Text(
-                data.cost,
-                style: TextStyle(color: Color.fromARGB(255, 58, 95, 33)),
+                "\$${data.cost}",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 58, 95, 33),
+                ),
               ),
             ),
           );

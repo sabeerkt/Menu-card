@@ -33,7 +33,7 @@ class detailpage extends StatelessWidget {
           ),
         ),
         flexibleSpace: Container(
-          color: const Color.fromARGB(255, 129, 44, 226),
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
         actions: [
           IconButton(
@@ -116,7 +116,7 @@ class detailpage extends StatelessWidget {
                     Align(
                       alignment: Alignment.topRight,
                       child: Text(
-                        cost, // Price
+                        "\$$cost", // Price
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -172,11 +172,11 @@ class detailpage extends StatelessWidget {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(255, 129, 44, 226),
+                            primary: Color.fromARGB(255, 0, 0, 0),
                           ),
                           child: const Text("Add to Cart"),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

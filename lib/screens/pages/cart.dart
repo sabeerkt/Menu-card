@@ -103,7 +103,7 @@ class cart extends StatelessWidget {
                                 },
                               ),
                               Text(
-                                cost,
+                                "\$$cost",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -163,7 +163,7 @@ class cart extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        cost,
+                        "\$$cost",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
