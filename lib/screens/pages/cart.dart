@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 
@@ -13,6 +12,36 @@ class cart extends StatefulWidget {
 }
 
 class _cartState extends State<cart> {
+  Future<void> _showDeleteConfirmationDialog(int index) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Delete Item"),
+          content:
+              Text("Are you sure you want to delete this item from the cart?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  deleteCartItem(index);
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text("Confirm"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -92,9 +121,7 @@ class _cartState extends State<cart> {
                                 icon: const Icon(Icons.delete,
                                     color: Color.fromARGB(255, 255, 0, 0)),
                                 onPressed: () {
-                                  setState(() {
-                                    deleteCartItem(index);
-                                  });
+                                  _showDeleteConfirmationDialog(index);
                                 },
                               ),
                               Text(
