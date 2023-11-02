@@ -54,28 +54,46 @@ Widget All_iteam() {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
-                    children: <Widget>[
-                      Column(
-                        children: [
-                          Text(data.name),
-                          Text(data.category ?? 'default')
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          Column(
+                            children: [
+                              Text(
+                                data.name,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              Text(
+                                data.category ?? 'default',
+                                style: TextStyle(color: Colors.blue),
+                              )
+                            ],
+                          ),
                         ],
                       ),
-                      IconButton(
-                        onPressed: () {
-                          addToCart(data);
-                        },
-                        icon: Icon(Icons.shopping_cart),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          deletfood(index);
-                        },
-                        icon: Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        ),
-                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              addToCart(data);
+                            },
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: Colors.black,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              deletfood(index);
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ],

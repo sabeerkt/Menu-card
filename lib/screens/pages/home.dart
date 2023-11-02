@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/Database/model/model.dart';
+
 import 'package:foodmenu/screens/pages/item.dart';
 
 class Home extends StatefulWidget {
@@ -23,6 +25,8 @@ class _HomeState extends State<Home> {
   ];
 
   final fooddata = FoodListNotifier.value;
+
+ 
 
   @override
   Widget build(BuildContext context) {
