@@ -70,17 +70,14 @@ class _detailpageState extends State<detailpage> {
           child: Column(
             children: [
               Container(
-                width: 500,
+                width: 600,
                 height: 250,
-                decoration: ShapeDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
                     image: widget.image != null
                         ? FileImage(File(widget.image))
                         : AssetImage("assets/juice.jfif") as ImageProvider,
                     fit: BoxFit.fill,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
                   ),
                 ),
               ),
@@ -153,17 +150,17 @@ class _detailpageState extends State<detailpage> {
                       const SizedBox(
                         height: 230,
                       ),
-                      Container(
-                        width: double.infinity, // Full width of the screen
-                        height: 70, // Height of 70
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(255, 0, 0, 0),
-                          ),
-                          child: const Text("Add to Cart"),
-                        ),
-                      ),
+                      // Container(
+                      //   width: double.infinity, // Full width of the screen
+                      //   height: 70, // Height of 70
+                      //   child: ElevatedButton(
+                      //     onPressed: () {},
+                      //     style: ElevatedButton.styleFrom(
+                      //       primary: Color.fromARGB(255, 0, 0, 0),
+                      //     ),
+                      //     child: const Text("Add to Cart"),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

@@ -16,13 +16,16 @@ Widget desrets() {
   return ValueListenableBuilder(
     valueListenable: FoodListNotifier,
     builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
+      final filteredBreakfastList = foodList
+          .where((food) => food.category?.contains('desrts') == true)
+          .toList();
       return ListView.builder(
-        itemCount: foodList.length,
+        itemCount: filteredBreakfastList.length,
         itemBuilder: (context, index) {
-          final data = foodList[index];
+          final data = filteredBreakfastList[index];
           // Return a Card widget for each item
           return Card(
-            color: const Color.fromARGB(255, 210, 144, 108),
+            color: Color.fromARGB(255, 255, 255, 255),
             child: ListTile(
               contentPadding: const EdgeInsets.all(10),
               leading: Container(
@@ -55,28 +58,48 @@ Widget desrets() {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
-                    children: <Widget>[
-                      Text(
-                        data.name,
-                        style: TextStyle(color: Colors.white),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          Column(
+                            children: [
+                              Text(
+                                data.name,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              Text(
+                                data.category ?? 'default',
+                                style: TextStyle(color: Colors.blue),
+                              )
+                            ],
+                          ),
+                        ],
                       ),
-                      const Spacer(), // Add spacer to push the checkbox to the right
-                      // Checkbox(
-                      //   value: true, // Set the initial value as needed
-                      //   onChanged: (bool? value) {
-                      //     // Handle checkbox state change
-                      //   },
-                      // ),
-                      IconButton(
-                          onPressed: () {
-                            //  deleteFood(id);
-
-                            deletfood(index);
-                          },
-                          icon: Icon(Icons.delete))
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              addToCart(data);
+                            },
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: Colors.black,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              deletfood(index);
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
-                 
                 ],
               ),
               subtitle: Text(

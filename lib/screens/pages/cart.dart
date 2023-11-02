@@ -14,9 +14,6 @@ class cart extends StatefulWidget {
 
 class _cartState extends State<cart> {
   @override
-
-  // Future<void> _deleteFood(id) async {
-  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -36,89 +33,6 @@ class _cartState extends State<cart> {
         ),
         body: Column(
           children: [
-            // Expanded(
-            //   child: ListView(
-            //     children: [
-            //       Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: ClipRRect(
-            //           borderRadius: BorderRadius.circular(
-            //               25), // Adjust the radius as needed
-            //           child: Card(
-            //             child: ListTile(
-            //               tileColor: const Color.fromARGB(255, 6, 6, 6),
-            //               leading: Container(
-            //                 height: double.infinity,
-            //                 width: 100,
-            //                 decoration: BoxDecoration(
-            //                   shape: BoxShape.rectangle,
-            //                   image: image != null
-            //                       ? DecorationImage(
-            //                           image: FileImage(File(image)),
-            //                           fit: BoxFit.cover,
-            //                         )
-            //                       : null,
-            //                 ),
-            //               ),
-            //               title: Text(
-            //                 name,
-            //                 style: TextStyle(
-            //                   color: Colors.white,
-            //                 ),
-            //               ),
-            //               trailing: Row(
-            //                 mainAxisSize: MainAxisSize.min,
-            //                 children: [
-            //                   IconButton(
-            //                     icon: const Icon(Icons.remove,
-            //                         color: Colors.white),
-            //                     onPressed: () {
-            //                       // Add logic to decrease item count
-            //                     },
-            //                   ),
-            //                   const Text(
-            //                     "1",
-            //                     style: TextStyle(
-            //                       fontSize: 16,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: Colors.white,
-            //                     ),
-            //                   ),
-            //                   IconButton(
-            //                     icon:
-            //                         const Icon(Icons.add, color: Colors.white),
-            //                     onPressed: () {
-            //                       // Add logic to increase item count
-            //                     },
-            //                   ),
-            //                   IconButton(
-            //                     icon: const Icon(Icons.delete,
-            //                         color: Colors.white),
-            //                     onPressed: () {
-            //                       // _deleteFood(name);
-            //                       // Navigator.pop(context);
-            //                       // print("deleted");
-            //                     },
-            //                   ),
-            //                   Text(
-            //                     "\$$cost",
-            //                     style: TextStyle(
-            //                       fontSize: 16,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: Color(0xFF65B31D),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-
-            //       //billl
-            //     ],
-            //   ),
-            // ),
             Expanded(
               child: ListView.builder(
                 itemCount: cartitems.length,
@@ -127,11 +41,10 @@ class _cartState extends State<cart> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                          25), // Adjust the radius as needed
+                      borderRadius: BorderRadius.circular(25),
                       child: Card(
                         child: ListTile(
-                          tileColor: const Color.fromARGB(255, 6, 6, 6),
+                          tileColor: Color.fromARGB(255, 255, 255, 255),
                           leading: Container(
                             height: double.infinity,
                             width: 100,
@@ -148,15 +61,14 @@ class _cartState extends State<cart> {
                           title: Text(
                             cartdata.name,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: const Color.fromARGB(255, 0, 0, 0),
                             ),
                           ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
+                          subtitle: Row(
                             children: [
                               IconButton(
                                 icon: const Icon(Icons.remove,
-                                    color: Colors.white),
+                                    color: Color.fromARGB(255, 0, 0, 0)),
                                 onPressed: () {
                                   // Add logic to decrease item count
                                 },
@@ -166,19 +78,19 @@ class _cartState extends State<cart> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: Color.fromARGB(255, 0, 0, 0),
                                 ),
                               ),
                               IconButton(
-                                icon:
-                                    const Icon(Icons.add, color: Colors.white),
+                                icon: const Icon(Icons.add,
+                                    color: Color.fromARGB(255, 0, 0, 0)),
                                 onPressed: () {
                                   // Add logic to increase item count
                                 },
                               ),
                               IconButton(
                                 icon: const Icon(Icons.delete,
-                                    color: Colors.white),
+                                    color: Color.fromARGB(255, 255, 0, 0)),
                                 onPressed: () {
                                   setState(() {
                                     deleteCartItem(index);
@@ -186,7 +98,7 @@ class _cartState extends State<cart> {
                                 },
                               ),
                               Text(
-                                cartdata.cost,
+                                '\$${cartdata.cost}',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -202,17 +114,6 @@ class _cartState extends State<cart> {
                 },
               ),
             ),
-            // Expanded(
-            //   child: ListView.builder(
-            //     itemCount: cartitems.length,
-            //     itemBuilder: (context, index) {
-            //       final cartdata = cartitems[index];
-            //       return ListTile(
-            //         title: Text(cartdata.name),
-            //       );
-            //     },
-            //   ),
-            // ),
             Container(
               decoration: BoxDecoration(
                 border: Border.all(
