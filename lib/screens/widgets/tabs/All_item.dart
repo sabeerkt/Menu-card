@@ -3,14 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
-
 import 'package:foodmenu/screens/pages/detial.dart';
 
-// Future<void> _deleteFood(name) async {
-//   deleteFood(name); // Call the deleteFood function from db_function.dart
-// }
-
-//change alliteam
 Widget All_iteam() {
   return ValueListenableBuilder(
     valueListenable: FoodListNotifier,
@@ -21,7 +15,7 @@ Widget All_iteam() {
           final data = foodList[index];
           // Create a custom item widget for each item
           return Card(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: const Color.fromARGB(255, 255, 255, 255),
             child: ListTile(
               contentPadding: const EdgeInsets.all(10),
               onTap: () {
@@ -62,11 +56,11 @@ Widget All_iteam() {
                             children: [
                               Text(
                                 data.name,
-                                style: TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.black),
                               ),
                               Text(
                                 data.category ?? 'default',
-                                style: TextStyle(color: Colors.blue),
+                                style: const TextStyle(color: Colors.blue),
                               )
                             ],
                           ),
@@ -77,8 +71,27 @@ Widget All_iteam() {
                           IconButton(
                             onPressed: () {
                               addToCart(data);
+                              // Show a snackbar when item is added to the cart
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor:
+                                      Colors.green, // Set the background color
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10), // Set a curved shape
+                                  ),
+                                  content: Text(
+                                    'Product added to cart',
+                                    style: TextStyle(
+                                      fontWeight:
+                                          FontWeight.bold, // Make text bold
+                                      color: Colors.white, // Change text color
+                                    ),
+                                  ),
+                                ),
+                              );
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.shopping_cart,
                               color: Colors.black,
                             ),
@@ -87,7 +100,7 @@ Widget All_iteam() {
                             onPressed: () {
                               deletfood(index);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.delete,
                               color: Colors.red,
                             ),
@@ -100,7 +113,7 @@ Widget All_iteam() {
               ),
               subtitle: Text(
                 "\$${data.cost}",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color.fromARGB(255, 58, 95, 33),
                 ),
               ),
@@ -111,27 +124,3 @@ Widget All_iteam() {
     },
   );
 }
-
-// class CustomFoodItem extends StatelessWidget {
-//   final Food data;
-
-//   CustomFoodItem({required this.data});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return 
-//   }
-// }
-
- // ListView.separated(
-  //   itemBuilder: (ctx, index) {
-  //     return ListTile(
-  //       title: Text("name $index"),
-  //       subtitle: Text("age $index"),
-  //     );
-  //   },
-  //   separatorBuilder: (ctx, index) {
-  //     return const Divider();
-  //   },
-  //   itemCount: 10,
-  // );

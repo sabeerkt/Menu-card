@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/Database/Function/db_function.dart';
 
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/Screens/Widgets/bottom.dart';
@@ -48,6 +49,7 @@ Future<void> resetDB(
   if (confirmReset == true) {
     final FoodMenu_db = await Hive.openBox<Food>('FoodMenu_db');
     FoodMenu_db.clear();
+    cartitems.clear();
 
     Navigator.pushReplacement(
         context,

@@ -64,4 +64,13 @@ deleteCartItem(int id) async {
   loadCart();
 }
 
+double calculateTotalCost(List<Food> foods) {
+  double totalCost = 0;
+  for (var food in foods) {
+    totalCost += double.parse(food.cost);
+  }
+  return totalCost;
+}
+
+
 

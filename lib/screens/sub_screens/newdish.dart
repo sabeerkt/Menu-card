@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
@@ -165,6 +166,12 @@ class _NewDishState extends State<NewDish> {
                       ),
                     ),
                   ),
+                  keyboardType:
+                      TextInputType.number, // Set the keyboard type to numeric
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(
+                        RegExp(r'[0-9]')), // Allow only numeric input
+                  ],
                 ),
                 const SizedBox(
                   height: 10,

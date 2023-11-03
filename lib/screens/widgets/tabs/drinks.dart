@@ -102,9 +102,11 @@ Widget bevarge() {
                   ),
                 ],
               ),
-              subtitle: Text(
-                data.cost,
-                style: TextStyle(color: Color.fromARGB(255, 58, 95, 33)),
+               subtitle: Text(
+                "\$${data.cost}",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 58, 95, 33),
+                ),
               ),
             ),
           );
