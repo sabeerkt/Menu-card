@@ -12,7 +12,8 @@ class cart extends StatefulWidget {
 }
 
 class _cartState extends State<cart> {
-  int count = 1;
+  List<int> counts = List.filled(cartitems.length, 1);
+
   Future<void> _showDeleteConfirmationDialog(int index) async {
     return showDialog(
       context: context,
@@ -68,6 +69,8 @@ class _cartState extends State<cart> {
                 itemCount: cartitems.length,
                 itemBuilder: (context, index) {
                   final cartdata = cartitems[index];
+                  final count = counts[index];
+
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
@@ -100,7 +103,11 @@ class _cartState extends State<cart> {
                                 icon: const Icon(Icons.remove,
                                     color: Color.fromARGB(255, 0, 0, 0)),
                                 onPressed: () {
-                                  // Add logic to decrease item count
+                                  setState(() {
+                                    if (count > 1) {
+                                      counts[index]--;
+                                    }
+                                  });
                                 },
                               ),
                               Text(
@@ -116,7 +123,7 @@ class _cartState extends State<cart> {
                                     color: Color.fromARGB(255, 0, 0, 0)),
                                 onPressed: () {
                                   setState(() {
-                                    count++;
+                                    counts[index]++;
                                   });
                                 },
                               ),
