@@ -13,7 +13,7 @@ Future<void> addFood(Food value) async {
   // print(value.toString());
 }
 
-Future<void> getfood() async {
+ getfood() async {
   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
   FoodListNotifier.value.clear();
   FoodListNotifier.value.addAll(Fooddb.values);
@@ -32,10 +32,11 @@ Future<void> deletfood(int index) async {
   getfood();
 }
 
-addToCart(Food data) async {
+Future<void> addToCart(Food data) async {
   final cartdb = await Hive.openBox<Food>('cart_db');
   cartitems.add(data);
   cartdb.add(data);
+  FoodListNotifier.notifyListeners();
 }
 
 loadCart() async {
@@ -71,6 +72,3 @@ double calculateTotalCost(List<Food> foods) {
   }
   return totalCost;
 }
-
-
-

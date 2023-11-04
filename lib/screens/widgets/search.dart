@@ -14,6 +14,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  // Size screenSize = Utils().getScreenSize();
   List<Food> _foundfood = [];
 
   loadrecipes() async {
@@ -78,7 +79,7 @@ class _SearchState extends State<Search> {
                   Icons.search_sharp,
                   color: Colors.orange, // Set the icon color to orange
                 ),
-                hintText: "Search",
+                hintText: "Find  food...",
                 hintStyle: const TextStyle(
                   color: Color(0xFF636262), // Set the hint text color
                 ),

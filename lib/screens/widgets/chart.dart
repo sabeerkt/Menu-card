@@ -29,10 +29,9 @@ class chart extends StatelessWidget {
           ),
           centerTitle: true, // Center-align the title text
           elevation: 0,
-
           bottom: const TabBar(
             tabs: <Widget>[
-              Tab(text: 'food'),
+              // Tab(text: 'food'),
               Tab(text: 'price'),
             ],
             labelColor: Colors.white, // Set the selected tab text color
@@ -44,69 +43,73 @@ class chart extends StatelessWidget {
           ),
         ),
         body: TabBarView(
-          children: [chart1(), chart2(foods: foods)],
+          children: [
+            //chart1(foods),
+
+            chart2(foods: foods)
+          ],
         ),
       ),
     );
   }
 }
 
-// Widget chart1() {
-//   return Padding(
-//     padding: const EdgeInsets.all(50),
+// Widget chart1(List<Food> foods) {
+//   Map<String, double> categoryCosts = {};
+
+//   // Calculate the total cost for each category
+//   for (var food in foods) {
+//     if (categoryCosts.containsKey(food.category)) {
+//       categoryCosts[food.category.toString()] = double.parse(food.cost);
+//     } else {
+//       categoryCosts[food.category.toString()] = double.parse(food.cost);
+//     }
+//   }
+
+//   // Generate data for the PieChart
+//   List<_PieData> pieData = categoryCosts.entries
+//       .map((entry) => _PieData(entry.key, entry.value,
+//           '${(entry.value / calculateTotalCost(foods) * 100).toStringAsFixed(2)}%'))
+//       .toList();
+
+//   return SizedBox(
+//     height: 500,
 //     child: PieChart(
-//         swapAnimationDuration: const Duration(milliseconds: 0),
-//         PieChartData(sections: [
-//           PieChartSectionData(
-//             value: 200,
-//             title: 'Section 3',
-//             color: Color.fromARGB(255, 127, 65, 181),
-//           ),
-//           PieChartSectionData(
-//             value: 200,
-//             color: const Color.fromARGB(255, 145, 82, 82),
-//           ),
-//           PieChartSectionData(
-//             value: 300,
-//             title: 'Section 2',
-//             color: const Color.fromARGB(255, 241, 233, 233),
-//           ),
-//           PieChartSectionData(
-//             value: 20,
-//             title: 'Section 1',
-//             color: Color.fromARGB(255, 53, 180, 192),
-//           ),
-//         ])),
+//       PieChartData(
+//         sections: pieData
+//             .map((data) => PieChartSectionData(
+//                   titlePositionPercentageOffset: 0.7,
+//                   badgePositionPercentageOffset: 1.1,
+//                   title: data.text,
+//                   color: getRandomColor(),
+//                   value: data.yData as double,
+//                   titleStyle: const TextStyle(
+//                     fontSize: 12,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.white,
+//                   ),
+//                 ))
+//             .toList(),
+//         sectionsSpace: 5,
+//         centerSpaceRadius: 90,
+//         startDegreeOffset: 0,
+//       ),
+//     ),
 //   );
 // }
-Widget chart1() {
-  return SfCircularChart(
-      title: ChartTitle(text: 'Food of the day'),
-      legend: const Legend(isVisible: true),
-      series: <PieSeries<_PieData, String>>[
-        PieSeries<_PieData, String>(
-            explode: true,
-            explodeIndex: 0,
-            dataSource: pieData,
-            xValueMapper: (_PieData data, _) => data.xData,
-            yValueMapper: (_PieData data, _) => data.yData,
-            dataLabelMapper: (_PieData data, _) => data.text,
-            dataLabelSettings: const DataLabelSettings(isVisible: true)),
-      ]);
-}
 
-class _PieData {
-  _PieData(this.xData, this.yData, this.text);
-  final String xData;
-  final num yData;
-  final String text;
-}
+// class _PieData {
+//   _PieData(this.xData, this.yData, this.text);
+//   final String xData;
+//   final num yData;
+//   final String text;
+// }
 
-final List<_PieData> pieData = [
-  _PieData('breakfast A', 30, '30%'),
-  _PieData('desrts', 20, '20%'),
-  _PieData('drinks', 15, '15%'),
-];
+// final List<_PieData> pieData = [
+//   _PieData('breakfast A', 30, '30%'),
+//   _PieData('desrts', 20, '20%'),
+//   _PieData('drinks', 15, '15%'),
+// ];
 
 Widget chart2({required foods}) {
   return SizedBox(
@@ -161,20 +164,6 @@ Widget chart2({required foods}) {
   );
 }
 
-class _PieDataa {
-  _PieDataa(this.xData, this.yData, this.text);
-  final String xData;
-  final num yData;
-  final String text;
-}
-
-final List<_PieData> pieDataa = [
-  _PieData('Category A', 30, '30%'),
-  _PieData('Category B', 20, '20%'),
-  _PieData('Category C', 15, '15%'),
-  _PieData('Category D', 10, '10%'),
-  _PieData('Category E', 25, '25%'),
-];
 Color getRandomColor() {
   return Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
 }

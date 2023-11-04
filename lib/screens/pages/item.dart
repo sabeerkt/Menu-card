@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
 
 import 'package:foodmenu/screens/widgets/search.dart';
-import 'package:foodmenu/screens/widgets/tabs/All_item.dart';
 import 'package:foodmenu/screens/widgets/tabs/drinks.dart';
 import 'package:foodmenu/screens/widgets/tabs/Breakfast.dart';
 import 'package:foodmenu/screens/widgets/tabs/Deserts.dart';
@@ -74,7 +74,7 @@ class _itemState extends State<item> {
         ),
         body: TabBarView(
           children: [
-            All_iteam(),
+            AllItems(),
             breakfast(),
             desrets(),
             bevarge(),
