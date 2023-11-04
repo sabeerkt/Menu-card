@@ -12,20 +12,21 @@ class cart extends StatefulWidget {
 }
 
 class _cartState extends State<cart> {
+  int count = 1;
   Future<void> _showDeleteConfirmationDialog(int index) async {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Delete Item"),
-          content:
-              Text("Are you sure you want to delete this item from the cart?"),
+          title: const Text("Delete Item"),
+          content: const Text(
+              "Are you sure you want to delete this item from the cart?"),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
             ),
             TextButton(
               onPressed: () {
@@ -34,7 +35,7 @@ class _cartState extends State<cart> {
                 });
                 Navigator.of(context).pop();
               },
-              child: Text("Confirm"),
+              child: const Text("Confirm"),
             ),
           ],
         );
@@ -57,7 +58,7 @@ class _cartState extends State<cart> {
             ),
           ),
           flexibleSpace: Container(
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: const Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         body: Column(
@@ -73,7 +74,7 @@ class _cartState extends State<cart> {
                       borderRadius: BorderRadius.circular(25),
                       child: Card(
                         child: ListTile(
-                          tileColor: Color.fromARGB(255, 255, 255, 255),
+                          tileColor: const Color.fromARGB(255, 255, 255, 255),
                           leading: Container(
                             height: double.infinity,
                             width: 100,
@@ -89,8 +90,8 @@ class _cartState extends State<cart> {
                           ),
                           title: Text(
                             cartdata.name,
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 0, 0, 0),
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
                             ),
                           ),
                           subtitle: Row(
@@ -102,8 +103,8 @@ class _cartState extends State<cart> {
                                   // Add logic to decrease item count
                                 },
                               ),
-                              const Text(
-                                "1",
+                              Text(
+                                '$count',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -114,7 +115,9 @@ class _cartState extends State<cart> {
                                 icon: const Icon(Icons.add,
                                     color: Color.fromARGB(255, 0, 0, 0)),
                                 onPressed: () {
-                                  // Add logic to increase item count
+                                  setState(() {
+                                    count++;
+                                  });
                                 },
                               ),
                               IconButton(
@@ -126,7 +129,7 @@ class _cartState extends State<cart> {
                               ),
                               Text(
                                 '\$${cartdata.cost}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF65B31D),
@@ -146,10 +149,10 @@ class _cartState extends State<cart> {
                 border: Border.all(
                     color: const Color.fromARGB(255, 255, 255, 255), width: 2),
                 borderRadius: BorderRadius.circular(12),
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: const Color.fromARGB(255, 255, 255, 255),
               ),
               padding: const EdgeInsets.all(16),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(

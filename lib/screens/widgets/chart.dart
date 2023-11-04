@@ -46,7 +46,7 @@ class chart extends StatelessWidget {
           children: [
             //chart1(foods),
 
-            chart2(foods: foods)
+            chartt(foods: foods)
           ],
         ),
       ),
@@ -111,7 +111,7 @@ class chart extends StatelessWidget {
 //   _PieData('drinks', 15, '15%'),
 // ];
 
-Widget chart2({required foods}) {
+Widget chartt({required foods}) {
   return SizedBox(
     height: 500,
     child: PieChart(
@@ -128,19 +128,6 @@ Widget chart2({required foods}) {
             return PieChartSectionData(
               badgePositionPercentageOffset: 1.1,
               titlePositionPercentageOffset: .4,
-              // badgeWidget: ClipOval(
-              //   child: SizedBox(
-              //     width: 60,
-              //     height: 60,
-              //     child: Image(
-              //       image: image != null
-              //           ? FileImage(File(image))
-              //           : const AssetImage('assets/images/food.png')
-              //               as ImageProvider,
-              //       fit: BoxFit.cover,
-              //     ),
-              //   ),
-              // ),
               color: getRandomColor(),
               value: percentage,
               title: '''₹ ${cost.toStringAsFixed(2)}

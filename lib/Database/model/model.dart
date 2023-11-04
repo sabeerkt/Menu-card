@@ -15,13 +15,19 @@ class Food {
 
   @HiveField(3)
   dynamic image;
+
   @HiveField(4)
   dynamic description;
 
-  Food(
-      {required this.name,
-      required this.category,
-      required this.cost,
-      this.image,
-      required this.description});
+  @HiveField(5) // Add this HiveField for the count property
+  int count;
+
+  Food({
+    required this.name,
+    required this.category,
+    required this.cost,
+    this.image,
+    required this.description,
+    this.count = 1, // Initialize count to 1 by default
+  });
 }

@@ -3,6 +3,7 @@ import 'package:foodmenu/Database/Function/db_function.dart';
 
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/Screens/Widgets/bottom.dart';
+import 'package:foodmenu/splash.dart';
 import 'package:hive/hive.dart';
 
 Future<void> resetDB(
@@ -54,11 +55,7 @@ Future<void> resetDB(
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const BottomBar(
-            name: '',
-            cost: '',
-            image: '',
-          ),
+          builder: (context) => SplashScreen(),
         ));
   }
 }
