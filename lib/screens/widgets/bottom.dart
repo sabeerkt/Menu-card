@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/Screens/Pages/cart.dart';
 import 'package:foodmenu/Screens/Pages/home.dart';
-
-import 'package:foodmenu/screens/pages/cart.dart';
 
 import 'package:foodmenu/screens/pages/item.dart';
 
@@ -27,7 +26,7 @@ class _BottomBarState extends State<BottomBar> {
 
   final List<Widget> bottomBarPages = [
     Home(),
-    cart(),
+    Cart(),
     item(
       name: '',
       cost: '',

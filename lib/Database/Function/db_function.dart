@@ -13,7 +13,7 @@ Future<void> addFood(Food value) async {
   // print(value.toString());
 }
 
- getfood() async {
+getfood() async {
   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
   FoodListNotifier.value.clear();
   FoodListNotifier.value.addAll(Fooddb.values);

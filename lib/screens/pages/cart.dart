@@ -2,47 +2,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 
-class cart extends StatefulWidget {
-  cart({
+class Cart extends StatefulWidget {
+  Cart({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<cart> createState() => _cartState();
+  State<Cart> createState() => _CartState();
 }
 
-class _cartState extends State<cart> {
+class _CartState extends State<Cart> {
   List<int> counts = List.filled(cartitems.length, 1);
-
-  Future<void> _showDeleteConfirmationDialog(int index) async {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Delete Item"),
-          content: const Text(
-              "Are you sure you want to delete this item from the cart?"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("Cancel"),
-            ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  deleteCartItem(index);
-                });
-                Navigator.of(context).pop();
-              },
-              child: const Text("Confirm"),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,86 +38,92 @@ class _cartState extends State<cart> {
               child: ListView.builder(
                 itemCount: cartitems.length,
                 itemBuilder: (context, index) {
-                  final cartdata = cartitems[index];
-                  final count = counts[index];
+                  if (index < cartitems.length) {
+                    final cartdata = cartitems[index];
+                    int cost = int.tryParse(cartdata.cost) ?? 0;
 
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Card(
-                        child: ListTile(
-                          tileColor: const Color.fromARGB(255, 255, 255, 255),
-                          leading: Container(
-                            height: double.infinity,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              image: cartdata.image != null
-                                  ? DecorationImage(
-                                      image: FileImage(File(cartdata.image)),
-                                      fit: BoxFit.cover,
-                                    )
-                                  : null,
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Card(
+                          child: ListTile(
+                            tileColor: const Color.fromARGB(255, 255, 255, 255),
+                            leading: Container(
+                              height: double.infinity,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                image: cartdata.image != null
+                                    ? DecorationImage(
+                                        image: FileImage(File(cartdata.image)),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null,
+                              ),
                             ),
-                          ),
-                          title: Text(
-                            cartdata.name,
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 0, 0, 0),
+                            title: Text(
+                              cartdata.name,
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
-                          ),
-                          subtitle: Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove,
-                                    color: Color.fromARGB(255, 0, 0, 0)),
-                                onPressed: () {
-                                  setState(() {
-                                    if (count > 1) {
-                                      counts[index]--;
-                                    }
-                                  });
-                                },
-                              ),
-                              Text(
-                                '$count',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 0, 0, 0),
+                            subtitle: Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove,
+                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                  onPressed: () {
+                                    setState(() {
+                                      if (counts[index] > 1) {
+                                        counts[index]--;
+                                      }
+                                    });
+                                  },
                                 ),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.add,
-                                    color: Color.fromARGB(255, 0, 0, 0)),
-                                onPressed: () {
-                                  setState(() {
-                                    counts[index]++;
-                                  });
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.delete,
-                                    color: Color.fromARGB(255, 255, 0, 0)),
-                                onPressed: () {
-                                  _showDeleteConfirmationDialog(index);
-                                },
-                              ),
-                              Text(
-                                '\$${cartdata.cost}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF65B31D),
+                                Text(
+                                  '${counts[index]}',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
                                 ),
-                              ),
-                            ],
+                                IconButton(
+                                  icon: const Icon(Icons.add,
+                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                  onPressed: () {
+                                    setState(() {
+                                      counts[index]++;
+                                    });
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete,
+                                      color: Color.fromARGB(255, 255, 0, 0)),
+                                  onPressed: () {
+                                    // _showDeleteConfirmationDialog(index);
+                                    setState(() {
+                                      deleteCartItem(index);
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  '\$${cost * counts[index]}',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF65B31D),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
+                    );
+                  }
+                  return const SizedBox.shrink(); // Handle index out of bounds.
                 },
               ),
             ),
@@ -159,7 +135,7 @@ class _cartState extends State<cart> {
                 color: const Color.fromARGB(255, 255, 255, 255),
               ),
               padding: const EdgeInsets.all(16),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
@@ -193,7 +169,7 @@ class _cartState extends State<cart> {
                         ),
                       ),
                       Text(
-                        '100',
+                        '\$${calculateTotalCost()}',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -209,5 +185,17 @@ class _cartState extends State<cart> {
         ),
       ),
     );
+  }
+
+  int calculateTotalCost() {
+    int totalCost = 0;
+    for (int i = 0; i < cartitems.length; i++) {
+      totalCost += (int.tryParse(cartitems[i].cost) ?? 0) * counts[i];
+    }
+    return totalCost;
+  }
+
+  Future<void> _showDeleteConfirmationDialog(int index) async {
+    // Your dialog implementation here
   }
 }
