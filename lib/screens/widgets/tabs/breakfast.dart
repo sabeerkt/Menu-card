@@ -12,9 +12,26 @@ late final String name;
 // }
 
 //change alliteam
-Widget breakfast() {
-  List<Food> filteredBreakfastList = [];
-  return ValueListenableBuilder(
+// Widget Breakfast() {
+//   List<Food> filteredBreakfastList = [];
+//   return
+
+  
+// }
+
+class Breakfast extends StatefulWidget {
+  const Breakfast({super.key});
+
+  @override
+  State<Breakfast> createState() => _BreakfastState();
+}
+
+class _BreakfastState extends State<Breakfast> {
+   List<Food> filteredBreakfastList = [];
+  @override
+  Widget build(BuildContext context) {
+    
+    return  ValueListenableBuilder(
     valueListenable: FoodListNotifier,
     builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
       final filteredBreakfastList = foodList
@@ -115,17 +132,5 @@ Widget breakfast() {
       );
     },
   );
-
-  // ListView.separated(
-  //   itemBuilder: (ctx, index) {
-  //     return ListTile(
-  //       title: Text("name $index"),
-  //       subtitle: Text("age $index"),
-  //     );
-  //   },
-  //   separatorBuilder: (ctx, index) {
-  //     return const Divider();
-  //   },
-  //   itemCount: 10,
-  // );
+  }
 }

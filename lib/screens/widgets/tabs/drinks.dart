@@ -11,9 +11,36 @@ late final String name;
 //   deleteFood(name); // Call the deleteFood function from db_function.dart
 // }
 
-//change alliteam
-Widget bevarge() {
-  return ValueListenableBuilder(
+// //change alliteam
+// Widget Bevarge() {
+//   return 
+
+//   // ListView.separated(
+//   //   itemBuilder: (ctx, index) {
+//   //     return ListTile(
+//   //       title: Text("name $index"),
+//   //       subtitle: Text("age $index"),
+//   //     );
+//   //   },
+//   //   separatorBuilder: (ctx, index) {
+//   //     return const Divider();
+//   //   },
+//   //   itemCount: 10,
+//   // );
+// }
+
+
+class Bevarge extends StatefulWidget {
+  const Bevarge({super.key});
+
+  @override
+  State<Bevarge> createState() => _BevargeState();
+}
+
+class _BevargeState extends State<Bevarge> {
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
     valueListenable: FoodListNotifier,
     builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
       final filteredBreakfastList = foodList
@@ -114,17 +141,5 @@ Widget bevarge() {
       );
     },
   );
-
-  // ListView.separated(
-  //   itemBuilder: (ctx, index) {
-  //     return ListTile(
-  //       title: Text("name $index"),
-  //       subtitle: Text("age $index"),
-  //     );
-  //   },
-  //   separatorBuilder: (ctx, index) {
-  //     return const Divider();
-  //   },
-  //   itemCount: 10,
-  // );
+  }
 }

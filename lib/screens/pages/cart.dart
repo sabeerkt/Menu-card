@@ -32,156 +32,165 @@ class _CartState extends State<Cart> {
             color: const Color.fromARGB(255, 0, 0, 0),
           ),
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: cartitems.length,
-                itemBuilder: (context, index) {
-                  if (index < cartitems.length) {
-                    final cartdata = cartitems[index];
-                    int cost = int.tryParse(cartdata.cost) ?? 0;
+        body: ValueListenableBuilder(
+          valueListenable: FoodListNotifier,
+          builder: (context, value, child) {
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: 100,
+                    itemBuilder: (context, index) {
+                      if (index < cartitems.length) {
+                        final cartdata = cartitems[index];
+                        int cost = int.tryParse(cartdata.cost) ?? 0;
 
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(25),
-                        child: Card(
-                          child: ListTile(
-                            tileColor: const Color.fromARGB(255, 255, 255, 255),
-                            leading: Container(
-                              height: double.infinity,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                image: cartdata.image != null
-                                    ? DecorationImage(
-                                        image: FileImage(File(cartdata.image)),
-                                        fit: BoxFit.cover,
-                                      )
-                                    : null,
-                              ),
-                            ),
-                            title: Text(
-                              cartdata.name,
-                              style: const TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
-                            subtitle: Row(
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.remove,
-                                      color: Color.fromARGB(255, 0, 0, 0)),
-                                  onPressed: () {
-                                    setState(() {
-                                      if (counts[index] > 1) {
-                                        counts[index]--;
-                                      }
-                                    });
-                                  },
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Card(
+                              child: ListTile(
+                                tileColor:
+                                    const Color.fromARGB(255, 255, 255, 255),
+                                leading: Container(
+                                  height: double.infinity,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    image: cartdata.image != null
+                                        ? DecorationImage(
+                                            image:
+                                                FileImage(File(cartdata.image)),
+                                            fit: BoxFit.cover,
+                                          )
+                                        : null,
+                                  ),
                                 ),
-                                Text(
-                                  '${counts[index]}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                title: Text(
+                                  cartdata.name,
+                                  style: const TextStyle(
                                     color: Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.add,
-                                      color: Color.fromARGB(255, 0, 0, 0)),
-                                  onPressed: () {
-                                    setState(() {
-                                      counts[index]++;
-                                    });
-                                  },
+                                subtitle: Row(
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.remove,
+                                          color: Color.fromARGB(255, 0, 0, 0)),
+                                      onPressed: () {
+                                        setState(() {
+                                          if (counts[index] > 1) {
+                                            counts[index]--;
+                                          }
+                                        });
+                                      },
+                                    ),
+                                    Text(
+                                      '${counts[index]}',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.add,
+                                          color: Color.fromARGB(255, 0, 0, 0)),
+                                      onPressed: () {
+                                        setState(() {
+                                          counts[index]++;
+                                        });
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.delete,
+                                          color:
+                                              Color.fromARGB(255, 255, 0, 0)),
+                                      onPressed: () {
+                                        // _showDeleteConfirmationDialog(index);
+                                        setState(() {
+                                          deleteCartItem(index);
+                                        });
+                                      },
+                                    ),
+                                    Text(
+                                      '\$${cost * counts[index]}',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF65B31D),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete,
-                                      color: Color.fromARGB(255, 255, 0, 0)),
-                                  onPressed: () {
-                                    // _showDeleteConfirmationDialog(index);
-                                    setState(() {
-                                      deleteCartItem(index);
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  '\$${cost * counts[index]}',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF65B31D),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    );
-                  }
-                  return const SizedBox.shrink(); // Handle index out of bounds.
-                },
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: const Color.fromARGB(255, 255, 255, 255), width: 2),
-                borderRadius: BorderRadius.circular(12),
-                color: const Color.fromARGB(255, 255, 255, 255),
-              ),
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                        );
+                      }
+                      // Handle index out of bounds.
+                    },
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        width: 2),
+                    borderRadius: BorderRadius.circular(12),
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "Product Bill",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Product Bill",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            "Discount Cost",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        "Discount Cost",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Total Cost",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            '\$${calculateTotalCost()}',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        "Total Cost",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        '\$${calculateTotalCost()}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            );
+          },
         ),
       ),
     );
@@ -190,7 +199,10 @@ class _CartState extends State<Cart> {
   int calculateTotalCost() {
     int totalCost = 0;
     for (int i = 0; i < cartitems.length; i++) {
-      totalCost += (int.tryParse(cartitems[i].cost) ?? 0) * counts[i];
+      if (i < counts.length) {
+        // Check that the index is valid
+        totalCost += (int.tryParse(cartitems[i].cost) ?? 0) * counts[i];
+      }
     }
     return totalCost;
   }

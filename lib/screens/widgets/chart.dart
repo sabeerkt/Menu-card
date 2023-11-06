@@ -1,19 +1,24 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/model/model.dart';
-import 'package:foodmenu/Screens/Widgets/Tabs/Deserts.dart';
 
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../Database/Function/db_function.dart';
 
-class chart extends StatelessWidget {
+class chart extends StatefulWidget {
+
+
+
   const chart({Key? key}) : super(key: key);
 
+  @override
+  State<chart> createState() => _chartState();
+}
+
+class _chartState extends State<chart> {
+  
   @override
   Widget build(BuildContext context) {
     List<Food> foods = FoodListNotifier.value;

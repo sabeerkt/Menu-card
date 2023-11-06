@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
+import 'package:foodmenu/Screens/Widgets/Tabs/Deserts.dart';
+import 'package:foodmenu/Screens/Widgets/Tabs/breakfast.dart';
+import 'package:foodmenu/Screens/Widgets/Tabs/drinks.dart';
 
 import 'package:foodmenu/screens/widgets/search.dart';
-import 'package:foodmenu/screens/widgets/tabs/drinks.dart';
-import 'package:foodmenu/screens/widgets/tabs/Breakfast.dart';
-import 'package:foodmenu/screens/widgets/tabs/Deserts.dart';
 
 class item extends StatefulWidget {
   final String name;
@@ -43,12 +43,12 @@ class _itemState extends State<item> {
           ),
           centerTitle: true,
           elevation: 0,
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: <Widget>[
               Tab(text: 'all'),
               Tab(text: 'breakfast'),
-              Tab(text: 'desserts'),
-              Tab(text: 'beverage'),
+              Tab(text: 'desrets'),
+              Tab(text: 'bevarge'),
             ],
 
             labelColor: Color.fromARGB(
@@ -75,9 +75,9 @@ class _itemState extends State<item> {
         body: TabBarView(
           children: [
             AllItems(),
-            breakfast(),
-            desrets(),
-            bevarge(),
+            Breakfast(),
+            Desrets(),
+            Bevarge(),
           ],
         ),
       ),

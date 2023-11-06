@@ -12,8 +12,34 @@ late final String name;
 // }
 
 //change alliteam
-Widget desrets() {
-  return ValueListenableBuilder(
+// Widget Desrets() {
+//   return 
+
+//   // ListView.separated(
+//   //   itemBuilder: (ctx, index) {
+//   //     return ListTile(
+//   //       title: Text("name $index"),
+//   //       subtitle: Text("age $index"),
+//   //     );
+//   //   },
+//   //   separatorBuilder: (ctx, index) {
+//   //     return const Divider();
+//   //   },
+//   //   itemCount: 10,
+//   // );
+// }
+
+class Desrets extends StatefulWidget {
+  const Desrets({super.key});
+
+  @override
+  State<Desrets> createState() => _DesretsState();
+}
+
+class _DesretsState extends State<Desrets> {
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
     valueListenable: FoodListNotifier,
     builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
       final filteredBreakfastList = foodList
@@ -114,17 +140,5 @@ Widget desrets() {
       );
     },
   );
-
-  // ListView.separated(
-  //   itemBuilder: (ctx, index) {
-  //     return ListTile(
-  //       title: Text("name $index"),
-  //       subtitle: Text("age $index"),
-  //     );
-  //   },
-  //   separatorBuilder: (ctx, index) {
-  //     return const Divider();
-  //   },
-  //   itemCount: 10,
-  // );
+  }
 }
