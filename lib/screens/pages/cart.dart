@@ -95,6 +95,13 @@ class _CartState extends State<Cart> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(25),
                             child: Card(
+                              elevation:
+                                  3, // Adjust the elevation value for the desired shadow effect
+                              shadowColor: Colors.grey,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10.0), // Set the border radius
+                              ),
                               child: ListTile(
                                 tileColor:
                                     const Color.fromARGB(255, 255, 255, 255),

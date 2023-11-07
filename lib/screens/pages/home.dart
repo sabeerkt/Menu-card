@@ -135,6 +135,7 @@ class _HomeState extends State<Home> {
                                   cost: data.cost,
                                   description: data.description,
                                   image: data.image,
+                                  category: data.category
                                 ),
                               ),
                             );

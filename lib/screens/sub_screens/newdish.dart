@@ -123,6 +123,8 @@ class _NewDishState extends State<NewDish> {
                 ),
                 TextField(
                   controller: _nameController,
+                  textCapitalization: TextCapitalization
+                      .characters, // Capitalize the first letter of each word
                   decoration: InputDecoration(
                     labelText: 'Name',
                     labelStyle: const TextStyle(
@@ -176,63 +178,76 @@ class _NewDishState extends State<NewDish> {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _categoryController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(),
-                          ),
-                        ),
+                    Text(
+                      'Select the category',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(width: 10),
-                    DropdownButton<String>(
-                      value: Selectedmoneytype,
-                      items: _foodtypelist.map((e) {
-                        return DropdownMenuItem<String>(
-                          value: e,
-                          child: Row(
-                            children: [
-                              // Add an Image widget if you have image assets
-                              const SizedBox(width: 10),
-                              Text(e, style: const TextStyle(fontSize: 18)),
-                            ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: _categoryController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(),
+                              ),
+                            ),
                           ),
-                        );
-                      }).toList(),
-                      selectedItemBuilder: (BuildContext context) {
-                        return _foodtypelist.map((e) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              // Add an Image widget if you have image assets
-                              const SizedBox(width: 10),
-                              Text(e, style: TextStyle(fontSize: 18)),
-                            ],
-                          );
-                        }).toList();
-                      },
-                      hint: Text(
-                        'Select',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      dropdownColor: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      underline: Container(),
-                      onChanged: (value) {
-                        setState(() {
-                          Selectedmoneytype = value!;
-                          _categoryController.text = value;
-                        });
-                      },
+                        SizedBox(width: 10),
+                        DropdownButton<String>(
+                          value: Selectedmoneytype,
+                          items: _foodtypelist.map((e) {
+                            return DropdownMenuItem<String>(
+                              value: e,
+                              child: Row(
+                                children: [
+                                  // Add an Image widget if you have image assets
+                                  const SizedBox(width: 10),
+                                  Text(e, style: const TextStyle(fontSize: 18)),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          selectedItemBuilder: (BuildContext context) {
+                            return _foodtypelist.map((e) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  // Add an Image widget if you have image assets
+                                  const SizedBox(width: 10),
+                                  Text(e, style: TextStyle(fontSize: 18)),
+                                ],
+                              );
+                            }).toList();
+                          },
+                          hint: Text(
+                            'Select',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red),
+                          ),
+                          dropdownColor: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                          underline: Container(),
+                          onChanged: (value) {
+                            setState(() {
+                              Selectedmoneytype = value!;
+                              _categoryController.text = value;
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),

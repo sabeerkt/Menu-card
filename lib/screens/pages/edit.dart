@@ -16,7 +16,7 @@ class EditDish extends StatefulWidget {
   final TextEditingController imageController;
   final bool isEditMode; // Set to true when editing an existing item
   final int index; // Pass the index if you're editing an existing item
-
+  TextEditingController _categoryController = TextEditingController();
   EditDish({
     required this.nameController,
     required this.costController,
@@ -24,7 +24,6 @@ class EditDish extends StatefulWidget {
     required this.isEditMode,
     required this.index,
     required this.imageController,
-
   });
 
   @override
@@ -34,6 +33,9 @@ class EditDish extends StatefulWidget {
 class _EditDishState extends State<EditDish> {
   String dropdownValue = 'all';
   XFile? pickedImage;
+  String Selectedmoneytype = 'breakfast';
+
+  final List<String> _foodtypelist = ['breakfast', 'desrts', "drinks"];
 
   Future<void> _pickImage() async {
     showDialog(
@@ -182,6 +184,80 @@ class _EditDishState extends State<EditDish> {
                         ),
                       ),
                     ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Select the category',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: widget._categoryController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            DropdownButton<String>(
+                              value: Selectedmoneytype,
+                              items: _foodtypelist.map((e) {
+                                return DropdownMenuItem<String>(
+                                  value: e,
+                                  child: Row(
+                                    children: [
+                                      // Add an Image widget if you have image assets
+                                      const SizedBox(width: 10),
+                                      Text(e,
+                                          style: const TextStyle(fontSize: 18)),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                              selectedItemBuilder: (BuildContext context) {
+                                return _foodtypelist.map((e) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      // Add an Image widget if you have image assets
+                                      const SizedBox(width: 10),
+                                      Text(e, style: TextStyle(fontSize: 18)),
+                                    ],
+                                  );
+                                }).toList();
+                              },
+                              hint: Text(
+                                'Select',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red),
+                              ),
+                              dropdownColor: Colors.white,
+                              borderRadius: BorderRadius.circular(30),
+                              underline: Container(),
+                              onChanged: (value) {
+                                setState(() {
+                                  Selectedmoneytype = value!;
+                                  widget._categoryController.text = value;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                     SizedBox(
                       height: 10,
                     ),
@@ -236,6 +312,7 @@ class _EditDishState extends State<EditDish> {
     final _name = widget.nameController.text.trim();
     final _cost = widget.costController.text.trim();
     final _Description = widget.descriptionController.text.trim();
+    final _category = widget._categoryController.text.trim();
     if (_name.isEmpty || _cost.isEmpty) {
       return;
     }

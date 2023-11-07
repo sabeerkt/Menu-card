@@ -11,14 +11,16 @@ class detailpage extends StatefulWidget {
   final String cost;
   final String description;
   final String image;
+  final String? category;
 
-  const detailpage({
-    Key? key,
-    required this.image,
-    required this.name,
-    required this.cost,
-    required this.description,
-  }) : super(key: key);
+  const detailpage(
+      {Key? key,
+      required this.image,
+      required this.name,
+      required this.cost,
+      required this.description,
+      required this.category,})
+      : super(key: key);
 
   @override
   State<detailpage> createState() => _detailpageState();
@@ -52,7 +54,7 @@ class _detailpageState extends State<detailpage> {
                     imageController: TextEditingController(text: widget.image),
                     nameController: TextEditingController(text: widget.name),
                     costController: TextEditingController(text: widget.cost),
-                    
+
                     descriptionController:
                         TextEditingController(text: widget.description),
                     isEditMode: true,
@@ -82,7 +84,8 @@ class _detailpageState extends State<detailpage> {
                   image: DecorationImage(
                     image: widget.image != null
                         ? FileImage(File(widget.image))
-                        : const AssetImage("assets/juice.jfif") as ImageProvider,
+                        : const AssetImage("assets/juice.jfif")
+                            as ImageProvider,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -112,13 +115,18 @@ class _detailpageState extends State<detailpage> {
                   ),
                   Align(
                     alignment: Alignment.topRight,
-                    child: Text(
-                      "\$${widget.cost}", // Price
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green,
-                      ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "\$${widget.cost}", // Price
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                        ),
+                        Text(widget.category!)
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),

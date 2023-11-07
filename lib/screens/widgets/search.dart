@@ -108,6 +108,7 @@ class _SearchState extends State<Search> {
                             cost: data.cost,
                             description: data.description,
                             image: data.image,
+                            category: data.category!,
                           ),
                         ),
                       );

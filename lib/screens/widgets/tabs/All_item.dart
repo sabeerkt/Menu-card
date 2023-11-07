@@ -15,6 +15,7 @@ Widget AllItems() {
           final data = foodList[index];
           // Create a custom item widget for each item
           return Card(
+            elevation: 3, // Add elevation for the shadow effect
             color: const Color.fromARGB(255, 255, 255, 255),
             child: ListTile(
               contentPadding: const EdgeInsets.all(10),
@@ -26,7 +27,7 @@ Widget AllItems() {
                       name: data.name,
                       cost: data.cost,
                       description: data.description,
-                      image: data.image,
+                      image: data.image, category: data.category
                     ),
                   ),
                 );
@@ -61,7 +62,7 @@ Widget AllItems() {
                               Text(
                                 data.category ?? 'default',
                                 style: const TextStyle(color: Colors.blue),
-                              )
+                              ),
                             ],
                           ),
                         ],
@@ -95,7 +96,7 @@ Widget AllItems() {
                                 // Product is not in the cart, so add it
                                 addToCart(data);
 
-                                // Show a snackbar when item is added to the cart
+                                // Show a snackbar when the item is added to the cart
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     backgroundColor: Colors
@@ -133,10 +134,8 @@ Widget AllItems() {
                                       children: <Widget>[
                                         Image.asset(
                                           'assets/Questions-pana.png', // Replace 'your_image_path' with the path to your image
-                                          width:
-                                              100, // Set the width of the image as per your needs
-                                          height:
-                                              100, // Set the height of the image as per your needs
+                                          width: 100,
+                                          height: 100,
                                         ),
                                         Text('Confirm Delete',
                                             style: TextStyle(
