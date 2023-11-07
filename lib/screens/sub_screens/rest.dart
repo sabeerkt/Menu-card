@@ -20,7 +20,7 @@ Future<void> resetDB(
           style: TextStyle(color: Color.fromARGB(255, 255, 0, 0)),
         ),
         content: const Text(
-          "This will delete this record. This action is irreversible. Do you want to continue ?",
+          "This will delete this cart. This action is irreversible. Do you want to continue ?",
           style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
         actions: <Widget>[

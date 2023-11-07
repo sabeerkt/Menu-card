@@ -124,7 +124,50 @@ Widget AllItems() {
                           ),
                           IconButton(
                             onPressed: () {
-                              deletfood(index);
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Image.asset(
+                                          'assets/Questions-pana.png', // Replace 'your_image_path' with the path to your image
+                                          width:
+                                              100, // Set the width of the image as per your needs
+                                          height:
+                                              100, // Set the height of the image as per your needs
+                                        ),
+                                        Text('Confirm Delete',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                        Text(
+                                            'Are you sure you want to delete this item?'),
+                                        ButtonBar(
+                                          children: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context)
+                                                    .pop(); // Close the dialog
+                                              },
+                                              child: Text('Cancel'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                deletfood(
+                                                    index); // Call the delete function
+                                                Navigator.of(context)
+                                                    .pop(); // Close the dialog
+                                              },
+                                              child: Text('Delete'),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             icon: const Icon(
                               Icons.delete,

@@ -23,7 +23,7 @@ class _NewDishState extends State<NewDish> {
   TextEditingController _categoryController = TextEditingController();
   String Selectedmoneytype = 'breakfast';
 
-  final List<String> _moneytypelist = ['breakfast', 'desrts', "drinks"];
+  final List<String> _foodtypelist = ['breakfast', 'desrts', "drinks"];
 
   XFile? pickedImage;
 
@@ -193,7 +193,7 @@ class _NewDishState extends State<NewDish> {
                     SizedBox(width: 10),
                     DropdownButton<String>(
                       value: Selectedmoneytype,
-                      items: _moneytypelist.map((e) {
+                      items: _foodtypelist.map((e) {
                         return DropdownMenuItem<String>(
                           value: e,
                           child: Row(
@@ -206,7 +206,7 @@ class _NewDishState extends State<NewDish> {
                         );
                       }).toList(),
                       selectedItemBuilder: (BuildContext context) {
-                        return _moneytypelist.map((e) {
+                        return _foodtypelist.map((e) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [

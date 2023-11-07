@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
               height: 5,
             ),
             Padding(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(2),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: 250,
@@ -90,16 +90,16 @@ class _HomeState extends State<Home> {
                     autoPlay: true,
                     enlargeCenterPage: true,
                     aspectRatio: MediaQuery.of(context).size.width / 500,
-                    viewportFraction: 1.0,
+                    viewportFraction: 2.0,
                     initialPage: 0,
                   ),
                 ),
               ),
             ),
             SizedBox(height: 10),
-            const Divider(
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
+            // const Divider(
+            //   color: Color.fromARGB(255, 0, 0, 0),
+            // ),
             const Text(
               "Products",
               style: TextStyle(
@@ -179,27 +179,56 @@ class _HomeState extends State<Home> {
                                     children: [
                                       IconButton(
                                         onPressed: () {
-                                          setState(() {
-                                            addToCart(data);
-                                          });
-                                          // Show a snackbar when item is added to the cart
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              backgroundColor: Colors.green,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              content: Text(
-                                                'Product added to cart',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
+                                          if (isProductInCart(data)) {
+                                            // Show a snackbar to inform the user that the product is already in the cart
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                backgroundColor: Colors
+                                                    .red, // Set the background color
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10), // Set a curved shape
+                                                ),
+                                                content: Text(
+                                                  'Product is already in the cart',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight
+                                                        .bold, // Make text bold
+                                                    color: Colors
+                                                        .white, // Change text color
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          );
+                                            );
+                                          } else {
+                                            // Product is not in the cart, so add it
+                                            addToCart(data);
+
+                                            // Show a snackbar when item is added to the cart
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                backgroundColor: Colors
+                                                    .green, // Set the background color
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10), // Set a curved shape
+                                                ),
+                                                content: Text(
+                                                  'Product added to cart',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight
+                                                        .bold, // Make text bold
+                                                    color: Colors
+                                                        .white, // Change text color
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
                                         },
                                         icon: const Icon(
                                           Icons.shopping_cart,

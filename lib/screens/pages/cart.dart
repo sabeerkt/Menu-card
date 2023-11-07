@@ -2,6 +2,48 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 
+class QuantityPickerButton extends StatefulWidget {
+  final int value;
+  final Function(int) onIncrease;
+  final Function(int) onDecrease;
+
+  const QuantityPickerButton({
+    required this.value,
+    required this.onIncrease,
+    required this.onDecrease,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<QuantityPickerButton> createState() => _QuantityPickerButtonState();
+}
+
+class _QuantityPickerButtonState extends State<QuantityPickerButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            widget.onDecrease(widget.value);
+          },
+          icon: const Icon(Icons.remove),
+        ),
+        Text(
+          widget.value.toString(),
+          style: const TextStyle(fontSize: 16),
+        ),
+        IconButton(
+          onPressed: () {
+            widget.onIncrease(widget.value);
+          },
+          icon: const Icon(Icons.add),
+        ),
+      ],
+    );
+  }
+}
+
 class Cart extends StatefulWidget {
   Cart({
     Key? key,
@@ -78,32 +120,19 @@ class _CartState extends State<Cart> {
                                 ),
                                 subtitle: Row(
                                   children: [
-                                    IconButton(
-                                      icon: const Icon(Icons.remove,
-                                          color: Color.fromARGB(255, 0, 0, 0)),
-                                      onPressed: () {
-                                        setState(() {
-                                          if (cartitems[index].count > 1) {
-                                            cartitems[index].count--;
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    Text(
-                                      '${cartitems[index].count}',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      ),
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(Icons.add,
-                                          color: Color.fromARGB(255, 0, 0, 0)),
-                                      onPressed: () {
+                                    QuantityPickerButton(
+                                      value: cartitems[index].count,
+                                      onIncrease: (count) {
                                         setState(() {
                                           cartitems[index].count++;
                                         });
+                                      },
+                                      onDecrease: (count) {
+                                        if (cartitems[index].count > 1) {
+                                          setState(() {
+                                            cartitems[index].count--;
+                                          });
+                                        }
                                       },
                                     ),
                                     IconButton(
@@ -111,10 +140,7 @@ class _CartState extends State<Cart> {
                                           color:
                                               Color.fromARGB(255, 255, 0, 0)),
                                       onPressed: () {
-                                        // _showDeleteConfirmationDialog(index);
-                                        setState(() {
-                                          deleteCartItem(index);
-                                        });
+                                        _showDeleteConfirmationDialog(index);
                                       },
                                     ),
                                     Text(
@@ -132,8 +158,7 @@ class _CartState extends State<Cart> {
                           ),
                         );
                       }
-                      return const SizedBox
-                          .shrink(); // Handle index out of bounds.
+                      return const SizedBox.shrink();
                     },
                   ),
                 ),
@@ -160,13 +185,6 @@ class _CartState extends State<Cart> {
                               color: Colors.black,
                             ),
                           ),
-                          Text(
-                            "Discount Cost",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
-                          ),
                         ],
                       ),
                       Column(
@@ -180,7 +198,7 @@ class _CartState extends State<Cart> {
                             ),
                           ),
                           Text(
-                            '\$${totalCost.toStringAsFixed(2)}', // Display the updated total cost
+                            '\$${totalCost.toStringAsFixed(2)}',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -203,13 +221,45 @@ class _CartState extends State<Cart> {
   double calculateTotalCost() {
     double totalCost = 0;
     for (var food in cartitems) {
-      totalCost += double.parse(food.cost) *
-          food.count; // Update the total cost based on item count
+      totalCost += double.parse(food.cost) * food.count;
     }
     return totalCost;
   }
 
   Future<void> _showDeleteConfirmationDialog(int index) async {
-    // Your dialog implementation here
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Your image goes here
+              Image.asset('assets/Questions-pana.png', width: 100, height: 100),
+              SizedBox(height: 16), // Add some space between the image and text
+              Text('Delete Item', style: TextStyle(fontSize: 18)),
+              Text('Are you sure you want to delete this item from your cart?'),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () {
+                setState(() {
+                  deleteCartItem(index);
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
