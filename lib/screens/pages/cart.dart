@@ -12,7 +12,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  List<int> counts = List.filled(cartitems.length, 1);
+  // List<int> counts = List.filled(cartitems.length, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _CartState extends State<Cart> {
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 100,
+                    itemCount: cartitems.length,
                     itemBuilder: (context, index) {
                       if (index < cartitems.length) {
                         final cartdata = cartitems[index];
@@ -80,14 +80,14 @@ class _CartState extends State<Cart> {
                                           color: Color.fromARGB(255, 0, 0, 0)),
                                       onPressed: () {
                                         setState(() {
-                                          if (counts[index] > 1) {
-                                            counts[index]--;
+                                          if (cartitems[index].count > 1) {
+                                            cartitems[index].count--;
                                           }
                                         });
                                       },
                                     ),
                                     Text(
-                                      '${counts[index]}',
+                                      '${cartitems[index].count}',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class _CartState extends State<Cart> {
                                           color: Color.fromARGB(255, 0, 0, 0)),
                                       onPressed: () {
                                         setState(() {
-                                          counts[index]++;
+                                              cartitems[index].count++;
                                         });
                                       },
                                     ),
@@ -115,7 +115,7 @@ class _CartState extends State<Cart> {
                                       },
                                     ),
                                     Text(
-                                      '\$${cost * counts[index]}',
+                                    '\$${cost * cartitems[index].count}',
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -129,7 +129,8 @@ class _CartState extends State<Cart> {
                           ),
                         );
                       }
-                      // Handle index out of bounds.
+                      return const SizedBox
+                          .shrink(); // Handle index out of bounds.
                     },
                   ),
                 ),
@@ -196,13 +197,10 @@ class _CartState extends State<Cart> {
     );
   }
 
-  int calculateTotalCost() {
-    int totalCost = 0;
-    for (int i = 0; i < cartitems.length; i++) {
-      if (i < counts.length) {
-        // Check that the index is valid
-        totalCost += (int.tryParse(cartitems[i].cost) ?? 0) * counts[i];
-      }
+  double calculateTotalCost() {
+    double totalCost = 0;
+    for (var food in cartitems) {
+      totalCost += double.parse(food.cost);
     }
     return totalCost;
   }

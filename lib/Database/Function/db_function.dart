@@ -34,6 +34,7 @@ Future<void> deletfood(int index) async {
 
 Future<void> addToCart(Food data) async {
   final cartdb = await Hive.openBox<Food>('cart_db');
+  data.count=1;
   cartitems.add(data);
   cartdb.add(data);
   FoodListNotifier.notifyListeners();
@@ -57,6 +58,7 @@ loadCart() async {
   cartitems.clear();
   cartitems = values.toList();
 }
+
 
 deleteCartItem(int id) async {
   final cartdb = await Hive.openBox<Food>('cart_db');

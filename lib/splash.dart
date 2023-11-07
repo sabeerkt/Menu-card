@@ -25,8 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor:
-          Color.fromARGB(255, 255, 255, 255), // Set the background color to dark blue
+      backgroundColor: Color.fromARGB(
+          255, 255, 255, 255), // Set the background color to dark blue
       body: Center(
         child: Container(
           width: screenWidth,
@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     screenWidth * 0.9, // Adjust the width based on screen width
                 child: Column(
                   children: [
-                    Lottie.asset("assets/Animation - 1698586603854.json"),
+                    Lottie.asset("assets/Animation - 1699263409025.json"),
                     Text(
                       'Someone with discerning taste and expertise in food.',
                       textAlign: TextAlign.center,

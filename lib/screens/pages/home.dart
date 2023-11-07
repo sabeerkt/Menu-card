@@ -121,7 +121,9 @@ class _HomeState extends State<Home> {
                       final data = fooddata[index];
                       // Create a custom item widget for each item
                       return Card(
-                        color: const Color.fromARGB(255, 255, 255, 255),
+                        elevation: 4, // Add elevation for a card-like effect
+                        margin: const EdgeInsets.all(
+                            10), // Add margin for spacing between cards
                         child: ListTile(
                           contentPadding: const EdgeInsets.all(10),
                           onTap: () {
@@ -157,21 +159,19 @@ class _HomeState extends State<Home> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    children: <Widget>[
-                                      Column(
-                                        children: [
-                                          Text(
-                                            data.name,
-                                            style: const TextStyle(
-                                                color: Colors.black),
-                                          ),
-                                          Text(
-                                            data.category ?? 'default',
-                                            style: const TextStyle(
-                                                color: Colors.blue),
-                                          )
-                                        ],
+                                  Column(
+                                    children: [
+                                      Text(
+                                        data.name,
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight
+                                                .bold), // Make the title bold
+                                      ),
+                                      Text(
+                                        data.category ?? 'default',
+                                        style:
+                                            const TextStyle(color: Colors.blue),
                                       ),
                                     ],
                                   ),
@@ -186,20 +186,16 @@ class _HomeState extends State<Home> {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
-                                              backgroundColor: Colors
-                                                  .green, // Set the background color
+                                              backgroundColor: Colors.green,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        10), // Set a curved shape
+                                                    BorderRadius.circular(10),
                                               ),
                                               content: Text(
                                                 'Product added to cart',
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight
-                                                      .bold, // Make text bold
-                                                  color: Colors
-                                                      .white, // Change text color
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
                                             ),
@@ -220,7 +216,7 @@ class _HomeState extends State<Home> {
                                         ),
                                       ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ],

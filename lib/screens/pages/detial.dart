@@ -40,7 +40,7 @@ class _detailpageState extends State<detailpage> {
           ),
         ),
         flexibleSpace: Container(
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: const Color.fromARGB(255, 0, 0, 0),
         ),
         actions: [
           IconButton(
@@ -65,108 +65,84 @@ class _detailpageState extends State<detailpage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Container(
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft:
+                    Radius.circular(20.0), // Adjust the radius as needed
+                bottomRight:
+                    Radius.circular(20.0), // Adjust the radius as needed
+              ),
+              child: Container(
                 width: 600,
-                height: 250,
+                height: 350, // Increase the height as needed
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: widget.image != null
                         ? FileImage(File(widget.image))
-                        : AssetImage("assets/juice.jfif") as ImageProvider,
+                        : const AssetImage("assets/juice.jfif") as ImageProvider,
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Align(
-                    //   alignment: Alignment.topLeft,
-                    //   child: Text(
-                    //     "dish",
-                    //     style: TextStyle(
-                    //       fontSize: 24,
-                    //       fontWeight: FontWeight bold,
-                    //     ),
-                    //   ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        widget.name, // Main Heading
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Text(
-                        "\$${widget.cost}", // Price
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      widget.description, // Description
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    SizedBox(height: 10),
-                  ],
-                ),
-              ),
+            ),
 
-              // Button
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    // Navigate to another page or perform the desired action here
-                  },
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 230,
+            const SizedBox(
+              height: 10,
+            ),
+
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      widget.name, // Main Heading
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
-                      // Container(
-                      //   width: double.infinity, // Full width of the screen
-                      //   height: 70, // Height of 70
-                      //   child: ElevatedButton(
-                      //     onPressed: () {},
-                      //     style: ElevatedButton.styleFrom(
-                      //       primary: Color.fromARGB(255, 0, 0, 0),
-                      //     ),
-                      //     child: const Text("Add to Cart"),
-                      //   ),
-                      // ),
-                    ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Text(
+                      "\$${widget.cost}", // Price
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 225),
+                    child: Text(
+                      'description',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    widget.description, // Description
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            ),
+
+            // Button
+          ],
         ),
       ),
     );
