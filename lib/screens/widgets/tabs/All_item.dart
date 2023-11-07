@@ -1,23 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/screens/pages/detial.dart';
-
-// class AllItems extends StatefulWidget {
-//   const AllItems({super.key});
-
-//   @override
-//   State<AllItems> createState() => _AllItemsState();
-// }
-
-// class _AllItemsState extends State<AllItems> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//   }
-// }
 
 Widget AllItems() {
   List<Food> filteredBreakfastList = [];
@@ -85,30 +70,52 @@ Widget AllItems() {
                         children: [
                           IconButton(
                             onPressed: () {
-                              // setState(() {
-
-                              // });
-                              addToCart(data);
-
-                              // Show a snackbar when item is added to the cart
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor:
-                                      Colors.green, // Set the background color
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        10), // Set a curved shape
-                                  ),
-                                  content: Text(
-                                    'Product added to cart',
-                                    style: TextStyle(
-                                      fontWeight:
-                                          FontWeight.bold, // Make text bold
-                                      color: Colors.white, // Change text color
+                              if (isProductInCart(data)) {
+                                // Show a snackbar to inform the user that the product is already in the cart
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor:
+                                        Colors.red, // Set the background color
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10), // Set a curved shape
+                                    ),
+                                    content: Text(
+                                      'Product is already in the cart',
+                                      style: TextStyle(
+                                        fontWeight:
+                                            FontWeight.bold, // Make text bold
+                                        color:
+                                            Colors.white, // Change text color
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
+                                );
+                              } else {
+                                // Product is not in the cart, so add it
+                                addToCart(data);
+
+                                // Show a snackbar when item is added to the cart
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors
+                                        .green, // Set the background color
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10), // Set a curved shape
+                                    ),
+                                    content: Text(
+                                      'Product added to cart',
+                                      style: TextStyle(
+                                        fontWeight:
+                                            FontWeight.bold, // Make text bold
+                                        color:
+                                            Colors.white, // Change text color
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
                             },
                             icon: const Icon(
                               Icons.shopping_cart,
@@ -142,4 +149,8 @@ Widget AllItems() {
       );
     },
   );
+}
+
+bool isProductInCart(Food product) {
+  return cartitems.any((item) => item.name == product.name);
 }

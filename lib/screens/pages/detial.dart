@@ -52,6 +52,7 @@ class _detailpageState extends State<detailpage> {
                     imageController: TextEditingController(text: widget.image),
                     nameController: TextEditingController(text: widget.name),
                     costController: TextEditingController(text: widget.cost),
+                    
                     descriptionController:
                         TextEditingController(text: widget.description),
                     isEditMode: true,

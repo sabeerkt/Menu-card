@@ -12,7 +12,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  // List<int> counts = List.filled(cartitems.length, 1);
+  double totalCost = 0; // State variable to store the total cost
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,9 @@ class _CartState extends State<Cart> {
         body: ValueListenableBuilder(
           valueListenable: FoodListNotifier,
           builder: (context, value, child) {
+            totalCost =
+                calculateTotalCost(); // Calculate and update the total cost
+
             return Column(
               children: [
                 Expanded(
@@ -99,7 +102,7 @@ class _CartState extends State<Cart> {
                                           color: Color.fromARGB(255, 0, 0, 0)),
                                       onPressed: () {
                                         setState(() {
-                                              cartitems[index].count++;
+                                          cartitems[index].count++;
                                         });
                                       },
                                     ),
@@ -115,7 +118,7 @@ class _CartState extends State<Cart> {
                                       },
                                     ),
                                     Text(
-                                    '\$${cost * cartitems[index].count}',
+                                      '\$${cost * cartitems[index].count}',
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -177,7 +180,7 @@ class _CartState extends State<Cart> {
                             ),
                           ),
                           Text(
-                            '\$${calculateTotalCost()}',
+                            '\$${totalCost.toStringAsFixed(2)}', // Display the updated total cost
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -200,7 +203,8 @@ class _CartState extends State<Cart> {
   double calculateTotalCost() {
     double totalCost = 0;
     for (var food in cartitems) {
-      totalCost += double.parse(food.cost);
+      totalCost += double.parse(food.cost) *
+          food.count; // Update the total cost based on item count
     }
     return totalCost;
   }
