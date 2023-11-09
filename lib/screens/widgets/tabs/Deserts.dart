@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 
@@ -50,184 +51,135 @@ class _DesretsState extends State<Desrets> {
           itemBuilder: (context, index) {
             final data = filteredBreakfastList[index];
             // Return a Card widget for each item
-            return Card(
-              elevation:
-                  3, // Adjust the elevation value for the desired shadow effect
-              shadowColor: Colors.grey,
-              shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(10.0), // Set the border radius
-              ),
-              color: Color.fromARGB(255, 255, 255, 255),
-              child: ListTile(
-                contentPadding: const EdgeInsets.all(10),
-                leading: Container(
-                  height: double.infinity,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    image: data.image != null
-                        ? DecorationImage(
-                            image: FileImage(File(data.image)),
-                            fit: BoxFit.cover,
-                          )
-                        : null,
-                  ),
-                ),
-                onTap: () {
-                  // Navigate to the detail page when the ListTile is tapped
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => detailpage(
-                              name: data.name,
-                              cost: data.cost,
-                              description: data.description,
-                              image: data.image,
-                              category: data.category
-                            )),
-                  );
-                },
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: <Widget>[
-                            Column(
+            return Slidable(
+              startActionPane: ActionPane(
+                motion: StretchMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Confirm Deletion"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(
-                                  data.name,
-                                  style: TextStyle(color: Colors.black),
+                                // Add your image here at the top center
+                                Image.asset(
+                                  "assets/Questions-pana.png",
+                                  width: 100,
+                                  height: 100,
                                 ),
+                                SizedBox(height: 16), // Add some spacing
                                 Text(
-                                  data.category ?? 'default',
-                                  style: TextStyle(color: Colors.blue),
-                                )
+                                    "Are you sure you want to delete this product?"),
                               ],
                             ),
-                          ],
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text(
+                                  "Delete",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                                onPressed: () {
+                                  deletfood(
+                                      index); // Call your delete function here
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    backgroundColor: Colors.red,
+                    icon: Icons.delete,
+                  ),
+                  SlidableAction(
+                    onPressed: (context) {
+                      if (isProductInCart(data)) {
+                        // Product is already in the cart, show a message
+                        final snackBar = SnackBar(
+                          content: Text('The product is already in the cart'),
+                          backgroundColor: Colors.red,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else {
+                        // Product is not in the cart, add it and show a different message
+                        addToCart(data);
+                        final snackBar = SnackBar(
+                          content: Text('Product added to the cart'),
+                          backgroundColor: Colors.green,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                    backgroundColor: Colors.black54,
+                    icon: Icons.shopping_cart,
+                  )
+                ],
+              ),
+              child: Card(
+                elevation: 3,
+                color: const Color.fromARGB(255, 255, 255, 255),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(10),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => detailpage(
+                          name: data.name,
+                          cost: data.cost,
+                          description: data.description,
+                          image: data.image,
+                          category: data.category,
                         ),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                if (isProductInCart(data)) {
-                                  // Show a snackbar to inform the user that the product is already in the cart
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: Colors
-                                          .red, // Set the background color
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            10), // Set a curved shape
-                                      ),
-                                      content: Text(
-                                        'Product is already in the cart',
-                                        style: TextStyle(
-                                          fontWeight:
-                                              FontWeight.bold, // Make text bold
-                                          color:
-                                              Colors.white, // Change text color
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  // Product is not in the cart, so add it
-                                  addToCart(data);
-
-                                  // Show a snackbar when item is added to the cart
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: Colors
-                                          .green, // Set the background color
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            10), // Set a curved shape
-                                      ),
-                                      content: Text(
-                                        'Product added to cart',
-                                        style: TextStyle(
-                                          fontWeight:
-                                              FontWeight.bold, // Make text bold
-                                          color:
-                                              Colors.white, // Change text color
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.shopping_cart,
-                                color: Colors.black,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Dialog(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Image.asset(
-                                            'assets/Questions-pana.png', // Replace 'your_image_path' with the path to your image
-                                            width:
-                                                100, // Set the width of the image as per your needs
-                                            height:
-                                                100, // Set the height of the image as per your needs
-                                          ),
-                                          Text('Confirm Delete',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold)),
-                                          Text(
-                                              'Are you sure you want to delete this item?'),
-                                          ButtonBar(
-                                            children: <Widget>[
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context)
-                                                      .pop(); // Close the dialog
-                                                },
-                                                child: Text('Cancel'),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  deletfood(
-                                                      index); // Call the delete function
-                                                  Navigator.of(context)
-                                                      .pop(); // Close the dialog
-                                                },
-                                                child: Text('Delete'),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              icon: const Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                      ),
+                    );
+                  },
+                  leading: Container(
+                    height: double.infinity,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      image: data.image != null
+                          ? DecorationImage(
+                              image: FileImage(File(data.image)),
+                              fit: BoxFit.cover,
+                            )
+                          : null,
                     ),
-                  ],
-                ),
-                subtitle: Text(
-                  "\$${data.cost}",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 58, 95, 33),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        children: [
+                          Text(
+                            data.name,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            data.category ?? 'default',
+                            style: const TextStyle(color: Colors.blue),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "\$${data.cost}",
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 58, 95, 33),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
