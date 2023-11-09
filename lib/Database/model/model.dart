@@ -19,7 +19,7 @@ class Food {
   @HiveField(4)
   dynamic description;
 
-  @HiveField(5) // Add this HiveField for the count property
+  @HiveField(5) 
   int count;
 
   Food({
@@ -28,6 +28,6 @@ class Food {
     required this.cost,
     this.image,
     required this.description,
-    this.count = 1, // Initialize count to 1 by default
+    this.count = 1,
   });
 }

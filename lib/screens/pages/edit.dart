@@ -1,16 +1,23 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_glow/flutter_glow.dart';
 import 'package:foodmenu/Screens/Widgets/bottom.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/Database/model/model.dart';
+import 'package:foodmenu/utility/utilty.dart';
 
 class EditDish extends StatefulWidget {
   final TextEditingController nameController;
   final TextEditingController costController;
   final TextEditingController descriptionController;
   final TextEditingController imageController;
-  final TextEditingController categoryController;
-  final bool isEditMode;
-  final int index;
+
+  final bool isEditMode; // Set to true when editing an existing item
+  final int index; // Pass the index if you're editing an existing item
+  TextEditingController categoryController = TextEditingController();
 
   EditDish({
     required this.nameController,
@@ -23,32 +30,52 @@ class EditDish extends StatefulWidget {
   });
 
   @override
-  _EditDishState createState() => _EditDishState();
+  State<EditDish> createState() => _EditDishState();
 }
 
 class _EditDishState extends State<EditDish> {
+  String dropdownValue = 'all';
   XFile? pickedImage;
   String selectedCategory = 'breakfast';
 
   final List<String> _foodCategoryList = ['breakfast', 'desserts', 'drinks'];
 
   Future<void> _pickImage() async {
-    final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (picked != null) {
-      setState(() {
-        pickedImage = picked;
-        widget.imageController.text = picked.path; // Update the image path in the controller
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    pickedImage = widget.imageController.text.isNotEmpty
-        ? XFile(widget.imageController.text)
-        : null;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Pick Image From...'),
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  XFile? picked =
+                      await ImageUtils.pickImage(ImageSource.camera);
+                  setState(() {
+                    pickedImage = picked;
+                  });
+                },
+                child: const Text('Camera'),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  XFile? picked =
+                      await ImageUtils.pickImage(ImageSource.gallery);
+                  setState(() {
+                    pickedImage = picked;
+                  });
+                },
+                child: const Text('Gallery'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -66,7 +93,7 @@ class _EditDishState extends State<EditDish> {
             ),
           ),
           flexibleSpace: Container(
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: const Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         body: SingleChildScrollView(
@@ -96,8 +123,10 @@ class _EditDishState extends State<EditDish> {
                           : Container(),
                       pickedImage == null
                           ? IconButton(
-                              onPressed: _pickImage,
-                              icon: const Icon(Icons.image),
+                              onPressed: () {
+                                _pickImage();
+                              },
+                              icon: const Icon(Icons.camera),
                               iconSize: 68,
                               color: const Color.fromARGB(255, 0, 0, 0),
                             )
@@ -105,6 +134,7 @@ class _EditDishState extends State<EditDish> {
                     ],
                   ),
                 ),
+
                 Container(),
                 const SizedBox(
                   height: 10,
@@ -133,7 +163,7 @@ class _EditDishState extends State<EditDish> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
@@ -160,7 +190,7 @@ class _EditDishState extends State<EditDish> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Select the category',
                           style: TextStyle(
                             fontSize: 18,
@@ -177,12 +207,12 @@ class _EditDishState extends State<EditDish> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(),
+                                    borderSide: const BorderSide(),
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             DropdownButton<String>(
                               value: selectedCategory,
                               items: _foodCategoryList.map((e) {
@@ -191,7 +221,8 @@ class _EditDishState extends State<EditDish> {
                                   child: Row(
                                     children: [
                                       const SizedBox(width: 10),
-                                      Text(e, style: const TextStyle(fontSize: 18)),
+                                      Text(e,
+                                          style: const TextStyle(fontSize: 18)),
                                     ],
                                   ),
                                 );
@@ -202,12 +233,13 @@ class _EditDishState extends State<EditDish> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       const SizedBox(width: 10),
-                                      Text(e, style: TextStyle(fontSize: 18)),
+                                      Text(e,
+                                          style: const TextStyle(fontSize: 18)),
                                     ],
                                   );
                                 }).toList();
                               },
-                              hint: Text(
+                              hint: const Text(
                                 'Select',
                                 style: TextStyle(
                                     fontSize: 15,
@@ -228,7 +260,7 @@ class _EditDishState extends State<EditDish> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
@@ -251,14 +283,16 @@ class _EditDishState extends State<EditDish> {
                           ),
                         ),
                       ),
-                      maxLines: 5,
                     ),
                   ],
                 ),
+
+                // ... Other TextFields for cost and description
+
                 MaterialButton(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  onPressed: onUpdateDishButton,
-                  child: Text(
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  onPressed: onnUpdateDishButton,
+                  child: const GlowText(
                     'Update',
                     style: TextStyle(
                       fontSize: 20,
@@ -275,21 +309,28 @@ class _EditDishState extends State<EditDish> {
     );
   }
 
-  Future<void> onUpdateDishButton() async {
+  Future<void> onnUpdateDishButton() async {
     final _name = widget.nameController.text.trim();
     final _cost = widget.costController.text.trim();
-    final _description = widget.descriptionController.text.trim();
-    final _category = widget.categoryController.text.trim();
+    final _Description = widget.descriptionController.text.trim();
 
     if (_name.isEmpty || _cost.isEmpty) {
       return;
     }
 
-    // Include the image path
-    final _imagePath = pickedImage?.path ?? widget.imageController.text;
+    final _foodd = Food(
+      name: _name,
+      cost: _cost,
+      category: widget.categoryController.text.trim(),
+      description: _Description,
+      image: pickedImage?.path ?? '',
+    );
 
-    // Continue with your data handling logic
-    // ...
+    if (widget.isEditMode) {
+      updateFood(widget.index, _foodd);
+    } else {
+      addFood(_foodd);
+    }
 
     Navigator.of(context).push(
       MaterialPageRoute(

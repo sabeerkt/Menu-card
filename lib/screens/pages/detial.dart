@@ -57,7 +57,7 @@ class _detailpageState extends State<detailpage> {
                     costController: TextEditingController(text: widget.cost),
                     descriptionController: TextEditingController(text: widget.description),
                     categoryController: categoryController, // Pass the categoryController
-                    isEditMode: true,
+                    isEditMode: true,    
                     index: 0, // You need to provide the correct index
                   ),
                 ),

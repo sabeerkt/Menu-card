@@ -181,7 +181,7 @@ class _CartState extends State<Cart> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -197,7 +197,7 @@ class _CartState extends State<Cart> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
+                          const Text(
                             "Total Cost",
                             style: TextStyle(
                               fontSize: 16,
@@ -206,7 +206,7 @@ class _CartState extends State<Cart> {
                           ),
                           Text(
                             '\$${totalCost.toStringAsFixed(2)}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.green,
@@ -243,20 +243,23 @@ class _CartState extends State<Cart> {
             children: <Widget>[
               // Your image goes here
               Image.asset('assets/Questions-pana.png', width: 100, height: 100),
-              SizedBox(height: 16), // Add some space between the image and text
-              Text('Delete Item', style: TextStyle(fontSize: 18)),
-              Text('Are you sure you want to delete this item from your cart?'),
+              const SizedBox(height: 16), // Add some space between the image and text
+              const Text('Delete Item', style: TextStyle(fontSize: 18)),
+              const Text('Are you sure you want to delete this item from your cart?'),
             ],
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Confirm'),
+              child: const Text(
+                'Confirm',
+                style: TextStyle(color: Colors.red),
+              ),
               onPressed: () {
                 setState(() {
                   deleteCartItem(index);

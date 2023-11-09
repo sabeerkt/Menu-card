@@ -97,9 +97,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(height: 10),
-            // const Divider(
-            //   color: Color.fromARGB(255, 0, 0, 0),
-            // ),
+           
             const Text(
               "Products",
               style: TextStyle(
