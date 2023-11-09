@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/Screens/Pages/newdish.dart';
 
 import 'package:foodmenu/screens/sub_screens/about.dart';
-import 'package:foodmenu/screens/sub_screens/newdish.dart';
+
 import 'package:foodmenu/screens/sub_screens/rest.dart';
 import 'package:foodmenu/screens/sub_screens/term.dart';
 

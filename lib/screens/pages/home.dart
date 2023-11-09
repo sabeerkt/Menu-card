@@ -21,9 +21,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<String> imageList = [
-    'assets/slide3.jpg',
-    'assets/sliddish.jpg',
-    'assets/slidword.jpg',
+    'assets/foodiesfeed.com_red-apple-background.jpg',
+    'assets/pexels-spencer-davis-4393021.jpg',
+    'assets/q3.JPG',
   ];
 
   final fooddata = FoodListNotifier.value;
@@ -131,12 +131,11 @@ class _HomeState extends State<Home> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => detailpage(
-                                  name: data.name,
-                                  cost: data.cost,
-                                  description: data.description,
-                                  image: data.image,
-                                  category: data.category
-                                ),
+                                    name: data.name,
+                                    cost: data.cost,
+                                    description: data.description,
+                                    image: data.image,
+                                    category: data.category),
                               ),
                             );
                           },
@@ -238,7 +237,63 @@ class _HomeState extends State<Home> {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          deletfood(index);
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Dialog(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    Image.asset(
+                                                      'assets/Questions-pana.png', // Replace 'your_image_path' with the path to your image
+                                                      width: 100,
+                                                      height: 100,
+                                                    ),
+                                                    Text('Confirm Delete',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                    Text(
+                                                        'Are you sure you want to delete this item?'),
+                                                    ButtonBar(
+                                                      children: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
+                                                          },
+                                                          child: Text(
+                                                            'Cancel',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black26),
+                                                          ),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            deletfood(
+                                                                index); // Call the delete function
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
+                                                          },
+                                                          child: Text(
+                                                            'Delete',
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.red),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
                                         },
                                         icon: const Icon(
                                           Icons.delete,

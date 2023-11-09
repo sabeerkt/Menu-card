@@ -1,22 +1,17 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_glow/flutter_glow.dart';
 import 'package:foodmenu/Screens/Widgets/bottom.dart';
 import 'package:image_picker/image_picker.dart';
-
-import 'package:foodmenu/Database/Function/db_function.dart';
-import 'package:foodmenu/Database/model/model.dart';
-import 'package:foodmenu/utility/utilty.dart';
 
 class EditDish extends StatefulWidget {
   final TextEditingController nameController;
   final TextEditingController costController;
   final TextEditingController descriptionController;
   final TextEditingController imageController;
-  final bool isEditMode; // Set to true when editing an existing item
-  final int index; // Pass the index if you're editing an existing item
-  TextEditingController _categoryController = TextEditingController();
+  final TextEditingController categoryController;
+  final bool isEditMode;
+  final int index;
+
   EditDish({
     required this.nameController,
     required this.costController,
@@ -24,55 +19,36 @@ class EditDish extends StatefulWidget {
     required this.isEditMode,
     required this.index,
     required this.imageController,
+    required this.categoryController,
   });
 
   @override
-  State<EditDish> createState() => _EditDishState();
+  _EditDishState createState() => _EditDishState();
 }
 
 class _EditDishState extends State<EditDish> {
-  String dropdownValue = 'all';
   XFile? pickedImage;
-  String Selectedmoneytype = 'breakfast';
+  String selectedCategory = 'breakfast';
 
-  final List<String> _foodtypelist = ['breakfast', 'desrts', "drinks"];
+  final List<String> _foodCategoryList = ['breakfast', 'desserts', 'drinks'];
 
   Future<void> _pickImage() async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Pick Image From...'),
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-                  XFile? picked =
-                      await ImageUtils.pickImage(ImageSource.camera);
-                  setState(() {
-                    pickedImage = picked;
-                  });
-                },
-                child: const Text('Camera'),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-                  XFile? picked =
-                      await ImageUtils.pickImage(ImageSource.gallery);
-                  setState(() {
-                    pickedImage = picked;
-                  });
-                },
-                child: const Text('Gallery'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+    final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (picked != null) {
+      setState(() {
+        pickedImage = picked;
+        widget.imageController.text = picked.path; // Update the image path in the controller
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    pickedImage = widget.imageController.text.isNotEmpty
+        ? XFile(widget.imageController.text)
+        : null;
   }
 
   @override
@@ -120,9 +96,7 @@ class _EditDishState extends State<EditDish> {
                           : Container(),
                       pickedImage == null
                           ? IconButton(
-                              onPressed: () {
-                                _pickImage();
-                              },
+                              onPressed: _pickImage,
                               icon: const Icon(Icons.image),
                               iconSize: 68,
                               color: const Color.fromARGB(255, 0, 0, 0),
@@ -131,7 +105,6 @@ class _EditDishState extends State<EditDish> {
                     ],
                   ),
                 ),
-
                 Container(),
                 const SizedBox(
                   height: 10,
@@ -200,7 +173,7 @@ class _EditDishState extends State<EditDish> {
                           children: [
                             Expanded(
                               child: TextFormField(
-                                controller: widget._categoryController,
+                                controller: widget.categoryController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -211,26 +184,23 @@ class _EditDishState extends State<EditDish> {
                             ),
                             SizedBox(width: 10),
                             DropdownButton<String>(
-                              value: Selectedmoneytype,
-                              items: _foodtypelist.map((e) {
+                              value: selectedCategory,
+                              items: _foodCategoryList.map((e) {
                                 return DropdownMenuItem<String>(
                                   value: e,
                                   child: Row(
                                     children: [
-                                      // Add an Image widget if you have image assets
                                       const SizedBox(width: 10),
-                                      Text(e,
-                                          style: const TextStyle(fontSize: 18)),
+                                      Text(e, style: const TextStyle(fontSize: 18)),
                                     ],
                                   ),
                                 );
                               }).toList(),
                               selectedItemBuilder: (BuildContext context) {
-                                return _foodtypelist.map((e) {
+                                return _foodCategoryList.map((e) {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      // Add an Image widget if you have image assets
                                       const SizedBox(width: 10),
                                       Text(e, style: TextStyle(fontSize: 18)),
                                     ],
@@ -249,8 +219,8 @@ class _EditDishState extends State<EditDish> {
                               underline: Container(),
                               onChanged: (value) {
                                 setState(() {
-                                  Selectedmoneytype = value!;
-                                  widget._categoryController.text = value;
+                                  selectedCategory = value!;
+                                  widget.categoryController.text = value;
                                 });
                               },
                             ),
@@ -285,13 +255,10 @@ class _EditDishState extends State<EditDish> {
                     ),
                   ],
                 ),
-
-                // ... Other TextFields for cost and description
-
                 MaterialButton(
                   color: Color.fromARGB(255, 0, 0, 0),
-                  onPressed: onnUpdateDishButton,
-                  child: GlowText(
+                  onPressed: onUpdateDishButton,
+                  child: Text(
                     'Update',
                     style: TextStyle(
                       fontSize: 20,
@@ -308,28 +275,21 @@ class _EditDishState extends State<EditDish> {
     );
   }
 
-  Future<void> onnUpdateDishButton() async {
+  Future<void> onUpdateDishButton() async {
     final _name = widget.nameController.text.trim();
     final _cost = widget.costController.text.trim();
-    final _Description = widget.descriptionController.text.trim();
-    final _category = widget._categoryController.text.trim();
+    final _description = widget.descriptionController.text.trim();
+    final _category = widget.categoryController.text.trim();
+
     if (_name.isEmpty || _cost.isEmpty) {
       return;
     }
 
-    final _foodd = Food(
-      name: _name,
-      cost: _cost,
-      category: widget.descriptionController.text.trim(),
-      description: _Description,
-      image: pickedImage?.path ?? '',
-    );
+    // Include the image path
+    final _imagePath = pickedImage?.path ?? widget.imageController.text;
 
-    if (widget.isEditMode) {
-      updateFood(widget.index, _foodd);
-    } else {
-      addFood(_foodd);
-    }
+    // Continue with your data handling logic
+    // ...
 
     Navigator.of(context).push(
       MaterialPageRoute(

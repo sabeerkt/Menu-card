@@ -24,11 +24,11 @@ Widget AllItems() {
                   context,
                   MaterialPageRoute(
                     builder: (context) => detailpage(
-                      name: data.name,
-                      cost: data.cost,
-                      description: data.description,
-                      image: data.image, category: data.category
-                    ),
+                        name: data.name,
+                        cost: data.cost,
+                        description: data.description,
+                        image: data.image,
+                        category: data.category),
                   ),
                 );
               },
@@ -149,7 +149,11 @@ Widget AllItems() {
                                                 Navigator.of(context)
                                                     .pop(); // Close the dialog
                                               },
-                                              child: Text('Cancel'),
+                                              child: Text(
+                                                'Cancel',
+                                                style: TextStyle(
+                                                    color: Colors.black26),
+                                              ),
                                             ),
                                             TextButton(
                                               onPressed: () {
@@ -158,7 +162,11 @@ Widget AllItems() {
                                                 Navigator.of(context)
                                                     .pop(); // Close the dialog
                                               },
-                                              child: Text('Delete'),
+                                              child: Text(
+                                                'Delete',
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
                                             ),
                                           ],
                                         ),

@@ -13,23 +13,24 @@ class detailpage extends StatefulWidget {
   final String image;
   final String? category;
 
-  const detailpage(
-      {Key? key,
-      required this.image,
-      required this.name,
-      required this.cost,
-      required this.description,
-      required this.category,})
-      : super(key: key);
+  const detailpage({
+    Key? key,
+    required this.image,
+    required this.name,
+    required this.cost,
+    required this.description,
+    required this.category,
+  }) : super(key: key);
 
   @override
   State<detailpage> createState() => _detailpageState();
 }
 
 class _detailpageState extends State<detailpage> {
-  // final food = FoodListNotifier.value[];
   @override
   Widget build(BuildContext context) {
+    final TextEditingController categoryController = TextEditingController(text: widget.category);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -54,9 +55,8 @@ class _detailpageState extends State<detailpage> {
                     imageController: TextEditingController(text: widget.image),
                     nameController: TextEditingController(text: widget.name),
                     costController: TextEditingController(text: widget.cost),
-
-                    descriptionController:
-                        TextEditingController(text: widget.description),
+                    descriptionController: TextEditingController(text: widget.description),
+                    categoryController: categoryController, // Pass the categoryController
                     isEditMode: true,
                     index: 0, // You need to provide the correct index
                   ),
@@ -72,20 +72,17 @@ class _detailpageState extends State<detailpage> {
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.only(
-                bottomLeft:
-                    Radius.circular(20.0), // Adjust the radius as needed
-                bottomRight:
-                    Radius.circular(20.0), // Adjust the radius as needed
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
               ),
               child: Container(
                 width: 600,
-                height: 350, // Increase the height as needed
+                height: 350,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: widget.image != null
                         ? FileImage(File(widget.image))
-                        : const AssetImage("assets/juice.jfif")
-                            as ImageProvider,
+                        : const AssetImage("assets/juice.jfif") as ImageProvider,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -106,7 +103,7 @@ class _detailpageState extends State<detailpage> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      widget.name, // Main Heading
+                      widget.name,
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -118,12 +115,15 @@ class _detailpageState extends State<detailpage> {
                     child: Column(
                       children: [
                         Text(
-                          "\$${widget.cost}", // Price
+                          "\$${widget.cost}",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.green,
                           ),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         Text(widget.category!)
                       ],
@@ -142,15 +142,13 @@ class _detailpageState extends State<detailpage> {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    widget.description, // Description
+                    widget.description,
                     style: const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 10),
                 ],
               ),
             ),
-
-            // Button
           ],
         ),
       ),
