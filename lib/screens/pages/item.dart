@@ -34,16 +34,16 @@ class _itemState extends State<item> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
           title: const Text(
-            'item',
+            'Item',
             style: TextStyle(
                 color: Color.fromARGB(
                     255, 255, 255, 255)), // Set the text color to white
           ),
           centerTitle: true,
           elevation: 0,
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: <Widget>[
               Tab(text: 'all'),
               Tab(text: 'breakfast'),
@@ -75,9 +75,9 @@ class _itemState extends State<item> {
         body: TabBarView(
           children: [
             AllItems(),
-            Breakfast(),
-            Desrets(),
-            Bevarge(),
+            const Breakfast(),
+            const Desrets(),
+            const Bevarge(),
           ],
         ),
       ),

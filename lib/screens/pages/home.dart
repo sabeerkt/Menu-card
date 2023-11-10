@@ -21,12 +21,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> imageList = [
-    'assets/foodiesfeed.com_red-apple-background.jpg',
-    'assets/pexels-spencer-davis-4393021.jpg',
-    'assets/q3.JPG',
-  ];
-
   final fooddata = FoodListNotifier.value;
 
   @override
@@ -63,41 +57,49 @@ class _HomeState extends State<Home> {
         ),
         body: Column(
           children: [
-            SizedBox(height: 20),
-            SizedBox(
+            const SizedBox(height: 20),
+            const SizedBox(
               height: 5,
             ),
             Padding(
               padding: const EdgeInsets.all(2),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 250,
-                child: CarouselSlider(
-                  items: imageList.map((item) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: 500,
-                          child: Image.asset(
-                            item,
-                            fit: BoxFit.cover,
-                          ),
+              child: ValueListenableBuilder(
+                valueListenable: FoodListNotifier,
+                builder:
+                    (BuildContext context, List<Food> value, Widget? child) {
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 250,
+                    child: CarouselSlider(
+                      items: fooddata.map((food) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 500,
+                              child: food.image != null
+                                  ? Image.file(
+                                      File(food.image),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Container(), // Handle the case where the image is null
+                            );
+                          },
                         );
-                      },
-                    );
-                  }).toList(),
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    aspectRatio: MediaQuery.of(context).size.width / 500,
-                    viewportFraction: 2.0,
-                    initialPage: 0,
-                  ),
-                ),
+                      }).toList(),
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                        aspectRatio: MediaQuery.of(context).size.width / 500,
+                        viewportFraction: 1.0,
+                        initialPage: 0,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             const Text(
               "Products",
               style: TextStyle(
@@ -106,7 +108,7 @@ class _HomeState extends State<Home> {
                 color: Colors.black,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ValueListenableBuilder(
@@ -120,7 +122,7 @@ class _HomeState extends State<Home> {
                       // Create a custom item widget for each item
                       return Slidable(
                         startActionPane: ActionPane(
-                          motion: StretchMotion(),
+                          motion: const StretchMotion(),
                           children: [
                             SlidableAction(
                               onPressed: (context) {
@@ -128,31 +130,29 @@ class _HomeState extends State<Home> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: Text("Confirm Deletion"),
+                                      title: const Text("Confirm Deletion"),
                                       content: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          // Add your image here at the top center
                                           Image.asset(
                                             "assets/Questions-pana.png",
                                             width: 100,
                                             height: 100,
                                           ),
-                                          SizedBox(
-                                              height: 16), // Add some spacing
-                                          Text(
+                                          const SizedBox(height: 16),
+                                          const Text(
                                               "Are you sure you want to delete this product?"),
                                         ],
                                       ),
                                       actions: <Widget>[
                                         TextButton(
-                                          child: Text("Cancel"),
+                                          child: const Text("Cancel"),
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
                                         ),
                                         TextButton(
-                                          child: Text(
+                                          child: const Text(
                                             "Delete",
                                             style: TextStyle(color: Colors.red),
                                           ),
@@ -173,8 +173,7 @@ class _HomeState extends State<Home> {
                             SlidableAction(
                               onPressed: (context) {
                                 if (isProductInCart(data)) {
-                                  // Product is already in the cart, show a message
-                                  final snackBar = SnackBar(
+                                  const snackBar = SnackBar(
                                     content: Text(
                                         'The product is already in the cart'),
                                     backgroundColor: Colors.red,
@@ -182,9 +181,8 @@ class _HomeState extends State<Home> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else {
-                                  // Product is not in the cart, add it and show a different message
                                   addToCart(data);
-                                  final snackBar = SnackBar(
+                                  const snackBar = SnackBar(
                                     content: Text('Product added to the cart'),
                                     backgroundColor: Colors.green,
                                   );
@@ -241,8 +239,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       data.category ?? 'default',
-                                      style:
-                                          const TextStyle(color: Colors.blue),
+                                      style: const TextStyle(color: Colors.red),
                                     ),
                                   ],
                                 ),

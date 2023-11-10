@@ -181,7 +181,7 @@ class _NewDishState extends State<NewDish> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Select the category',
                       style: TextStyle(
                         fontSize: 18,
@@ -198,12 +198,12 @@ class _NewDishState extends State<NewDish> {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(),
+                                borderSide: const BorderSide(),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         DropdownButton<String>(
                           value: Selectedmoneytype,
                           items: _foodtypelist.map((e) {
@@ -225,12 +225,12 @@ class _NewDishState extends State<NewDish> {
                                 children: [
                                   // Add an Image widget if you have image assets
                                   const SizedBox(width: 10),
-                                  Text(e, style: TextStyle(fontSize: 18)),
+                                  Text(e, style: const TextStyle(fontSize: 18)),
                                 ],
                               );
                             }).toList();
                           },
-                          hint: Text(
+                          hint: const Text(
                             'Select',
                             style: TextStyle(
                                 fontSize: 15,
@@ -251,7 +251,7 @@ class _NewDishState extends State<NewDish> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(

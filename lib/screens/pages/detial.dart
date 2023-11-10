@@ -29,7 +29,8 @@ class detailpage extends StatefulWidget {
 class _detailpageState extends State<detailpage> {
   @override
   Widget build(BuildContext context) {
-    final TextEditingController categoryController = TextEditingController(text: widget.category);
+    final TextEditingController categoryController =
+        TextEditingController(text: widget.category);
 
     return Scaffold(
       appBar: AppBar(
@@ -55,9 +56,11 @@ class _detailpageState extends State<detailpage> {
                     imageController: TextEditingController(text: widget.image),
                     nameController: TextEditingController(text: widget.name),
                     costController: TextEditingController(text: widget.cost),
-                    descriptionController: TextEditingController(text: widget.description),
-                    categoryController: categoryController, // Pass the categoryController
-                    isEditMode: true,    
+                    descriptionController:
+                        TextEditingController(text: widget.description),
+                    categoryController:
+                        categoryController, // Pass the categoryController
+                    isEditMode: true,
                     index: 0, // You need to provide the correct index
                   ),
                 ),
@@ -82,17 +85,16 @@ class _detailpageState extends State<detailpage> {
                   image: DecorationImage(
                     image: widget.image != null
                         ? FileImage(File(widget.image))
-                        : const AssetImage("assets/juice.jfif") as ImageProvider,
+                        : const AssetImage("assets/juice.jfif")
+                            as ImageProvider,
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
             ),
-
             const SizedBox(
               height: 10,
             ),
-
             const SizedBox(
               height: 10,
             ),
@@ -125,7 +127,11 @@ class _detailpageState extends State<detailpage> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(widget.category!)
+                        Text(
+                          widget.category!,
+                          style:
+                              TextStyle(color: Colors.deepPurple, fontSize: 30),
+                        )
                       ],
                     ),
                   ),
