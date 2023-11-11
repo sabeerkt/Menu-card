@@ -6,7 +6,7 @@ import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/screens/pages/detial.dart';
 
 Widget AllItems() {
-  List<Food> filteredBreakfastList = [];
+ 
   return ValueListenableBuilder(
     valueListenable: FoodListNotifier,
     builder: (BuildContext ctx, List<Food> foodList, Widget? child) {

@@ -14,7 +14,6 @@ class EditDish extends StatefulWidget {
   final TextEditingController costController;
   final TextEditingController descriptionController;
   final TextEditingController imageController;
-
   final bool isEditMode; // Set to true when editing an existing item
   final int index; // Pass the index if you're editing an existing item
   TextEditingController categoryController = TextEditingController();
@@ -326,11 +325,11 @@ class _EditDishState extends State<EditDish> {
       image: pickedImage?.path ?? '',
     );
 
-    if (widget.isEditMode) {
+    // if (widget.isEditMode) {
       updateFood(widget.index, _foodd);
-    } else {
-      addFood(_foodd);
-    }
+    // } else {
+    //   addFood(_foodd);
+    // // }
 
     Navigator.of(context).push(
       MaterialPageRoute(

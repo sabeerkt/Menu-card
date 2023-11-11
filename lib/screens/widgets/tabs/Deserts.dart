@@ -53,7 +53,7 @@ class _DesretsState extends State<Desrets> {
             // Return a Card widget for each item
             return Slidable(
               startActionPane: ActionPane(
-                motion: StretchMotion(),
+                motion: const StretchMotion(),
                 children: [
                   SlidableAction(
                     onPressed: (context) {
@@ -61,7 +61,7 @@ class _DesretsState extends State<Desrets> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Confirm Deletion"),
+                            title: const Text("Confirm Deletion"),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -71,20 +71,20 @@ class _DesretsState extends State<Desrets> {
                                   width: 100,
                                   height: 100,
                                 ),
-                                SizedBox(height: 16), // Add some spacing
-                                Text(
+                                const SizedBox(height: 16), // Add some spacing
+                                const Text(
                                     "Are you sure you want to delete this product?"),
                               ],
                             ),
                             actions: <Widget>[
                               TextButton(
-                                child: Text("Cancel"),
+                                child: const Text("Cancel"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
                               ),
                               TextButton(
-                                child: Text(
+                                child: const Text(
                                   "Delete",
                                   style: TextStyle(color: Colors.red),
                                 ),
@@ -106,7 +106,7 @@ class _DesretsState extends State<Desrets> {
                     onPressed: (context) {
                       if (isProductInCart(data)) {
                         // Product is already in the cart, show a message
-                        final snackBar = SnackBar(
+                        const snackBar = SnackBar(
                           content: Text('The product is already in the cart'),
                           backgroundColor: Colors.red,
                         );
@@ -114,7 +114,7 @@ class _DesretsState extends State<Desrets> {
                       } else {
                         // Product is not in the cart, add it and show a different message
                         addToCart(data);
-                        final snackBar = SnackBar(
+                        const snackBar = SnackBar(
                           content: Text('Product added to the cart'),
                           backgroundColor: Colors.green,
                         );

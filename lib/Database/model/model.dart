@@ -19,8 +19,8 @@ class Food {
   @HiveField(4)
   dynamic description;
 
-  @HiveField(5) 
-  int count;
+  @HiveField(5)
+  int? count;
 
   Food({
     required this.name,
@@ -28,6 +28,6 @@ class Food {
     required this.cost,
     this.image,
     required this.description,
-    this.count = 1,
+    this.count ,
   });
 }

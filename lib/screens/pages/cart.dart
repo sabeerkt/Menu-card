@@ -25,17 +25,17 @@ class _QuantityPickerButtonState extends State<QuantityPickerButton> {
       children: [
         IconButton(
           onPressed: () {
-            widget.onDecrease(widget.value);
+            widget.onDecrease(widget.value ?? 0);
           },
           icon: const Icon(Icons.remove),
         ),
         Text(
-          widget.value.toString(),
+          (widget.value ?? 0).toString(),
           style: const TextStyle(fontSize: 16),
         ),
         IconButton(
           onPressed: () {
-            widget.onIncrease(widget.value);
+            widget.onIncrease(widget.value ?? 0);
           },
           icon: const Icon(Icons.add),
         ),
@@ -54,7 +54,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  double totalCost = 0; // State variable to store the total cost
+  double totalCost = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +77,7 @@ class _CartState extends State<Cart> {
         body: ValueListenableBuilder(
           valueListenable: FoodListNotifier,
           builder: (context, value, child) {
-            totalCost =
-                calculateTotalCost(); // Calculate and update the total cost
+            totalCost = calculateTotalCost();
 
             return Column(
               children: [
@@ -95,16 +94,13 @@ class _CartState extends State<Cart> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(25),
                             child: Card(
-                              elevation:
-                                  3, // Adjust the elevation value for the desired shadow effect
+                              elevation: 3,
                               shadowColor: Colors.grey,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    10.0), // Set the border radius
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: ListTile(
-                                tileColor:
-                                    const Color.fromARGB(255, 255, 255, 255),
+                                tileColor: const Color.fromARGB(255, 255, 255, 255),
                                 leading: Container(
                                   height: double.infinity,
                                   width: 100,
@@ -112,8 +108,7 @@ class _CartState extends State<Cart> {
                                     shape: BoxShape.rectangle,
                                     image: cartdata.image != null
                                         ? DecorationImage(
-                                            image:
-                                                FileImage(File(cartdata.image)),
+                                            image: FileImage(File(cartdata.image)),
                                             fit: BoxFit.cover,
                                           )
                                         : null,
@@ -128,30 +123,29 @@ class _CartState extends State<Cart> {
                                 subtitle: Row(
                                   children: [
                                     QuantityPickerButton(
-                                      value: cartitems[index].count,
+                                      value: cartitems[index].count ?? 0,
                                       onIncrease: (count) {
                                         setState(() {
-                                          cartitems[index].count++;
+                                          cartitems[index].count = (cartitems[index].count ?? 0) + 1;
                                         });
                                       },
                                       onDecrease: (count) {
-                                        if (cartitems[index].count > 1) {
+                                        if ((cartitems[index].count ?? 0) > 1) {
                                           setState(() {
-                                            cartitems[index].count--;
+                                            cartitems[index].count = (cartitems[index].count ?? 0) - 1;
                                           });
                                         }
                                       },
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.delete,
-                                          color:
-                                              Color.fromARGB(255, 255, 0, 0)),
+                                          color: Color.fromARGB(255, 255, 0, 0)),
                                       onPressed: () {
                                         _showDeleteConfirmationDialog(index);
                                       },
                                     ),
                                     Text(
-                                      '\$${cost * cartitems[index].count}',
+                                      '\$${cost * (cartitems[index].count ?? 0)}',
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -228,7 +222,7 @@ class _CartState extends State<Cart> {
   double calculateTotalCost() {
     double totalCost = 0;
     for (var food in cartitems) {
-      totalCost += double.parse(food.cost) * food.count;
+      totalCost += double.parse(food.cost) * (food.count ?? 0);
     }
     return totalCost;
   }
@@ -241,9 +235,8 @@ class _CartState extends State<Cart> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              // Your image goes here
               Image.asset('assets/Questions-pana.png', width: 100, height: 100),
-              const SizedBox(height: 16), // Add some space between the image and text
+              const SizedBox(height: 16),
               const Text('Delete Item', style: TextStyle(fontSize: 18)),
               const Text('Are you sure you want to delete this item from your cart?'),
             ],
