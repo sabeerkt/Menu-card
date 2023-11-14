@@ -17,7 +17,7 @@ Widget AllItems() {
           // Wrap each item in a Slidable widget
           return Slidable(
             startActionPane: ActionPane(
-              motion: StretchMotion(),
+              motion: const StretchMotion(),
               children: [
                 SlidableAction(
                   onPressed: (context) {
@@ -25,7 +25,7 @@ Widget AllItems() {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Confirm Deletion"),
+                          title: const Text("Confirm Deletion"),
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -35,20 +35,20 @@ Widget AllItems() {
                                 width: 100,
                                 height: 100,
                               ),
-                              SizedBox(height: 16), // Add some spacing
-                              Text(
+                              const SizedBox(height: 16), // Add some spacing
+                              const Text(
                                   "Are you sure you want to delete this product?"),
                             ],
                           ),
                           actions: <Widget>[
                             TextButton(
-                              child: Text("Cancel"),
+                              child: const Text("Cancel"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             ),
                             TextButton(
-                              child: Text(
+                              child: const Text(
                                 "Delete",
                                 style: TextStyle(color: Colors.red),
                               ),
@@ -70,7 +70,7 @@ Widget AllItems() {
                   onPressed: (context) {
                     if (isProductInCart(data)) {
                       // Product is already in the cart, show a message
-                      final snackBar = SnackBar(
+                      const snackBar = SnackBar(
                         content: Text('The product is already in the cart'),
                         backgroundColor: Colors.red,
                       );
@@ -78,7 +78,7 @@ Widget AllItems() {
                     } else {
                       // Product is not in the cart, add it and show a different message
                       addToCart(data);
-                      final snackBar = SnackBar(
+                      const snackBar = SnackBar(
                         content: Text('Product added to the cart'),
                         backgroundColor: Colors.green,
                       );
@@ -105,6 +105,7 @@ Widget AllItems() {
                         description: data.description,
                         image: data.image,
                         category: data.category,
+                        index:index,
                       ),
                     ),
                   );

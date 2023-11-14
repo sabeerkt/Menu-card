@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/Utility/utilty.dart';
 
 class QuantityPickerButton extends StatefulWidget {
   final int value;
@@ -77,7 +78,7 @@ class _CartState extends State<Cart> {
         body: ValueListenableBuilder(
           valueListenable: FoodListNotifier,
           builder: (context, value, child) {
-            totalCost = calculateTotalCost();
+            totalCost = calculateTotalCostt();
 
             return Column(
               children: [
@@ -100,7 +101,8 @@ class _CartState extends State<Cart> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: ListTile(
-                                tileColor: const Color.fromARGB(255, 255, 255, 255),
+                                tileColor:
+                                    const Color.fromARGB(255, 255, 255, 255),
                                 leading: Container(
                                   height: double.infinity,
                                   width: 100,
@@ -108,7 +110,8 @@ class _CartState extends State<Cart> {
                                     shape: BoxShape.rectangle,
                                     image: cartdata.image != null
                                         ? DecorationImage(
-                                            image: FileImage(File(cartdata.image)),
+                                            image:
+                                                FileImage(File(cartdata.image)),
                                             fit: BoxFit.cover,
                                           )
                                         : null,
@@ -126,20 +129,24 @@ class _CartState extends State<Cart> {
                                       value: cartitems[index].count ?? 0,
                                       onIncrease: (count) {
                                         setState(() {
-                                          cartitems[index].count = (cartitems[index].count ?? 0) + 1;
+                                          cartitems[index].count =
+                                              (cartitems[index].count ?? 0) + 1;
                                         });
                                       },
                                       onDecrease: (count) {
                                         if ((cartitems[index].count ?? 0) > 1) {
                                           setState(() {
-                                            cartitems[index].count = (cartitems[index].count ?? 0) - 1;
+                                            cartitems[index].count =
+                                                (cartitems[index].count ?? 0) -
+                                                    1;
                                           });
                                         }
                                       },
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.delete,
-                                          color: Color.fromARGB(255, 255, 0, 0)),
+                                          color:
+                                              Color.fromARGB(255, 255, 0, 0)),
                                       onPressed: () {
                                         _showDeleteConfirmationDialog(index);
                                       },
@@ -159,7 +166,6 @@ class _CartState extends State<Cart> {
                           ),
                         );
                       }
-                      return const SizedBox.shrink();
                     },
                   ),
                 ),
@@ -219,14 +225,7 @@ class _CartState extends State<Cart> {
     );
   }
 
-  double calculateTotalCost() {
-    double totalCost = 0;
-    for (var food in cartitems) {
-      totalCost += double.parse(food.cost) * (food.count ?? 0);
-    }
-    return totalCost;
-  }
-
+//alertbocx when dlt the cart prdt 
   Future<void> _showDeleteConfirmationDialog(int index) async {
     return showDialog<void>(
       context: context,
@@ -238,7 +237,8 @@ class _CartState extends State<Cart> {
               Image.asset('assets/Questions-pana.png', width: 100, height: 100),
               const SizedBox(height: 16),
               const Text('Delete Item', style: TextStyle(fontSize: 18)),
-              const Text('Are you sure you want to delete this item from your cart?'),
+              const Text(
+                  'Are you sure you want to delete this item from your cart?'),
             ],
           ),
           actions: <Widget>[

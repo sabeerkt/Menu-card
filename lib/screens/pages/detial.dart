@@ -1,20 +1,20 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
-import 'package:foodmenu/screens/pages/cart.dart';
+
 import 'package:foodmenu/screens/pages/edit.dart';
-import 'package:foodmenu/screens/widgets/search.dart';
 
 class detailpage extends StatefulWidget {
+  final int index;
   final String name;
   final String cost;
   final String description;
   final String image;
   final String? category;
 
-  const detailpage({
+  detailpage({
     Key? key,
+    required this.index,
     required this.image,
     required this.name,
     required this.cost,
@@ -58,10 +58,9 @@ class _detailpageState extends State<detailpage> {
                     costController: TextEditingController(text: widget.cost),
                     descriptionController:
                         TextEditingController(text: widget.description),
-                    categoryController:
-                        categoryController, // Pass the categoryController
+                    categoryController: categoryController,
                     isEditMode: true,
-                    index: 0, // You need to provide the correct index
+                    index: widget.index,
                   ),
                 ),
               );
@@ -124,13 +123,13 @@ class _detailpageState extends State<detailpage> {
                             color: Colors.green,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           widget.category!,
-                          style:
-                              TextStyle(color: Colors.deepPurple, fontSize: 30),
+                          style: const TextStyle(
+                              color: Colors.deepPurple, fontSize: 30),
                         )
                       ],
                     ),

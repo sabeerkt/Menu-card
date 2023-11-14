@@ -141,6 +141,7 @@ class _BevargeState extends State<Bevarge> {
                           description: data.description,
                           image: data.image,
                           category: data.category,
+                          index: index,
                         ),
                       ),
                     );

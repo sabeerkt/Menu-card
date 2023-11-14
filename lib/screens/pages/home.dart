@@ -9,7 +9,6 @@ import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
 import 'package:foodmenu/screens/pages/detial.dart';
 
-import 'package:foodmenu/screens/pages/item.dart';
 
 class Home extends StatefulWidget {
   Home({
@@ -25,7 +24,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    getfood();
+    // getfood();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -56,21 +55,22 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: Column(
+          
           children: [
-            const SizedBox(height: 20),
-            const SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 25),
             Padding(
-              padding: const EdgeInsets.all(2),
+              
+              padding: const EdgeInsets.all(10),
               child: ValueListenableBuilder(
                 valueListenable: FoodListNotifier,
                 builder:
                     (BuildContext context, List<Food> value, Widget? child) {
                   return SizedBox(
+                    
                     width: MediaQuery.of(context).size.width,
-                    height: 250,
+                    height: 200,
                     child: CarouselSlider(
+                      
                       items: fooddata.map((food) {
                         return Builder(
                           builder: (BuildContext context) {
@@ -82,7 +82,9 @@ class _HomeState extends State<Home> {
                                       File(food.image),
                                       fit: BoxFit.cover,
                                     )
-                                  : Container(), // Handle the case where the image is null
+                                  : Container(
+                                    
+                                  ), // Handle the case where the image is null
                             );
                           },
                         );
@@ -210,6 +212,7 @@ class _HomeState extends State<Home> {
                                     description: data.description,
                                     image: data.image,
                                     category: data.category,
+                                    index:index,
                                   ),
                                 ),
                               );

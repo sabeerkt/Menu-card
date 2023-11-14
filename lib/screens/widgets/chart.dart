@@ -2,9 +2,10 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Database/model/model.dart';
+import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/Utility/utilty.dart';
 
-import '../../Database/Function/db_function.dart';
+import '../../Database/model/model.dart';
 
 class chart extends StatefulWidget {
   const chart({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class chart extends StatefulWidget {
 class _chartState extends State<chart> {
   @override
   Widget build(BuildContext context) {
-    List<Food> foods = FoodListNotifier.value;
+    List foods = FoodListNotifier.value;
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
@@ -43,11 +44,7 @@ class _chartState extends State<chart> {
           ),
         ),
         body: TabBarView(
-          children: [
-            //chart1(foods),
-
-            chartt(foods: foods)
-          ],
+          children: [chartt(foods: foods)],
         ),
       ),
     );

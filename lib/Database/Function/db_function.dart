@@ -10,7 +10,6 @@ Future<void> addFood(Food value) async {
   Fooddb.add(value);
   FoodListNotifier.value.add(value);
   FoodListNotifier.notifyListeners();
-  // print(value.toString());
 }
 
 getfood() async {
@@ -23,6 +22,8 @@ getfood() async {
 Future<void> updateFood(int index, Food newValue) async {
   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
   await Fooddb.putAt(index, newValue);
+  print('hi');
+  print(Fooddb.values);
   getfood(); // Refresh the list after update
 }
 
@@ -34,11 +35,13 @@ Future<void> deletfood(int index) async {
 
 Future<void> addToCart(Food data) async {
   final cartdb = await Hive.openBox<Food>('cart_db');
-  data.count=1;
+  data.count = 1;
   cartitems.add(data);
   cartdb.add(data);
   FoodListNotifier.notifyListeners();
 }
+
+//load the cart
 
 loadCart() async {
   final cartdb = await Hive.openBox<Food>('cart_db');
@@ -59,18 +62,27 @@ loadCart() async {
   cartitems = values.toList();
 }
 
-
 deleteCartItem(int id) async {
   final cartdb = await Hive.openBox<Food>('cart_db');
   cartdb.deleteAt(id);
   cartitems.removeAt(id);
   loadCart();
 }
+//chart calcultion
 
 double calculateTotalCost(List<Food> foods) {
   double totalCost = 0;
   for (var food in foods) {
     totalCost += double.parse(food.cost);
+  }
+  return totalCost;
+}
+
+//totaling of the cart prodct
+double calculateTotalCostt() {
+  double totalCost = 0;
+  for (var food in cartitems) {
+    totalCost += double.parse(food.cost) * (food.count ?? 0);
   }
   return totalCost;
 }

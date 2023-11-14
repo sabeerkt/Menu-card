@@ -131,6 +131,7 @@ class _BreakfastState extends State<Breakfast> {
                           description: data.description,
                           image: data.image,
                           category: data.category,
+                          index:index,
                         ),
                       ),
                     );

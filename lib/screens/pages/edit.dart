@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:foodmenu/Screens/Widgets/bottom.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/utility/utilty.dart';
@@ -14,8 +12,8 @@ class EditDish extends StatefulWidget {
   final TextEditingController costController;
   final TextEditingController descriptionController;
   final TextEditingController imageController;
-  final bool isEditMode; // Set to true when editing an existing item
-  final int index; // Pass the index if you're editing an existing item
+  final bool isEditMode;
+  final int index;
   TextEditingController categoryController = TextEditingController();
 
   EditDish({
@@ -38,44 +36,6 @@ class _EditDishState extends State<EditDish> {
   String selectedCategory = 'breakfast';
 
   final List<String> _foodCategoryList = ['breakfast', 'desserts', 'drinks'];
-
-  Future<void> _pickImage() async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Pick Image From...'),
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-                  XFile? picked =
-                      await ImageUtils.pickImage(ImageSource.camera);
-                  setState(() {
-                    pickedImage = picked;
-                  });
-                },
-                child: const Text('Camera'),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-                  XFile? picked =
-                      await ImageUtils.pickImage(ImageSource.gallery);
-                  setState(() {
-                    pickedImage = picked;
-                  });
-                },
-                child: const Text('Gallery'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,12 +93,10 @@ class _EditDishState extends State<EditDish> {
                     ],
                   ),
                 ),
-
                 Container(),
                 const SizedBox(
                   height: 10,
                 ),
-                // TextField for 'Name'
                 Column(
                   children: [
                     TextField(
@@ -285,9 +243,6 @@ class _EditDishState extends State<EditDish> {
                     ),
                   ],
                 ),
-
-                // ... Other TextFields for cost and description
-
                 MaterialButton(
                   color: const Color.fromARGB(255, 0, 0, 0),
                   onPressed: onnUpdateDishButton,
@@ -308,6 +263,44 @@ class _EditDishState extends State<EditDish> {
     );
   }
 
+  Future<void> _pickImage() async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Pick Image From...'),
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  XFile? picked =
+                      await ImageUtils.pickImage(ImageSource.camera);
+                  setState(() {
+                    pickedImage = picked;
+                  });
+                },
+                child: const Text('Camera'),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  XFile? picked =
+                      await ImageUtils.pickImage(ImageSource.gallery);
+                  setState(() {
+                    pickedImage = picked;
+                  });
+                },
+                child: const Text('Gallery'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> onnUpdateDishButton() async {
     final _name = widget.nameController.text.trim();
     final _cost = widget.costController.text.trim();
@@ -325,11 +318,7 @@ class _EditDishState extends State<EditDish> {
       image: pickedImage?.path ?? '',
     );
 
-    // if (widget.isEditMode) {
-      updateFood(widget.index, _foodd);
-    // } else {
-    //   addFood(_foodd);
-    // // }
+    updateFood(widget.index, _foodd);
 
     Navigator.of(context).push(
       MaterialPageRoute(

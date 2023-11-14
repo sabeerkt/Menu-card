@@ -26,7 +26,7 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         elevation: 0,
         centerTitle: true,
         title: const Text(
@@ -38,45 +38,39 @@ class _SettingState extends State<Setting> {
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            color: Colors.black,
-            child: ListView.separated(
-              itemCount: itemsList.length,
-              separatorBuilder: (context, index) => const Divider(),
-              itemBuilder: (BuildContext context, int index) {
-                final ItemData item = itemsList[index];
-                return Container(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          leading: Icon(
-                            item.icon,
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                          ),
-                          title: Text(
-                            item.name,
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          onTap: () {
-                            tap(item);
-                          },
+      body: Container(
+        color: const Color.fromARGB(255, 255, 255, 255),
+        child: ListView.separated(
+          itemCount: itemsList.length,
+          separatorBuilder: (context, index) => const Divider(),
+          itemBuilder: (BuildContext context, int index) {
+            final ItemData item = itemsList[index];
+            return Container(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(
+                        item.icon,
+                        color: Color.fromARGB(255, 8, 8, 8),
+                      ),
+                      title: Text(
+                        item.name,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontWeight: FontWeight.w700,
                         ),
-                      ],
+                      ),
+                      onTap: () {
+                        tap(item);
+                      },
                     ),
-                  ),
-                );
-              },
-            ),
-          ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

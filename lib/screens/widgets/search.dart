@@ -17,7 +17,7 @@ class _SearchState extends State<Search> {
   // Size screenSize = Utils().getScreenSize();
   List<Food> _foundfood = [];
 
-  loadrecipes() async {
+  loadFood() async {
     final allfood = FoodListNotifier.value;
     setState(() {
       _foundfood = allfood;
@@ -31,8 +31,8 @@ class _SearchState extends State<Search> {
       result = FoodListNotifier.value;
     } else {
       result = FoodListNotifier.value
-          .where((Food recipe) =>
-              recipe.name.toLowerCase().contains(enteredName.toLowerCase()))
+          .where((Food food) =>
+              food.name.toLowerCase().contains(enteredName.toLowerCase()))
           .toList();
     }
 
@@ -109,6 +109,7 @@ class _SearchState extends State<Search> {
                             description: data.description,
                             image: data.image,
                             category: data.category!,
+                            index: index,
                           ),
                         ),
                       );

@@ -8,27 +8,9 @@ import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/screens/pages/detial.dart';
 
 late final String name;
-// Future<void> _deleteFood(name) async {
-//   deleteFood(name); // Call the deleteFood function from db_function.dart
-// }
 
-//change alliteam
-// Widget Desrets() {
-//   return
 
-//   // ListView.separated(
-//   //   itemBuilder: (ctx, index) {
-//   //     return ListTile(
-//   //       title: Text("name $index"),
-//   //       subtitle: Text("age $index"),
-//   //     );
-//   //   },
-//   //   separatorBuilder: (ctx, index) {
-//   //     return const Divider();
-//   //   },
-//   //   itemCount: 10,
-//   // );
-// }
+
 
 class Desrets extends StatefulWidget {
   const Desrets({super.key});
@@ -141,6 +123,7 @@ class _DesretsState extends State<Desrets> {
                           description: data.description,
                           image: data.image,
                           category: data.category,
+                          index:index,
                         ),
                       ),
                     );
