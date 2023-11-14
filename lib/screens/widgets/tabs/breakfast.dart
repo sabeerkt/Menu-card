@@ -8,16 +8,6 @@ import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/screens/pages/detial.dart';
 
 late final String name;
-// Future<void> _deleteFood(name) async {
-//   deleteFood(name); // Call the deleteFood function from db_function.dart
-// }
-
-//change alliteam
-// Widget Breakfast() {
-//   List<Food> filteredBreakfastList = [];
-//   return
-
-// }
 
 class Breakfast extends StatefulWidget {
   const Breakfast({super.key});
@@ -40,6 +30,10 @@ class _BreakfastState extends State<Breakfast> {
           itemCount: filteredBreakfastList.length,
           itemBuilder: (context, index) {
             final data = filteredBreakfastList[index];
+
+
+
+            
             // Return a Card widget for each item
             return Slidable(
               startActionPane: ActionPane(

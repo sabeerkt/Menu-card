@@ -46,6 +46,7 @@ class _BevargeState extends State<Bevarge> {
         final filteredBreakfastList = foodList
             .where((food) => food.category?.contains('drinks') == true)
             .toList();
+
         return ListView.builder(
           itemCount: filteredBreakfastList.length,
           itemBuilder: (context, index) {

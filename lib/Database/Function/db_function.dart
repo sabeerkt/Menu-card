@@ -68,6 +68,12 @@ deleteCartItem(int id) async {
   cartitems.removeAt(id);
   loadCart();
 }
+
+void clearCart() async {
+  final cartdb = await Hive.openBox<Food>('cart_db');
+  cartdb.clear();
+  cartitems.clear();
+}
 //chart calcultion
 
 double calculateTotalCost(List<Food> foods) {
