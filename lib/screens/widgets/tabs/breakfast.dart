@@ -22,7 +22,6 @@ class _BreakfastState extends State<Breakfast> {
     return ValueListenableBuilder(
       valueListenable: FoodListNotifier,
       builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
-        foodList = foodList.reversed.toList();
         final filteredBreakfastList = foodList
             .where((food) => food.category?.contains('breakfast') == true)
             .toList();

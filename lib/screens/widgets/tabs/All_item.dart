@@ -10,11 +10,13 @@ Widget AllItems() {
     valueListenable: FoodListNotifier,
     builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
       // Reverse the order of the foodList
-      foodList = foodList.reversed.toList();
+      // foodList = foodList.reversed.toList();
       return ListView.builder(
         itemCount: foodList.length,
         itemBuilder: (context, index) {
-          final data = foodList[index];
+          final reversedIndex = foodList.length - 1 - index;
+          final data = foodList[reversedIndex];
+          //final data = foodList[index];
           // Wrap each item in a Slidable widget
           return Slidable(
             startActionPane: ActionPane(
@@ -53,7 +55,7 @@ Widget AllItems() {
                                 style: TextStyle(color: Colors.red),
                               ),
                               onPressed: () {
-                                deletfood(index);
+                                deletfood(reversedIndex);
                                 Navigator.of(context).pop();
                               },
                             ),

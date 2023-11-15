@@ -21,9 +21,9 @@ class _DesretsState extends State<Desrets> {
     return ValueListenableBuilder(
       valueListenable: FoodListNotifier,
       builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
-        foodList = foodList.reversed.toList();
+        // foodList = foodList.reversed.toList();
         final filteredBreakfastList = foodList
-            .where((food) => food.category?.contains('desrts') == true)
+            .where((food) => food.category?.contains('desserts') == true)
             .toList();
         return ListView.builder(
           itemCount: filteredBreakfastList.length,

@@ -21,7 +21,6 @@ class _BevargeState extends State<Bevarge> {
     return ValueListenableBuilder(
       valueListenable: FoodListNotifier,
       builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
-        foodList = foodList.reversed.toList();
         final filteredBreakfastList = foodList
             .where((food) => food.category?.contains('drinks') == true)
             .toList();
@@ -69,8 +68,7 @@ class _BevargeState extends State<Bevarge> {
                                   style: TextStyle(color: Colors.red),
                                 ),
                                 onPressed: () {
-                                  deletfood(
-                                      index); // Call your delete function here
+                                  deletfood(index);
                                   Navigator.of(context).pop();
                                 },
                               ),
