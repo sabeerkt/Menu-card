@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/Utility/dailogs/cartDltDailog.dart';
+import 'package:foodmenu/Utility/dailogs/clearCartDailog.dart';
 import 'package:foodmenu/Utility/utilty.dart';
 import 'package:lottie/lottie.dart';
 
@@ -154,7 +156,8 @@ class _CartState extends State<Cart> {
                                           color:
                                               Color.fromARGB(255, 255, 0, 0)),
                                       onPressed: () {
-                                        _showDeleteConfirmationDialog(index);
+                                        showDeleteConfirmationDialog(
+                                            index, context);
                                       },
                                     ),
                                     Text(
@@ -228,14 +231,16 @@ class _CartState extends State<Cart> {
                   color: Colors.white, // Set background color to white
                   child: ElevatedButton(
                     onPressed: () {
-                      _showClearCartConfirmationDialog();
+                      setState(() {
+                        showClearCartConfirmationDialog(context);
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       primary:
                           Colors.white, // Set button background color to white
                       onPrimary: Colors.red, // Set button text color to red
                     ),
-                    child: Text('Clear Cart'),
+                    child: const Text('Clear Cart'),
                   ),
                 ),
               ],
@@ -246,85 +251,5 @@ class _CartState extends State<Cart> {
     );
   }
 
-  // Alert box when deleting the cart product
-  Future<void> _showDeleteConfirmationDialog(int index) async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Image.asset('assets/Questions-pana.png', width: 100, height: 100),
-              const SizedBox(height: 16),
-              const Text('Delete Item', style: TextStyle(fontSize: 18)),
-              const Text(
-                  'Are you sure you want to delete this item from your cart?'),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text(
-                'Confirm',
-                style: TextStyle(color: Colors.red),
-              ),
-              onPressed: () {
-                setState(() {
-                  deleteCartItem(index);
-                });
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  // Alert box to clear the entire cart
-  Future<void> _showClearCartConfirmationDialog() async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Icon(Icons.warning,
-                  color: Colors.orange, size: 50), // Add caution icon
-              const SizedBox(height: 16),
-              const Text('Clear Cart', style: TextStyle(fontSize: 18)),
-              const Text('Are you sure you want to clear your entire cart?'),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text(
-                'Confirm',
-                style: TextStyle(color: Colors.red),
-              ),
-              onPressed: () {
-                setState(() {
-                  clearCart();
-                });
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+ 
 }

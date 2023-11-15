@@ -6,9 +6,8 @@ import 'package:flutter_glow/flutter_glow.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
+import 'package:foodmenu/Screens/Pages/detial.dart';
 import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
-import 'package:foodmenu/screens/pages/detial.dart';
-
 
 class Home extends StatefulWidget {
   Home({
@@ -17,14 +16,13 @@ class Home extends StatefulWidget {
 
   @override
   _HomeState createState() => _HomeState();
-}
+}   
 
 class _HomeState extends State<Home> {
   final fooddata = FoodListNotifier.value;
 
   @override
   Widget build(BuildContext context) {
-    // getfood();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -55,22 +53,18 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: Column(
-          
           children: [
             const SizedBox(height: 25),
             Padding(
-              
               padding: const EdgeInsets.all(10),
               child: ValueListenableBuilder(
                 valueListenable: FoodListNotifier,
                 builder:
                     (BuildContext context, List<Food> value, Widget? child) {
                   return SizedBox(
-                    
                     width: MediaQuery.of(context).size.width,
                     height: 200,
                     child: CarouselSlider(
-                      
                       items: fooddata.map((food) {
                         return Builder(
                           builder: (BuildContext context) {
@@ -82,9 +76,7 @@ class _HomeState extends State<Home> {
                                       File(food.image),
                                       fit: BoxFit.cover,
                                     )
-                                  : Container(
-                                    
-                                  ), // Handle the case where the image is null
+                                  : Container(),
                             );
                           },
                         );
@@ -120,8 +112,8 @@ class _HomeState extends State<Home> {
                   child: ListView.builder(
                     itemCount: fooddata.length,
                     itemBuilder: (context, index) {
-                      final data = fooddata[index];
-                      // Create a custom item widget for each item
+                      final reversedIndex = fooddata.length - 1 - index;
+                      final data = fooddata[reversedIndex];
                       return Slidable(
                         startActionPane: ActionPane(
                           motion: const StretchMotion(),
@@ -159,8 +151,7 @@ class _HomeState extends State<Home> {
                                             style: TextStyle(color: Colors.red),
                                           ),
                                           onPressed: () {
-                                            deletfood(
-                                                index); // Call your delete function here
+                                            deletfood(reversedIndex);
                                             Navigator.of(context).pop();
                                           },
                                         ),
@@ -206,13 +197,13 @@ class _HomeState extends State<Home> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => detailpage(
+                                  builder: (context) => DetailPage(
                                     name: data.name,
                                     cost: data.cost,
                                     description: data.description,
                                     image: data.image,
                                     category: data.category,
-                                    index:index,
+                                    index: reversedIndex,
                                   ),
                                 ),
                               );
@@ -221,7 +212,7 @@ class _HomeState extends State<Home> {
                               height: double.infinity,
                               width: 100,
                               decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
+                                shape: BoxShape.circle,
                                 image: data.image != null
                                     ? DecorationImage(
                                         image: FileImage(File(data.image)),

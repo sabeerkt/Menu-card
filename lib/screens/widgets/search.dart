@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/Screens/Pages/detial.dart';
-import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
+import 'package:lottie/lottie.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  // Size screenSize = Utils().getScreenSize();
+  final String defaultImage = 'assets/default_image.jpg';
   List<Food> _foundfood = [];
 
   loadFood() async {
@@ -69,19 +69,19 @@ class _SearchState extends State<Search> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(40.0),
                   borderSide: const BorderSide(
-                    color: Colors.orange, // Set the border color
-                    width: 2.0, // Set the border width
+                    color: Colors.orange,
+                    width: 2.0,
                   ),
                 ),
                 filled: true,
                 fillColor: Colors.white,
                 suffixIcon: const Icon(
                   Icons.search_sharp,
-                  color: Colors.orange, // Set the icon color to orange
+                  color: Colors.orange,
                 ),
                 hintText: "Find  food...",
                 hintStyle: const TextStyle(
-                  color: Color(0xFF636262), // Set the hint text color
+                  color: Color(0xFF636262),
                 ),
               ),
             ),
@@ -90,96 +90,103 @@ class _SearchState extends State<Search> {
             height: 50,
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: _foundfood.length,
-              itemBuilder: (context, index) {
-                final data = _foundfood[index];
-                // Create a custom item widget for each item
-                return Card(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.all(10),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => detailpage(
-                            name: data.name,
-                            cost: data.cost,
-                            description: data.description,
-                            image: data.image,
-                            category: data.category!,
-                            index: index,
+            child: _foundfood.isEmpty
+                ? Center(
+                    child: Lottie.asset("assets/searcgh.json"),
+                  )
+                : ListView.builder(
+                    itemCount: _foundfood.length,
+                    itemBuilder: (context, index) {
+                      final data = _foundfood[index];
+                      return Card(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.all(10),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                  name: data.name,
+                                  cost: data.cost,
+                                  description: data.description,
+                                  image: data.image,
+                                  category: data.category!,
+                                  index: index,
+                                ),
+                              ),
+                            );
+                          },
+                          leading: Container(
+                            height: double.infinity,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              image: data.image != null
+                                  ? DecorationImage(
+                                      image: FileImage(File(data.image)),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : DecorationImage(
+                                      image: AssetImage(defaultImage),
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                          ),
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: <Widget>[
+                                      Column(
+                                        children: [
+                                          Text(data.name),
+                                          Text(data.category ?? 'default')
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          addToCart(data);
+                                        },
+                                        icon: Icon(
+                                          Icons.shopping_cart,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          deletfood(index);
+                                        },
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          subtitle: Text(
+                            "\$${data.cost}",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 58, 95, 33),
+                            ),
                           ),
                         ),
                       );
                     },
-                    leading: Container(
-                      height: double.infinity,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        image: data.image != null
-                            ? DecorationImage(
-                                image: FileImage(File(data.image)),
-                                fit: BoxFit.cover,
-                              )
-                            : null,
-                      ),
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: <Widget>[
-                                Column(
-                                  children: [
-                                    Text(data.name),
-                                    Text(data.category ?? 'default')
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    addToCart(data);
-                                  },
-                                  icon: Icon(
-                                    Icons.shopping_cart,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    deletfood(index);
-                                  },
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    subtitle: Text(
-                      "\$${data.cost}",
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 58, 95, 33),
-                      ),
-                    ),
                   ),
-                );
-              },
-            ),
-          )
+          ),
         ],
       ),
     );

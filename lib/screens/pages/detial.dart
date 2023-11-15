@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:foodmenu/screens/pages/edit.dart';
 
-class detailpage extends StatefulWidget {
+class DetailPage extends StatefulWidget {
   final int index;
   final String name;
   final String cost;
@@ -12,7 +11,7 @@ class detailpage extends StatefulWidget {
   final String image;
   final String? category;
 
-  detailpage({
+  DetailPage({
     Key? key,
     required this.index,
     required this.image,
@@ -23,10 +22,10 @@ class detailpage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<detailpage> createState() => _detailpageState();
+  State<DetailPage> createState() => _DetailPageState();
 }
 
-class _detailpageState extends State<detailpage> {
+class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController categoryController =
@@ -78,7 +77,7 @@ class _detailpageState extends State<detailpage> {
                 bottomRight: Radius.circular(20.0),
               ),
               child: Container(
-                width: 600,
+                width: double.infinity,
                 height: 350,
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -86,7 +85,7 @@ class _detailpageState extends State<detailpage> {
                         ? FileImage(File(widget.image))
                         : const AssetImage("assets/juice.jfif")
                             as ImageProvider,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -94,58 +93,30 @@ class _detailpageState extends State<detailpage> {
             const SizedBox(
               height: 10,
             ),
-            const SizedBox(
-              height: 10,
-            ),
             Container(
               padding: const EdgeInsets.all(16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      widget.name,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Column(
-                      children: [
-                        Text(
-                          "\$${widget.cost}",
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          widget.category!,
-                          style: const TextStyle(
-                              color: Colors.deepPurple, fontSize: 30),
-                        )
-                      ],
-                    ),
-                  ),
+                  _buildInfoRow("Name:", widget.name),
                   const SizedBox(height: 10),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 225),
-                    child: Text(
-                      'description',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildInfoBox("Category:", widget.category!),
+                      _buildInfoBox("Cost:", '\$${widget.cost}',
+                          color: Colors.green),
+                    ],
                   ),
                   const SizedBox(height: 20),
+                  const Text(
+                    'Description',
+                    style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue),
+                  ),
+                  const SizedBox(height: 10),
                   Text(
                     widget.description,
                     style: const TextStyle(fontSize: 16),
@@ -156,6 +127,68 @@ class _detailpageState extends State<detailpage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.grey[200],
+      ),
+      padding: const EdgeInsets.all(8),
+      child: Row(
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue, // Set the color for the label (e.g., blue)
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(
+                  255, 0, 0, 0), // Set the color for the value (e.g., green)
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoBox(String label, String value, {Color? color}) {
+    return Container(
+      width: 150, // Adjust the width as needed
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.grey[200],
+      ),
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
+        ],
       ),
     );
   }

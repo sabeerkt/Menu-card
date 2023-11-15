@@ -8,6 +8,7 @@ import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/Screens/Widgets/bottom.dart';
 import 'package:foodmenu/utility/utilty.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 
 class NewDish extends StatefulWidget {
   const NewDish({Key? key}) : super(key: key);
@@ -17,13 +18,13 @@ class NewDish extends StatefulWidget {
 }
 
 class _NewDishState extends State<NewDish> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _costController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
-  TextEditingController _categoryController = TextEditingController();
-  String Selectedmoneytype = 'breakfast';
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _costController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _categoryController = TextEditingController();
+  String selectedMoneyType = 'breakfast';
 
-  final List<String> _foodtypelist = ['breakfast', 'desrts', "drinks"];
+  final List<String> _foodTypeList = ['breakfast', 'desserts', 'drinks'];
 
   XFile? pickedImage;
 
@@ -40,7 +41,7 @@ class _NewDishState extends State<NewDish> {
                 onPressed: () async {
                   Navigator.pop(context);
                   XFile? picked =
-                      await ImageUtils.pickImage(ImageSource.camera);
+                      await ImagePicker().pickImage(source: ImageSource.camera);
                   setState(() {
                     pickedImage = picked;
                   });
@@ -50,8 +51,8 @@ class _NewDishState extends State<NewDish> {
               ElevatedButton(
                 onPressed: () async {
                   Navigator.pop(context);
-                  XFile? picked =
-                      await ImageUtils.pickImage(ImageSource.gallery);
+                  XFile? picked = await ImagePicker()
+                      .pickImage(source: ImageSource.gallery);
                   setState(() {
                     pickedImage = picked;
                   });
@@ -75,23 +76,23 @@ class _NewDishState extends State<NewDish> {
           title: const Text(
             "New Dish",
             style: TextStyle(
-              color: Color.fromARGB(255, 255, 252, 252),
+              color: Colors.white,
               fontSize: 16,
             ),
           ),
           flexibleSpace: Container(
-            color: const Color.fromARGB(255, 0, 0, 0),
+            color: Colors.black,
           ),
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  height: 100,
-                  width: 100,
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     border: Border.all(
@@ -104,27 +105,38 @@ class _NewDishState extends State<NewDish> {
                       pickedImage != null
                           ? Image.file(
                               File(pickedImage!.path),
-                              width: 100,
-                              height: 100,
+                              fit: BoxFit.cover,
                             )
                           : Container(),
                       pickedImage == null
-                          ? IconButton(
-                              onPressed: () {
-                                _pickImage();
-                              },
-                              icon: const Icon(Icons.image),
-                              iconSize: 68,
-                              color: const Color.fromARGB(255, 0, 0, 0),
+                          ? Positioned.fill(
+                              child: GestureDetector(
+                                onTap: () {
+                                  _pickImage();
+                                },
+                                child: Container(
+                                  color: Colors.transparent,
+                                  child: Center(
+                                    child: Lottie.asset(
+                                      'assets/addimage.json', // Replace with your image asset
+                                      width: 68,
+                                      height: 68,
+                                      // color: const Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             )
                           : const SizedBox(),
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   controller: _nameController,
-                  textCapitalization: TextCapitalization
-                      .characters, // Capitalize the first letter of each word
+                  textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
                     labelText: 'Name',
                     labelStyle: const TextStyle(
@@ -154,7 +166,7 @@ class _NewDishState extends State<NewDish> {
                     labelStyle: const TextStyle(
                       color: Colors.pink,
                     ),
-                    prefixText: '\$', // Add the dollar sign as a prefix
+                    prefixText: '\$',
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
@@ -168,11 +180,9 @@ class _NewDishState extends State<NewDish> {
                       ),
                     ),
                   ),
-                  keyboardType:
-                      TextInputType.number, // Set the keyboard type to numeric
+                  keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(
-                        RegExp(r'[0-9]')), // Allow only numeric input
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                   ],
                 ),
                 const SizedBox(
@@ -205,13 +215,12 @@ class _NewDishState extends State<NewDish> {
                         ),
                         const SizedBox(width: 10),
                         DropdownButton<String>(
-                          value: Selectedmoneytype,
-                          items: _foodtypelist.map((e) {
+                          value: selectedMoneyType,
+                          items: _foodTypeList.map((e) {
                             return DropdownMenuItem<String>(
                               value: e,
                               child: Row(
                                 children: [
-                                  // Add an Image widget if you have image assets
                                   const SizedBox(width: 10),
                                   Text(e, style: const TextStyle(fontSize: 18)),
                                 ],
@@ -219,11 +228,10 @@ class _NewDishState extends State<NewDish> {
                             );
                           }).toList(),
                           selectedItemBuilder: (BuildContext context) {
-                            return _foodtypelist.map((e) {
+                            return _foodTypeList.map((e) {
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  // Add an Image widget if you have image assets
                                   const SizedBox(width: 10),
                                   Text(e, style: const TextStyle(fontSize: 18)),
                                 ],
@@ -242,7 +250,7 @@ class _NewDishState extends State<NewDish> {
                           underline: Container(),
                           onChanged: (value) {
                             setState(() {
-                              Selectedmoneytype = value!;
+                              selectedMoneyType = value!;
                               _categoryController.text = value;
                             });
                           },
@@ -268,16 +276,20 @@ class _NewDishState extends State<NewDish> {
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: Colors.pink,
-                        )),
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                        color: Colors.pink,
+                      ),
+                    ),
                   ),
                   maxLines: 5,
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 MaterialButton(
                   color: const Color.fromARGB(255, 0, 0, 0),
-                  onPressed: onnAddDishButton,
+                  onPressed: onAddDishButton,
                   child: const GlowText(
                     'Save',
                     style: TextStyle(
@@ -291,11 +303,12 @@ class _NewDishState extends State<NewDish> {
             ),
           ),
         ),
+        backgroundColor: Colors.white,
       ),
     );
   }
 
-  Future<void> onnAddDishButton() async {
+  Future<void> onAddDishButton() async {
     final _name = _nameController.text.trim();
     final _cost = _costController.text.trim();
     final _description = _descriptionController.text.trim();
@@ -308,7 +321,7 @@ class _NewDishState extends State<NewDish> {
       return;
     }
 
-    final foodd = Food(
+    final food = Food(
       name: _name,
       cost: _cost,
       description: _description,
@@ -316,7 +329,7 @@ class _NewDishState extends State<NewDish> {
       image: pickedImage?.path ?? '',
     );
 
-    addFood(foodd);
+    addFood(food);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => const BottomBar(name: '', cost: '', image: ''),

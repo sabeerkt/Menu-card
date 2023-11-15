@@ -4,13 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
-
-import 'package:foodmenu/screens/pages/detial.dart';
+import 'package:foodmenu/Screens/Pages/detial.dart';
 
 late final String name;
-
-
-
 
 class Desrets extends StatefulWidget {
   const Desrets({super.key});
@@ -25,6 +21,7 @@ class _DesretsState extends State<Desrets> {
     return ValueListenableBuilder(
       valueListenable: FoodListNotifier,
       builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
+        foodList = foodList.reversed.toList();
         final filteredBreakfastList = foodList
             .where((food) => food.category?.contains('desrts') == true)
             .toList();
@@ -117,13 +114,13 @@ class _DesretsState extends State<Desrets> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => detailpage(
+                        builder: (context) => DetailPage(
                           name: data.name,
                           cost: data.cost,
                           description: data.description,
                           image: data.image,
                           category: data.category,
-                          index:index,
+                          index: index,
                         ),
                       ),
                     );
@@ -132,7 +129,7 @@ class _DesretsState extends State<Desrets> {
                     height: double.infinity,
                     width: 100,
                     decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
+                      shape: BoxShape.circle,
                       image: data.image != null
                           ? DecorationImage(
                               image: FileImage(File(data.image)),

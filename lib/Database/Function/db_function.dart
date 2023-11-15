@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:hive/hive.dart';
 
@@ -92,3 +93,5 @@ double calculateTotalCostt() {
   }
   return totalCost;
 }
+
+

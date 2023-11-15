@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
-import 'package:foodmenu/screens/pages/detial.dart';
+import 'package:foodmenu/Screens/Pages/detial.dart';
 
 Widget AllItems() {
- 
   return ValueListenableBuilder(
     valueListenable: FoodListNotifier,
     builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
+      // Reverse the order of the foodList
+      foodList = foodList.reversed.toList();
       return ListView.builder(
         itemCount: foodList.length,
         itemBuilder: (context, index) {
@@ -29,13 +30,12 @@ Widget AllItems() {
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              // Add your image here at the top center
                               Image.asset(
                                 "assets/Questions-pana.png",
                                 width: 100,
                                 height: 100,
                               ),
-                              const SizedBox(height: 16), // Add some spacing
+                              const SizedBox(height: 16),
                               const Text(
                                   "Are you sure you want to delete this product?"),
                             ],
@@ -53,8 +53,7 @@ Widget AllItems() {
                                 style: TextStyle(color: Colors.red),
                               ),
                               onPressed: () {
-                                deletfood(
-                                    index); // Call your delete function here
+                                deletfood(index);
                                 Navigator.of(context).pop();
                               },
                             ),
@@ -69,14 +68,12 @@ Widget AllItems() {
                 SlidableAction(
                   onPressed: (context) {
                     if (isProductInCart(data)) {
-                      // Product is already in the cart, show a message
                       const snackBar = SnackBar(
                         content: Text('The product is already in the cart'),
                         backgroundColor: Colors.red,
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
-                      // Product is not in the cart, add it and show a different message
                       addToCart(data);
                       const snackBar = SnackBar(
                         content: Text('Product added to the cart'),
@@ -99,13 +96,13 @@ Widget AllItems() {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => detailpage(
+                      builder: (context) => DetailPage(
                         name: data.name,
                         cost: data.cost,
                         description: data.description,
                         image: data.image,
                         category: data.category,
-                        index:index,
+                        index: index,
                       ),
                     ),
                   );
@@ -114,7 +111,7 @@ Widget AllItems() {
                   height: double.infinity,
                   width: 100,
                   decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
+                    shape: BoxShape.circle,
                     image: data.image != null
                         ? DecorationImage(
                             image: FileImage(File(data.image)),

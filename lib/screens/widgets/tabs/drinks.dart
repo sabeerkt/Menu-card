@@ -4,31 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
-
-import 'package:foodmenu/screens/pages/detial.dart';
+import 'package:foodmenu/Screens/Pages/detial.dart';
 
 late final String name;
-// Future<void> _deleteFood(name) async {
-//   deleteFood(name); // Call the deleteFood function from db_function.dart
-// }
-
-// //change alliteam
-// Widget Bevarge() {
-//   return
-
-//   // ListView.separated(
-//   //   itemBuilder: (ctx, index) {
-//   //     return ListTile(
-//   //       title: Text("name $index"),
-//   //       subtitle: Text("age $index"),
-//   //     );
-//   //   },
-//   //   separatorBuilder: (ctx, index) {
-//   //     return const Divider();
-//   //   },
-//   //   itemCount: 10,
-//   // );
-// }
 
 class Bevarge extends StatefulWidget {
   const Bevarge({super.key});
@@ -43,6 +21,7 @@ class _BevargeState extends State<Bevarge> {
     return ValueListenableBuilder(
       valueListenable: FoodListNotifier,
       builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
+        foodList = foodList.reversed.toList();
         final filteredBreakfastList = foodList
             .where((food) => food.category?.contains('drinks') == true)
             .toList();
@@ -136,7 +115,7 @@ class _BevargeState extends State<Bevarge> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => detailpage(
+                        builder: (context) => DetailPage(
                           name: data.name,
                           cost: data.cost,
                           description: data.description,
@@ -151,7 +130,7 @@ class _BevargeState extends State<Bevarge> {
                     height: double.infinity,
                     width: 100,
                     decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
+                      shape: BoxShape.circle,
                       image: data.image != null
                           ? DecorationImage(
                               image: FileImage(File(data.image)),

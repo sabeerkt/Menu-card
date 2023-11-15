@@ -3,9 +3,6 @@ import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
-import 'package:foodmenu/Utility/utilty.dart';
-
-import '../../Database/model/model.dart';
 
 class chart extends StatefulWidget {
   const chart({Key? key}) : super(key: key);
@@ -20,7 +17,7 @@ class _chartState extends State<chart> {
     List foods = FoodListNotifier.value;
     return DefaultTabController(
       initialIndex: 0,
-      length: 2,
+      length: 1,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -32,7 +29,6 @@ class _chartState extends State<chart> {
           elevation: 0,
           bottom: const TabBar(
             tabs: <Widget>[
-              // Tab(text: 'food'),
               Tab(text: 'price'),
             ],
             labelColor: Colors.white, // Set the selected tab text color
@@ -85,7 +81,6 @@ Widget chartt({required foods}) {
                 );
               },
             ),
-            // borderData: FlBorderData(show: true),
             sectionsSpace: 5,
             centerSpaceRadius: 90,
             startDegreeOffset: 0,
