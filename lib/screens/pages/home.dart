@@ -8,6 +8,7 @@ import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/Screens/Pages/detial.dart';
 import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
+import 'package:lottie/lottie.dart';
 
 class Home extends StatefulWidget {
   Home({
@@ -16,7 +17,7 @@ class Home extends StatefulWidget {
 
   @override
   _HomeState createState() => _HomeState();
-}   
+}
 
 class _HomeState extends State<Home> {
   final fooddata = FoodListNotifier.value;
@@ -166,17 +167,41 @@ class _HomeState extends State<Home> {
                             SlidableAction(
                               onPressed: (context) {
                                 if (isProductInCart(data)) {
-                                  const snackBar = SnackBar(
-                                    content: Text(
-                                        'The product is already in the cart'),
+                                  final snackBar = SnackBar(
+                                    content: Row(
+                                      children: [
+                                        const Text(
+                                            'The product is already in the cart'),
+                                        const SizedBox(width: 10),
+                                        Lottie.asset(
+                                          'assets/smile.json', // Replace with the actual image path
+                                          width:
+                                              20, // Adjust the width as needed
+                                          height:
+                                              20, // Adjust the height as needed
+                                        ),
+                                      ],
+                                    ),
                                     backgroundColor: Colors.red,
                                   );
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else {
                                   addToCart(data);
-                                  const snackBar = SnackBar(
-                                    content: Text('Product added to the cart'),
+                                  final snackBar = SnackBar(
+                                    content: Row(
+                                      children: [
+                                        const Text('Product added to the cart'),
+                                        const SizedBox(width: 10),
+                                        Lottie.asset(
+                                          'assets/smile.json', // Replace with the actual image path
+                                          width:
+                                              20, // Adjust the width as needed
+                                          height:
+                                              20, // Adjust the height as needed
+                                        ),
+                                      ],
+                                    ),
                                     backgroundColor: Colors.green,
                                   );
                                   ScaffoldMessenger.of(context)

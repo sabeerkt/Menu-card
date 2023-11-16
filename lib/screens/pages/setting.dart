@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:foodmenu/Screens/Pages/newdish.dart';
-
-import 'package:foodmenu/screens/sub_screens/about.dart';
-
 import 'package:foodmenu/screens/sub_screens/rest.dart';
 import 'package:foodmenu/screens/sub_screens/term.dart';
 
@@ -18,7 +16,6 @@ class _SettingState extends State<Setting> {
     ItemData(Icons.notes, 'Terms and Conditions'),
     ItemData(Icons.food_bank_outlined, 'New dish'),
     ItemData(Icons.restore, 'Reset App'),
-    ItemData(Icons.info, 'About'),
     ItemData(Icons.exit_to_app, 'Exit'),
   ];
 
@@ -90,14 +87,12 @@ class _SettingState extends State<Setting> {
           MaterialPageRoute(builder: (context) => const NewDish()),
         );
         break;
-      case 'About':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const about()),
-        );
-        break;
       case 'Exit':
         // Handle exit logic here
+        // For example, you can use SystemNavigator.pop to close the app
+        // Note: This method may not work on all platforms.
+        // For a more robust solution, consider using platform-specific implementations.
+        SystemNavigator.pop();
         break;
       case 'Reset App':
         resetDB(context);

@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
-import 'package:foodmenu/Utility/dailogs/cartDltDailog.dart';
-import 'package:foodmenu/Utility/dailogs/clearCartDailog.dart';
-import 'package:foodmenu/Utility/utilty.dart';
+import 'package:foodmenu/utility/dailogs/cart_dlt_dailog.dart';
+import 'package:foodmenu/utility/dailogs/clear_cart_dailog.dart';
+
 import 'package:lottie/lottie.dart';
 
 class QuantityPickerButton extends StatefulWidget {
