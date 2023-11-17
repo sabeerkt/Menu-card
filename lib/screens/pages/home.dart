@@ -174,7 +174,7 @@ class _HomeState extends State<Home> {
                                             'The product is already in the cart'),
                                         const SizedBox(width: 10),
                                         Lottie.asset(
-                                          'assets/smile.json', // Replace with the actual image path
+                                          'assets/sad.json', // Replace with the actual image path
                                           width:
                                               20, // Adjust the width as needed
                                           height:

@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/Screens/Pages/detial.dart';
+import 'package:lottie/lottie.dart';
 
 late final String name;
 
@@ -26,7 +27,6 @@ class _BreakfastState extends State<Breakfast> {
             .where((food) => food.category?.contains('breakfast') == true)
             .toList();
         return ListView.builder(
-          
           itemCount: filteredBreakfastList.length,
           itemBuilder: (context, index) {
             final data = filteredBreakfastList[index];
@@ -42,36 +42,34 @@ class _BreakfastState extends State<Breakfast> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Confirm Deletion"),
+                            title: const Text("Confirm Deletion"),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                // Add your image here at the top center
                                 Image.asset(
                                   "assets/Questions-pana.png",
                                   width: 100,
                                   height: 100,
                                 ),
-                                SizedBox(height: 16), // Add some spacing
-                                Text(
+                                const SizedBox(height: 16),
+                                const Text(
                                     "Are you sure you want to delete this product?"),
                               ],
                             ),
                             actions: <Widget>[
                               TextButton(
-                                child: Text("Cancel"),
+                                child: const Text("Cancel"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
                               ),
                               TextButton(
-                                child: Text(
+                                child: const Text(
                                   "Delete",
                                   style: TextStyle(color: Colors.red),
                                 ),
                                 onPressed: () {
-                                  deletfood(
-                                      index); // Call your delete function here
+                                  deletfood(index);
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -86,17 +84,35 @@ class _BreakfastState extends State<Breakfast> {
                   SlidableAction(
                     onPressed: (context) {
                       if (isProductInCart(data)) {
-                        // Product is already in the cart, show a message
                         final snackBar = SnackBar(
-                          content: Text('The product is already in the cart'),
+                          content: Row(
+                            children: [
+                              const Text('The product is already in the cart'),
+                              const SizedBox(width: 10),
+                              Lottie.asset(
+                                'assets/sad.json', // Replace with the actual image path
+                                width: 20, // Adjust the width as needed
+                                height: 20, // Adjust the height as needed
+                              ),
+                            ],
+                          ),
                           backgroundColor: Colors.red,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else {
-                        // Product is not in the cart, add it and show a different message
                         addToCart(data);
                         final snackBar = SnackBar(
-                          content: Text('Product added to the cart'),
+                          content: Row(
+                            children: [
+                              const Text('Product added to the cart'),
+                              const SizedBox(width: 10),
+                              Lottie.asset(
+                                'assets/smile.json', // Replace with the actual image path
+                                width: 20, // Adjust the width as needed
+                                height: 20, // Adjust the height as needed
+                              ),
+                            ],
+                          ),
                           backgroundColor: Colors.green,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
