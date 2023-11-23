@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:foodmenu/Screens/Pages/newdish.dart';
 import 'package:foodmenu/screens/sub_screens/rest.dart';
 import 'package:foodmenu/screens/sub_screens/term.dart';
+import 'package:lottie/lottie.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -35,40 +36,55 @@ class _SettingState extends State<Setting> {
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: Container(
-        color: const Color.fromARGB(255, 255, 255, 255),
-        child: ListView.separated(
-          itemCount: itemsList.length,
-          separatorBuilder: (context, index) => const Divider(),
-          itemBuilder: (BuildContext context, int index) {
-            final ItemData item = itemsList[index];
-            return Container(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Column(
-                  children: [
-                    ListTile(
-                      leading: Icon(
-                        item.icon,
-                        color: Color.fromARGB(255, 8, 8, 8),
-                      ),
-                      title: Text(
-                        item.name,
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontWeight: FontWeight.w700,
+      body: Column(
+        children: [
+          Lottie.asset(
+            'assets/setting.json', // Replace with the actual path to your image
+            // height: 200, // Set the height as per your requirement
+            width: double.infinity, // Take the full width of the body
+            fit: BoxFit.cover,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                child: ListView.separated(
+                  itemCount: itemsList.length,
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemBuilder: (BuildContext context, int index) {
+                    final ItemData item = itemsList[index];
+                    return Container(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              leading: Icon(
+                                item.icon,
+                                color: Color.fromARGB(255, 8, 8, 8),
+                              ),
+                              title: Text(
+                                item.name,
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              onTap: () {
+                                tap(item);
+                              },
+                            ),
+                          ],
                         ),
                       ),
-                      onTap: () {
-                        tap(item);
-                      },
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -88,10 +104,6 @@ class _SettingState extends State<Setting> {
         );
         break;
       case 'Exit':
-        // Handle exit logic here
-        // For example, you can use SystemNavigator.pop to close the app
-        // Note: This method may not work on all platforms.
-        // For a more robust solution, consider using platform-specific implementations.
         SystemNavigator.pop();
         break;
       case 'Reset App':

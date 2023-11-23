@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 
 import 'package:foodmenu/Database/model/model.dart';
-import 'package:foodmenu/Screens/Widgets/bottom.dart';
+
 import 'package:foodmenu/splash.dart';
 import 'package:hive/hive.dart';
 
