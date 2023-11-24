@@ -24,7 +24,7 @@ class _BottomBarState extends State<BottomBar> {
   final List<Widget> bottomBarPages = [
     Home(),
     Cart(),
-    item(
+    const item(
       name: '',
       cost: '',
       image: '',
@@ -47,7 +47,7 @@ class _BottomBarState extends State<BottomBar> {
           currentIndex: _currentIndex,
           backgroundColor: const Color.fromARGB(255, 0, 0, 0),
           selectedItemColor: const Color.fromARGB(255, 250, 14, 14),
-          unselectedItemColor: Color.fromARGB(255, 255, 255, 255),
+          unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
           onTap: (i) => setState(() => _currentIndex = i),
           items: [
             _buildNavItem("Home", Icons.house, 0),
@@ -68,7 +68,7 @@ class _BottomBarState extends State<BottomBar> {
       icon: Container(
         decoration: BoxDecoration(
           border: _currentIndex == index
-              ? Border(
+              ? const Border(
                   top: BorderSide(width: 2.0, color: Colors.white),
                 )
               : null,
@@ -76,7 +76,7 @@ class _BottomBarState extends State<BottomBar> {
         child: Icon(
           icon,
           color: _currentIndex == index
-              ? Color.fromARGB(255, 186, 34, 34)
+              ? const Color.fromARGB(255, 186, 34, 34)
               : const Color.fromARGB(255, 244, 239, 239),
         ),
       ),

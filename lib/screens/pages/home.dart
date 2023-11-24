@@ -11,11 +11,12 @@ import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
 import 'package:lottie/lottie.dart';
 
 class Home extends StatefulWidget {
-  Home({
+  const Home({
     Key? key,
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
@@ -29,27 +30,25 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          flexibleSpace: Container(
-            child: const Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage('assets/appbar.jpeg'),
-                    backgroundColor: Colors.white,
+          flexibleSpace: const Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage('assets/appbar.jpeg'),
+                  backgroundColor: Colors.white,
+                ),
+                SizedBox(width: 30),
+                GlowText(
+                  'Satisfy your cravings!',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 48, 50, 51),
                   ),
-                  SizedBox(width: 30),
-                  GlowText(
-                    'Satisfy your cravings!',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 48, 50, 51),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -253,8 +252,10 @@ class _HomeState extends State<Home> {
                                   children: [
                                     Text(
                                       data.name,
-                                      style:
-                                          const TextStyle(color: Colors.black),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          fontSize: 15),
                                     ),
                                     Text(
                                       data.category ?? 'default',

@@ -162,7 +162,11 @@ class _DesretsState extends State<Desrets> {
                         children: [
                           Text(
                             data.name,
-                            style: const TextStyle(color: Colors.black),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             data.category ?? 'default',

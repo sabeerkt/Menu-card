@@ -163,7 +163,11 @@ class _BreakfastState extends State<Breakfast> {
                         children: [
                           Text(
                             data.name,
-                            style: const TextStyle(color: Colors.black),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             data.category ?? 'default',

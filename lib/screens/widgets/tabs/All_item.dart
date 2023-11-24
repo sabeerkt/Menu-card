@@ -10,13 +10,12 @@ Widget AllItems() {
   return ValueListenableBuilder(
     valueListenable: FoodListNotifier,
     builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
-      
       return ListView.builder(
         itemCount: foodList.length,
         itemBuilder: (context, index) {
           final reversedIndex = foodList.length - 1 - index;
           final data = foodList[reversedIndex];
-          
+
           return Slidable(
             startActionPane: ActionPane(
               motion: const StretchMotion(),
@@ -148,7 +147,11 @@ Widget AllItems() {
                       children: [
                         Text(
                           data.name,
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           data.category ?? 'default',

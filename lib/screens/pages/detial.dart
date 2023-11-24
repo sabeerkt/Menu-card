@@ -112,7 +112,7 @@ class _DetailPageState extends State<DetailPage> {
                   const Text(
                     'Description',
                     style: TextStyle(
-                        fontSize: 26,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue),
                   ),
