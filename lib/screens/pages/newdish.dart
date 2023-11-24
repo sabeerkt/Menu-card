@@ -28,6 +28,40 @@ class _NewDishState extends State<NewDish> {
 
   XFile? pickedImage;
 
+  // Helper function to show an alert dialog
+  Future<void> _showAlertDialog(String message) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Container(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                Lottie.asset(
+                  'assets/newdish.json', // Replace with the path to your image
+                  height: 80, // Adjust the height as needed
+                ),
+                const SizedBox(
+                    height: 8), // Add some space between the image and text
+                const Text('Alert'),
+              ],
+            ),
+          ),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> _pickImage() async {
     showDialog(
       context: context,
@@ -118,10 +152,9 @@ class _NewDishState extends State<NewDish> {
                                   color: Colors.transparent,
                                   child: Center(
                                     child: Lottie.asset(
-                                      'assets/addimage.json', // Replace with your image asset
+                                      'assets/addimage.json',
                                       width: 68,
                                       height: 68,
-                                      // color: const Color.fromARGB(255, 0, 0, 0),
                                     ),
                                   ),
                                 ),
@@ -140,7 +173,7 @@ class _NewDishState extends State<NewDish> {
                   decoration: InputDecoration(
                     labelText: 'Name',
                     labelStyle: const TextStyle(
-                      color: Colors.pink,
+                      color: Color.fromARGB(255, 0, 0, 0),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -151,7 +184,7 @@ class _NewDishState extends State<NewDish> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
-                        color: Colors.pink,
+                        color: Color.fromARGB(255, 30, 165, 233),
                       ),
                     ),
                   ),
@@ -164,7 +197,7 @@ class _NewDishState extends State<NewDish> {
                   decoration: InputDecoration(
                     labelText: 'Cost',
                     labelStyle: const TextStyle(
-                      color: Colors.pink,
+                      color: Color.fromARGB(255, 0, 0, 0),
                     ),
                     prefixText: '\$',
                     enabledBorder: OutlineInputBorder(
@@ -176,7 +209,7 @@ class _NewDishState extends State<NewDish> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
-                        color: Colors.pink,
+                        color: Color.fromARGB(255, 30, 142, 233),
                       ),
                     ),
                   ),
@@ -198,6 +231,9 @@ class _NewDishState extends State<NewDish> {
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -241,9 +277,10 @@ class _NewDishState extends State<NewDish> {
                           hint: const Text(
                             'Select',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                            ),
                           ),
                           dropdownColor: Colors.white,
                           borderRadius: BorderRadius.circular(30),
@@ -267,7 +304,7 @@ class _NewDishState extends State<NewDish> {
                   decoration: InputDecoration(
                     labelText: 'Description',
                     labelStyle: const TextStyle(
-                      color: Colors.pink,
+                      color: Color.fromARGB(255, 0, 0, 0),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -278,7 +315,7 @@ class _NewDishState extends State<NewDish> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
-                        color: Colors.pink,
+                        color: Color.fromARGB(255, 30, 220, 233),
                       ),
                     ),
                   ),
@@ -317,7 +354,9 @@ class _NewDishState extends State<NewDish> {
     if (_name.isEmpty ||
         _cost.isEmpty ||
         _description.isEmpty ||
-        _category.isEmpty) {
+        _category.isEmpty ||
+        pickedImage == null) {
+      _showAlertDialog('All fields, including the image, are required.');
       return;
     }
 
@@ -330,6 +369,15 @@ class _NewDishState extends State<NewDish> {
     );
 
     addFood(food);
+
+    // Clear the text fields and reset selected values
+    _nameController.clear();
+    _costController.clear();
+    _descriptionController.clear();
+    _categoryController.clear();
+    selectedFoodType = 'breakfast';
+    pickedImage = null;
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => const BottomBar(name: '', cost: '', image: ''),

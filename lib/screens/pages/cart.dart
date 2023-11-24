@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/utility/dailogs/cart_dlt_dailog.dart';
 import 'package:foodmenu/utility/dailogs/clear_cart_dailog.dart';
-
 import 'package:lottie/lottie.dart';
 
 class QuantityPickerButton extends StatefulWidget {
@@ -70,12 +69,13 @@ class _CartState extends State<Cart> {
           title: const Text(
             "Cart",
             style: TextStyle(
-              color: Color.fromARGB(255, 255, 255, 255),
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
           flexibleSpace: Container(
-            color: const Color.fromARGB(255, 0, 0, 0),
+            color: Colors.black,
           ),
         ),
         body: ValueListenableBuilder(
@@ -109,13 +109,12 @@ class _CartState extends State<Cart> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: ListTile(
-                                tileColor:
-                                    const Color.fromARGB(255, 255, 255, 255),
+                                tileColor: Colors.white,
                                 leading: Container(
                                   height: double.infinity,
                                   width: 100,
                                   decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(8),
                                     image: cartdata.image != null
                                         ? DecorationImage(
                                             image:
@@ -127,8 +126,10 @@ class _CartState extends State<Cart> {
                                 ),
                                 title: Text(
                                   cartdata.name,
-                                  style: const TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 subtitle: Row(
@@ -153,8 +154,7 @@ class _CartState extends State<Cart> {
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.delete,
-                                          color:
-                                              Color.fromARGB(255, 255, 0, 0)),
+                                          color: Colors.red),
                                       onPressed: () {
                                         showDeleteConfirmationDialog(
                                             index, context);
@@ -165,7 +165,7 @@ class _CartState extends State<Cart> {
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xFF65B31D),
+                                        color: Colors.green,
                                       ),
                                     ),
                                   ],
@@ -180,11 +180,9 @@ class _CartState extends State<Cart> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        width: 2),
+                    border: Border.all(color: Colors.white, width: 2),
                     borderRadius: BorderRadius.circular(12),
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                    color: Colors.white,
                   ),
                   padding: const EdgeInsets.all(16),
                   child: Row(
@@ -216,7 +214,7 @@ class _CartState extends State<Cart> {
                           Text(
                             '\$${totalCost.toStringAsFixed(2)}',
                             style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.green,
                             ),
@@ -228,7 +226,7 @@ class _CartState extends State<Cart> {
                 ),
                 Container(
                   width: double.infinity,
-                  color: Colors.white, // Set background color to white
+                  color: Colors.white,
                   child: ElevatedButton(
                     onPressed: () {
                       setState(() {
@@ -236,9 +234,8 @@ class _CartState extends State<Cart> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      primary:
-                          Colors.white, // Set button background color to white
-                      onPrimary: Colors.red, // Set button text color to red
+                      primary: Colors.red,
+                      onPrimary: Colors.white,
                     ),
                     child: const Text('Clear Cart'),
                   ),

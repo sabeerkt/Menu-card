@@ -94,7 +94,7 @@ class _SettingState extends State<Setting> {
       case 'Terms and Conditions':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const term()),
+          MaterialPageRoute(builder: (context) => const Term()),
         );
         break;
       case 'New dish':
