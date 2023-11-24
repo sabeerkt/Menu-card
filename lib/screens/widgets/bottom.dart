@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Screens/Pages/cart.dart';
 import 'package:foodmenu/Screens/Pages/home.dart';
-
 import 'package:foodmenu/screens/pages/item.dart';
-
 import 'package:foodmenu/screens/pages/setting.dart';
-
 import 'package:foodmenu/screens/widgets/chart.dart';
 
 class BottomBar extends StatefulWidget {
@@ -48,51 +45,39 @@ class _BottomBarState extends State<BottomBar> {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
-          backgroundColor: const Color.fromARGB(
-              255, 0, 0, 0), // Set the background color to black
-          selectedItemColor:
-              Colors.white, // Set the selected item color to white
-          unselectedItemColor: Colors.white,
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          selectedItemColor: const Color.fromARGB(255, 250, 14, 14),
+          unselectedItemColor: Color.fromARGB(255, 255, 255, 255),
           onTap: (i) => setState(() => _currentIndex = i),
-          items: const [
-            BottomNavigationBarItem(
-              label: "Home",
-              icon: Icon(
-                // Icons.home_sharp,
-                Icons.house,
-
-                color: Color.fromARGB(255, 244, 239, 239),
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "cart",
-              icon: Icon(
-                Icons.shopping_bag_sharp,
-                color: Color.fromARGB(255, 244, 239, 239),
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "item",
-              icon: Icon(
-                Icons.restaurant,
-                color: Color.fromARGB(255, 255, 255, 255),
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "chart",
-              icon: Icon(
-                Icons.pie_chart,
-                color: Color.fromARGB(255, 255, 255, 255),
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "setting",
-              icon: Icon(
-                Icons.settings,
-                color: Color.fromARGB(255, 255, 255, 255),
-              ),
-            ),
+          items: [
+            _buildNavItem("Home", Icons.house, 0),
+            _buildNavItem("Cart", Icons.shopping_bag_sharp, 1),
+            _buildNavItem("Item", Icons.restaurant, 2),
+            _buildNavItem("Chart", Icons.pie_chart, 3),
+            _buildNavItem("Setting", Icons.settings, 4),
           ],
+        ),
+      ),
+    );
+  }
+
+  BottomNavigationBarItem _buildNavItem(
+      String label, IconData icon, int index) {
+    return BottomNavigationBarItem(
+      label: label,
+      icon: Container(
+        decoration: BoxDecoration(
+          border: _currentIndex == index
+              ? Border(
+                  top: BorderSide(width: 2.0, color: Colors.white),
+                )
+              : null,
+        ),
+        child: Icon(
+          icon,
+          color: _currentIndex == index
+              ? Color.fromARGB(255, 186, 34, 34)
+              : const Color.fromARGB(255, 244, 239, 239),
         ),
       ),
     );
