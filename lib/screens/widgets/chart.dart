@@ -61,7 +61,6 @@ Widget chartt({required foods}) {
                 double cost = double.parse(foods[index].cost);
                 double totalCost = calculateTotalCost(foods);
                 double percentage = (cost / totalCost) * 100;
-                final image = foods[index].image;
                 final name = foods[index].name;
 
                 return PieChartSectionData(
@@ -71,13 +70,13 @@ Widget chartt({required foods}) {
                   value: percentage,
                   title: '''₹ ${cost.toStringAsFixed(2)}
       (${percentage.toStringAsFixed(2)}%)
-      ${name}
+      $name
       ''',
-                  radius: 80,
+                  radius: 50,
                   titleStyle: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      color: Color.fromARGB(255, 0, 0, 0)),
                 );
               },
             ),

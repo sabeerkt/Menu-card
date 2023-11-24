@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
             child: const Center(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
+                children: [
                   CircleAvatar(
                     radius: 30,
                     backgroundImage: AssetImage('assets/appbar.jpeg'),

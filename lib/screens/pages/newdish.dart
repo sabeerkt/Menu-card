@@ -22,7 +22,7 @@ class _NewDishState extends State<NewDish> {
   final TextEditingController _costController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
-  String selectedMoneyType = 'breakfast';
+  String selectedFoodType = 'breakfast';
 
   final List<String> _foodTypeList = ['breakfast', 'desserts', 'drinks'];
 
@@ -215,7 +215,7 @@ class _NewDishState extends State<NewDish> {
                         ),
                         const SizedBox(width: 10),
                         DropdownButton<String>(
-                          value: selectedMoneyType,
+                          value: selectedFoodType,
                           items: _foodTypeList.map((e) {
                             return DropdownMenuItem<String>(
                               value: e,
@@ -250,7 +250,7 @@ class _NewDishState extends State<NewDish> {
                           underline: Container(),
                           onChanged: (value) {
                             setState(() {
-                              selectedMoneyType = value!;
+                              selectedFoodType = value!;
                               _categoryController.text = value;
                             });
                           },
