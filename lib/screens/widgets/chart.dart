@@ -20,22 +20,23 @@ class _chartState extends State<chart> {
       length: 1,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           title: const Text(
             'chart',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
           ),
           centerTitle: true, // Center-align the title text
-          elevation: 0,
+          elevation: 5,
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(text: 'price'),
             ],
-            labelColor: Colors.white, // Set the selected tab text color
+            labelColor:
+                Color.fromARGB(255, 0, 0, 0), // Set the selected tab text color
             unselectedLabelColor: Color.fromARGB(
                 255, 155, 149, 149), // Set the unselected tab text color
             labelStyle: TextStyle(
-              fontSize: 16, // You can adjust the font size if needed
+              fontSize: 20, // You can adjust the font size if needed
             ),
           ),
         ),

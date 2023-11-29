@@ -69,13 +69,13 @@ class _CartState extends State<Cart> {
           title: const Text(
             "Cart",
             style: TextStyle(
-              color: Colors.white,
+              color: Color.fromARGB(255, 0, 0, 0),
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
           flexibleSpace: Container(
-            color: Colors.black,
+            color: const Color.fromARGB(255, 255, 255, 255),
           ),
         ),
         body: ValueListenableBuilder(

@@ -45,9 +45,9 @@ class _BottomBarState extends State<BottomBar> {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-          selectedItemColor: const Color.fromARGB(255, 250, 14, 14),
-          unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          selectedItemColor: Color.fromARGB(255, 34, 150, 186),
+          unselectedItemColor: Color.fromARGB(255, 0, 0, 0),
           onTap: (i) => setState(() => _currentIndex = i),
           items: [
             _buildNavItem("Home", Icons.house, 0),
@@ -69,15 +69,16 @@ class _BottomBarState extends State<BottomBar> {
         decoration: BoxDecoration(
           border: _currentIndex == index
               ? const Border(
-                  top: BorderSide(width: 2.0, color: Colors.white),
+                  top: BorderSide(
+                      width: 2.0, color: Color.fromARGB(255, 0, 0, 0)),
                 )
               : null,
         ),
         child: Icon(
           icon,
           color: _currentIndex == index
-              ? const Color.fromARGB(255, 186, 34, 34)
-              : const Color.fromARGB(255, 244, 239, 239),
+              ? Color.fromARGB(255, 34, 150, 186)
+              : Color.fromARGB(255, 0, 0, 0),
         ),
       ),
     );

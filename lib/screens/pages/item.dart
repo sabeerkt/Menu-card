@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
+
 import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
 import 'package:foodmenu/Screens/Widgets/Tabs/Deserts.dart';
 import 'package:foodmenu/Screens/Widgets/Tabs/breakfast.dart';
@@ -28,20 +29,19 @@ class _itemState extends State<item> {
   // Future<void> _deleteFood(name) async {
   @override
   Widget build(BuildContext context) {
-
-    //to get show the iteam that saved 
-    getfood();
+    //to get show the iteam that saved
+    getFood();
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           title: const Text(
             'Item',
             style: TextStyle(
                 color: Color.fromARGB(
-                    255, 255, 255, 255)), // Set the text color to white
+                    255, 0, 0, 0)), // Set the text color to white
           ),
           centerTitle: true,
           elevation: 0,
@@ -54,7 +54,7 @@ class _itemState extends State<item> {
             ],
 
             labelColor: Color.fromARGB(
-                255, 255, 255, 255), // Set the selected tab text color to black
+                255, 0, 0, 0), // Set the selected tab text color to black
             unselectedLabelColor: Color.fromARGB(255, 126, 123, 123),
           ),
           actions: [

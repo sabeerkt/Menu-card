@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/model/model.dart';
 import 'package:hive/hive.dart';
 
-
 ValueNotifier<List<Food>> FoodListNotifier = ValueNotifier([]);
 List<Food> cartitems = [];
 
@@ -14,11 +13,12 @@ Future<void> addFood(Food value) async {
   FoodListNotifier.notifyListeners();
 }
 
-getfood() async {
+getFood() async {
   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
   FoodListNotifier.value.clear();
   FoodListNotifier.value.addAll(Fooddb.values);
   FoodListNotifier.notifyListeners();
+  
 }
 
 Future<void> updateFood(int index, Food newValue) async {
@@ -26,15 +26,14 @@ Future<void> updateFood(int index, Food newValue) async {
   await Fooddb.putAt(index, newValue);
 
   print(Fooddb.values);
-  getfood(); // Refresh the list after update
+  getFood(); // Refresh the list after update
 }
 
 Future<void> deletfood(int index) async {
   final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
   await Fooddb.deleteAt(index);
-  getfood();
+  getFood();
 }
-
 
 //cart
 Future<void> addToCart(Food data) async {
@@ -50,11 +49,7 @@ Future<void> addToCart(Food data) async {
 loadCart() async {
   final cartdb = await Hive.openBox<Food>('cart_db');
 
-  
-
   final values = cartdb.values;
-
-  
 
   cartitems.clear();
   cartitems = values.toList();
