@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Database/model/model.dart';
+import 'package:foodmenu/model/model.dart';
+
 import 'package:hive/hive.dart';
 
 ValueNotifier<List<Food>> FoodListNotifier = ValueNotifier([]);

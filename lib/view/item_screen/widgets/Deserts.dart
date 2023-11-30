@@ -2,31 +2,32 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
-import 'package:foodmenu/Database/model/model.dart';
+import 'package:foodmenu/db_functions/db_function.dart';
+import 'package:foodmenu/model/model.dart';
+
 import 'package:foodmenu/view/detail_screen/detial.dart';
 
 import 'package:lottie/lottie.dart';
 
 late final String name;
 
-class Bevarge extends StatefulWidget {
-  const Bevarge({super.key});
+class Desrets extends StatefulWidget {
+  const Desrets({super.key});
 
   @override
-  State<Bevarge> createState() => _BevargeState();
+  State<Desrets> createState() => _DesretsState();
 }
 
-class _BevargeState extends State<Bevarge> {
+class _DesretsState extends State<Desrets> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: FoodListNotifier,
       builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
+        // foodList = foodList.reversed.toList();
         final filteredBreakfastList = foodList
-            .where((food) => food.category?.contains('drinks') == true)
+            .where((food) => food.category?.contains('desserts') == true)
             .toList();
-
         return ListView.builder(
           itemCount: filteredBreakfastList.length,
           itemBuilder: (context, index) {
@@ -34,7 +35,7 @@ class _BevargeState extends State<Bevarge> {
             // Return a Card widget for each item
             return Slidable(
               startActionPane: ActionPane(
-                motion: StretchMotion(),
+                motion: const StretchMotion(),
                 children: [
                   SlidableAction(
                     onPressed: (context) {

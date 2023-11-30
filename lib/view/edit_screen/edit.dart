@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
+import 'package:foodmenu/db_functions/db_function.dart';
+import 'package:foodmenu/model/model.dart';
 import 'package:foodmenu/widgets/bottom.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
-import 'package:foodmenu/Database/model/model.dart';
+
 import 'package:foodmenu/utility/utilty.dart';
 
 class EditDish extends StatefulWidget {

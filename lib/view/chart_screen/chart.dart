@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
+
+import 'package:foodmenu/db_functions/db_function.dart';
 
 class chart extends StatefulWidget {
   const chart({Key? key}) : super(key: key);

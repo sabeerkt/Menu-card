@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
-import 'package:foodmenu/Database/model/model.dart';
+
+import 'package:foodmenu/db_functions/db_function.dart';
+import 'package:foodmenu/model/model.dart';
 import 'package:foodmenu/view/detail_screen/detial.dart';
-import 'package:foodmenu/view/widgets/tabs/All_item.dart';
+import 'package:foodmenu/view/item_screen/widgets/All_item.dart';
+
 import 'package:lottie/lottie.dart';
 
 class Home extends StatefulWidget {

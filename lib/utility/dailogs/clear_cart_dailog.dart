@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/db_functions/db_function.dart';
+
 
 Future<void> showClearCartConfirmationDialog(BuildContext ctx) async {
   return showDialog<void>(

@@ -1,6 +1,7 @@
 // Alert box when deleting the cart product
   import 'package:flutter/material.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/db_functions/db_function.dart';
+
 
 Future<void> showDeleteConfirmationDialog(int index , BuildContext ctx ) async {
     return showDialog<void>(

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/db_functions/db_function.dart';
+
 import 'package:foodmenu/utility/dailogs/cart_dlt_dailog.dart';
 import 'package:foodmenu/utility/dailogs/clear_cart_dailog.dart';
 import 'package:lottie/lottie.dart';

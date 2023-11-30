@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/db_functions/db_function.dart';
+import 'package:foodmenu/model/model.dart';
 
-import 'package:foodmenu/Database/model/model.dart';
 import 'package:foodmenu/widgets/splash.dart';
 
 
