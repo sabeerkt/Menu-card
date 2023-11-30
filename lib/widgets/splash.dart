@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/unboard.dart';
+import 'package:foodmenu/widgets/unboard.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {

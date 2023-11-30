@@ -1,7 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:foodmenu/screens/pages/edit.dart';
+import 'package:foodmenu/view/edit_screen/edit.dart';
+
+
+
 
 class DetailPage extends StatefulWidget {
   final int index;

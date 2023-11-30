@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Screens/Pages/cart.dart';
-import 'package:foodmenu/Screens/Pages/home.dart';
-import 'package:foodmenu/screens/pages/item.dart';
-import 'package:foodmenu/screens/pages/setting.dart';
-import 'package:foodmenu/screens/widgets/chart.dart';
+import 'package:foodmenu/view/cart_screen/cart.dart';
+import 'package:foodmenu/view/chart_screen/chart.dart';
+import 'package:foodmenu/view/home_screen/home.dart';
+import 'package:foodmenu/view/item_screen/item.dart';
+import 'package:foodmenu/view/setting_screen/setting.dart';
+
+
 
 class BottomBar extends StatefulWidget {
   final String name;

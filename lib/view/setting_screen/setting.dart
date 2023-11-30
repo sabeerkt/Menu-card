@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:foodmenu/Screens/Pages/newdish.dart';
-import 'package:foodmenu/screens/sub_screens/rest.dart';
-import 'package:foodmenu/screens/sub_screens/term.dart';
+import 'package:foodmenu/view/newdish_screen/newdish.dart';
+import 'package:foodmenu/view/reset_screen/reset.dart';
+import 'package:foodmenu/view/terms_screen/term.dart';
+
+
+
 import 'package:lottie/lottie.dart';
 
 class Setting extends StatefulWidget {

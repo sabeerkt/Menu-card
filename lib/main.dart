@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
-import 'package:foodmenu/splash.dart';
+import 'package:foodmenu/widgets/splash.dart';
+
 
 import 'package:hive_flutter/adapters.dart';
 

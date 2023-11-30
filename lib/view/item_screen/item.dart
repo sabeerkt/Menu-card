@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
+import 'package:foodmenu/view/sesrch_screen/search.dart';
+import 'package:foodmenu/view/widgets/tabs/All_item.dart';
+import 'package:foodmenu/view/widgets/tabs/Deserts.dart';
+import 'package:foodmenu/view/widgets/tabs/breakfast.dart';
+import 'package:foodmenu/view/widgets/tabs/drinks.dart';
 
-import 'package:foodmenu/Screens/Widgets/Tabs/All_item.dart';
-import 'package:foodmenu/Screens/Widgets/Tabs/Deserts.dart';
-import 'package:foodmenu/Screens/Widgets/Tabs/breakfast.dart';
-import 'package:foodmenu/Screens/Widgets/Tabs/drinks.dart';
 
-import 'package:foodmenu/screens/widgets/search.dart';
+
+
+
 
 class item extends StatefulWidget {
   final String name;

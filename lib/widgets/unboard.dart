@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/Screens/Widgets/bottom.dart';
+import 'package:foodmenu/widgets/bottom.dart';
+
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key});

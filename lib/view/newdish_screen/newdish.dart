@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:foodmenu/Database/Function/db_function.dart';
 import 'package:foodmenu/Database/model/model.dart';
-import 'package:foodmenu/Screens/Widgets/bottom.dart';
+import 'package:foodmenu/widgets/bottom.dart';
+
 
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
