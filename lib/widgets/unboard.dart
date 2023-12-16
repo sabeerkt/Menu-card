@@ -29,12 +29,12 @@ class OnboardingPage extends StatelessWidget {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) =>
-                      const BottomBar(
+                      const BottomBar(name: '', cost: '', image: '',
 
-                        name: '', 
+                       
         
         
-        cost: '', image: '',
+        
                       ), // Replace 'NextPage' with your desired next page
                 ),
               );

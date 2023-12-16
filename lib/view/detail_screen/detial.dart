@@ -6,7 +6,7 @@ import 'package:foodmenu/view/edit_screen/edit.dart';
 
 
 
-class DetailPage extends StatefulWidget {
+class DetailPage extends StatelessWidget {
   final int index;
   final String name;
   final String cost;
@@ -25,14 +25,9 @@ class DetailPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DetailPage> createState() => _DetailPageState();
-}
-
-class _DetailPageState extends State<DetailPage> {
-  @override
   Widget build(BuildContext context) {
     final TextEditingController categoryController =
-        TextEditingController(text: widget.category);
+        TextEditingController(text: category);
 
     return Scaffold(
       appBar: AppBar(
@@ -55,14 +50,14 @@ class _DetailPageState extends State<DetailPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => EditDish(
-                    imageController: TextEditingController(text: widget.image),
-                    nameController: TextEditingController(text: widget.name),
-                    costController: TextEditingController(text: widget.cost),
+                    imageController: TextEditingController(text: image),
+                    nameController: TextEditingController(text: name),
+                    costController: TextEditingController(text: cost),
                     descriptionController:
-                        TextEditingController(text: widget.description),
+                        TextEditingController(text: description),
                     categoryController: categoryController,
                     isEditMode: true,
-                    index: widget.index,
+                    index: index,
                   ),
                 ),
               );
@@ -84,8 +79,8 @@ class _DetailPageState extends State<DetailPage> {
                 height: 350,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: widget.image != null
-                        ? FileImage(File(widget.image))
+                    image: image != null
+                        ? FileImage(File(image))
                         : const AssetImage("assets/juice.jfif")
                             as ImageProvider,
                     fit: BoxFit.cover,
@@ -101,13 +96,13 @@ class _DetailPageState extends State<DetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildInfoRow("Name:", widget.name),
+                  _buildInfoRow("Name:", name),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildInfoBox("Category:", widget.category!),
-                      _buildInfoBox("Cost:", '\$${widget.cost}',
+                      _buildInfoBox("Category:", category!),
+                      _buildInfoBox("Cost:", '\$$cost',
                           color: Colors.green),
                     ],
                   ),
@@ -121,7 +116,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    widget.description,
+                    description,
                     style: const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 10),

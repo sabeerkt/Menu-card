@@ -4,18 +4,16 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'package:foodmenu/db_functions/db_function.dart';
+import 'package:provider/provider.dart';
 
-class chart extends StatefulWidget {
+class chart extends StatelessWidget {
   const chart({Key? key}) : super(key: key);
 
   @override
-  State<chart> createState() => _chartState();
-}
-
-class _chartState extends State<chart> {
-  @override
   Widget build(BuildContext context) {
-    List foods = FoodListNotifier.value;
+    final chartdbprovider = Provider.of<dbfunction>(context, listen: false);
+    //  List foods = chartdbprovider.FoodListNotifier.value;
+    List foods = chartdbprovider.fooddata;
     return DefaultTabController(
       initialIndex: 0,
       length: 1,
@@ -50,47 +48,48 @@ class _chartState extends State<chart> {
 }
 
 Widget chartt({required foods}) {
-  return ValueListenableBuilder(
-    valueListenable: FoodListNotifier,
-    builder: (context, value, child) {
-      return SizedBox(
-        height: 500,
-        child: PieChart(
-          PieChartData(
-            sections: List.generate(
-              foods.length,
-              (index) {
-                double cost = double.parse(foods[index].cost);
-                double totalCost = calculateTotalCost(foods);
-                double percentage = (cost / totalCost) * 100;
-                final name = foods[index].name;
+  return Consumer<dbfunction>(
+    builder: (context, value, child) => SizedBox(
+      height: 500,
+      child: PieChart(
+        PieChartData(
+          sections: List.generate(
+            foods.length,
+            (index) {
+              double cost = double.parse(foods[index].cost);
+              double totalCost = value.calculateTotalCost(foods);
+              double percentage = (cost / totalCost) * 100;
+              final name = foods[index].name;
 
-                return PieChartSectionData(
-                  badgePositionPercentageOffset: 1.1,
-                  titlePositionPercentageOffset: .4,
-                  color: getRandomColor(),
-                  value: percentage,
-                  title: '''₹ ${cost.toStringAsFixed(2)}
-      (${percentage.toStringAsFixed(2)}%)
-      $name
-      ''',
-                  radius: 50,
-                  titleStyle: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                );
-              },
-            ),
-            sectionsSpace: 5,
-            centerSpaceRadius: 90,
-            startDegreeOffset: 0,
+              return PieChartSectionData(
+                badgePositionPercentageOffset: 1.1,
+                titlePositionPercentageOffset: .4,
+                color: chartColors[index],
+                value: percentage,
+                title: '''₹ ${cost.toStringAsFixed(2)}
+        (${percentage.toStringAsFixed(2)}%)
+        $name
+        ''',
+                radius: 50,
+                titleStyle: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 0, 0)),
+              );
+            },
           ),
+          sectionsSpace: 5,
+          centerSpaceRadius: 90,
+          startDegreeOffset: 0,
         ),
-      );
-    },
+      ),
+    ),
   );
 }
+List<Color> chartColors = List.generate(
+  10, // Adjust the size based on the number of data points
+  (index) => getRandomColor(),
+);
 
 Color getRandomColor() {
   return Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);

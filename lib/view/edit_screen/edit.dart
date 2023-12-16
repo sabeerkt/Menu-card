@@ -8,6 +8,7 @@ import 'package:foodmenu/widgets/bottom.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:foodmenu/utility/utilty.dart';
+import 'package:provider/provider.dart';
 
 class EditDish extends StatefulWidget {
   final TextEditingController nameController;
@@ -209,10 +210,10 @@ class _EditDishState extends State<EditDish> {
                               borderRadius: BorderRadius.circular(30),
                               underline: Container(),
                               onChanged: (value) {
-                                setState(() {
+                              
                                   selectedCategory = value!;
                                   widget.categoryController.text = value;
-                                });
+                              
                               },
                             ),
                           ],
@@ -279,9 +280,9 @@ class _EditDishState extends State<EditDish> {
                   Navigator.pop(context);
                   XFile? picked =
                       await ImageUtils.pickImage(ImageSource.camera);
-                  setState(() {
+                 
                     pickedImage = picked;
-                  });
+                  
                 },
                 child: const Text('Camera'),
               ),
@@ -290,9 +291,9 @@ class _EditDishState extends State<EditDish> {
                   Navigator.pop(context);
                   XFile? picked =
                       await ImageUtils.pickImage(ImageSource.gallery);
-                  setState(() {
+              
                     pickedImage = picked;
-                  });
+               
                 },
                 child: const Text('Gallery'),
               ),
@@ -304,6 +305,7 @@ class _EditDishState extends State<EditDish> {
   }
 
   Future<void> onnUpdateDishButton() async {
+   // final editdbprovider = Provider.of<dbfunction>(context);
     final _name = widget.nameController.text.trim();
     final _cost = widget.costController.text.trim();
     final _Description = widget.descriptionController.text.trim();
@@ -320,11 +322,13 @@ class _EditDishState extends State<EditDish> {
       image: pickedImage?.path ?? '',
     );
 
-    updateFood(widget.index, _foodd);
+   Provider.of<dbfunction>(context, listen: false). updateFood(widget.index, _foodd);
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => const BottomBar(name: '', cost: '', image: ''),
+        builder: (ctx) =>  const BottomBar( 
+          name: '', cost: '', image: '',
+        ),
       ),
     );
   }

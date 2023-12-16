@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
+
 import 'package:foodmenu/db_functions/db_function.dart';
 import 'package:foodmenu/view/item_screen/widgets/All_item.dart';
 import 'package:foodmenu/view/item_screen/widgets/Deserts.dart';
 import 'package:foodmenu/view/item_screen/widgets/breakfast.dart';
 import 'package:foodmenu/view/item_screen/widgets/drinks.dart';
-import 'package:foodmenu/view/sesrch_screen/search.dart';
+
 import 'package:provider/provider.dart';
-
-
-
-
-
 
 class item extends StatefulWidget {
   final String name;
@@ -31,15 +27,19 @@ class item extends StatefulWidget {
 }
 
 class _itemState extends State<item> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<dbfunction>(context, listen: false).loadrecipes();
+  }
+
   // Future<void> _deleteFood(name) async {
   @override
   Widget build(BuildContext context) {
+    final itemdbprovider = Provider.of<dbfunction>(context);
     //to get show the iteam that saved
-   // getFood();
-    void initState() {
-    super.initState();
-    Provider.of<DbFunctionProvider>(context, listen: false).getFood();
-  }
+    itemdbprovider.getFood();
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
@@ -56,10 +56,10 @@ class _itemState extends State<item> {
           elevation: 0,
           bottom: const TabBar(
             tabs: <Widget>[
-              Tab(text: 'all'),
-              Tab(text: 'breakfast'),
-              Tab(text: 'desrets'),
-              Tab(text: 'bevarge'),
+              Tab(text: 'All'),
+              Tab(text: 'Breakfast'),
+              Tab(text: 'Desrets'),
+              Tab(text: 'Bevarge'),
             ],
 
             labelColor: Color.fromARGB(
@@ -69,26 +69,26 @@ class _itemState extends State<item> {
           actions: [
             Row(
               children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Search(),
-                        ));
-                  },
-                  icon: const Icon(Icons.search),
-                ),
+                // IconButton(
+                //   onPressed: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //           builder: (context) => const Search(),
+                //         ));
+                //   },
+                //   icon: const Icon(Icons.search),
+                // ),
               ],
             )
           ],
         ),
         body: TabBarView(
           children: [
-            AllItems(),
-            const Breakfast(),
-            const Desrets(),
-            const Bevarge(),
+            AllItems(context),
+            Breakfast(),
+            Desrets(),
+            Bevarge(),
           ],
         ),
       ),

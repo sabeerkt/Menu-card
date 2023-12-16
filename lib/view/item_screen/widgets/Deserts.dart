@@ -2,30 +2,27 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:foodmenu/controller/cart_provider.dart';
 import 'package:foodmenu/db_functions/db_function.dart';
 import 'package:foodmenu/model/model.dart';
 
 import 'package:foodmenu/view/detail_screen/detial.dart';
 
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 late final String name;
 
-class Desrets extends StatefulWidget {
+class Desrets extends StatelessWidget {
   const Desrets({super.key});
 
   @override
-  State<Desrets> createState() => _DesretsState();
-}
-
-class _DesretsState extends State<Desrets> {
-  @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: FoodListNotifier,
-      builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
-        // foodList = foodList.reversed.toList();
-        final filteredBreakfastList = foodList
+    // foodList = foodList.reversed.toList();
+
+    return Consumer2<dbfunction, CartProvider>(
+      builder: (context, value, cartvalue, child) {
+        final filteredBreakfastList = value.fooddata
             .where((food) => food.category?.contains('desserts') == true)
             .toList();
         return ListView.builder(
@@ -70,7 +67,7 @@ class _DesretsState extends State<Desrets> {
                                   style: TextStyle(color: Colors.red),
                                 ),
                                 onPressed: () {
-                                  deletfood(index);
+                                  value.deletfood(index);
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -84,7 +81,7 @@ class _DesretsState extends State<Desrets> {
                   ),
                   SlidableAction(
                     onPressed: (context) {
-                      if (isProductInCart(data)) {
+                      if (cartvalue.isProductInCart(data)) {
                         final snackBar = SnackBar(
                           content: Row(
                             children: [
@@ -101,7 +98,7 @@ class _DesretsState extends State<Desrets> {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else {
-                        addToCart(data);
+                        cartvalue.addToCart(data);
                         final snackBar = SnackBar(
                           content: Row(
                             children: [
@@ -194,6 +191,6 @@ class _DesretsState extends State<Desrets> {
   }
 }
 
-bool isProductInCart(Food product) {
-  return cartitems.any((item) => item.name == product.name);
-}
+// bool isProductInCart(Food product) {
+//   return cartitems.any((item) => item.name == product.name);
+// }

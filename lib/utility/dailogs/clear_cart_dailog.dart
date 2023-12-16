@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/controller/cart_provider.dart';
 import 'package:foodmenu/db_functions/db_function.dart';
+import 'package:provider/provider.dart';
 
 
 Future<void> showClearCartConfirmationDialog(BuildContext ctx) async {
+  
   return showDialog<void>(
     context: ctx,
     builder: (BuildContext context) {
+       final resetdbprovider = Provider.of<CartProvider>(context);
       return AlertDialog(
         content: const Column(
           mainAxisSize: MainAxisSize.min,
@@ -30,8 +34,8 @@ Future<void> showClearCartConfirmationDialog(BuildContext ctx) async {
               style: TextStyle(color: Colors.red),
             ),
             onPressed: () {
-              clearCart();
-              FoodListNotifier.value = [];
+             resetdbprovider. clearCart();
+              // FoodListNotifier.value = [];
 
               Navigator.of(context).pop();
             },

@@ -1,12 +1,15 @@
 // Alert box when deleting the cart product
   import 'package:flutter/material.dart';
+import 'package:foodmenu/controller/cart_provider.dart';
 import 'package:foodmenu/db_functions/db_function.dart';
+import 'package:provider/provider.dart';
 
 
 Future<void> showDeleteConfirmationDialog(int index , BuildContext ctx ) async {
     return showDialog<void>(
       context: ctx,
       builder: (BuildContext context) {
+         final resetdbprovider = Provider.of<CartProvider>(context);
         return AlertDialog(
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -31,8 +34,8 @@ Future<void> showDeleteConfirmationDialog(int index , BuildContext ctx ) async {
                 style: TextStyle(color: Colors.red),
               ),
               onPressed: () {
-                deleteCartItem(index);
-                FoodListNotifier.value = [];
+               resetdbprovider. deleteCartItem(index);
+                // FoodListNotifier.value = [];
                 Navigator.of(context).pop();
               },
             ),

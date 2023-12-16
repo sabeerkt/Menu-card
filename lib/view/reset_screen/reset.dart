@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:foodmenu/db_functions/db_function.dart';
+import 'package:foodmenu/controller/cart_provider.dart';
 import 'package:foodmenu/model/model.dart';
 
 import 'package:foodmenu/widgets/splash.dart';
 
-
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
 Future<void> resetDB(
   BuildContext context,
@@ -21,9 +21,9 @@ Future<void> resetDB(
           style: TextStyle(color: Color.fromARGB(255, 255, 0, 0)),
         ),
         content: const Text(
-          "This will delete this cart. This action is irreversible. Do you want to continue ?",
+          "This will delete this cart. This action is irreversible. Do  you want to continue ?",
           style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-        ),
+        ), 
         actions: <Widget>[
           TextButton(
             child: const Text(
@@ -49,9 +49,10 @@ Future<void> resetDB(
   );
 
   if (confirmReset == true) {
-    final FoodMenu_db = await Hive.openBox<Food>('FoodMenu_db');
-    FoodMenu_db.clear();
-    cartitems.clear();
+    final resetdbprovider = Provider.of<CartProvider>(context);
+    final foodmenuDb = await Hive.openBox<Food>('FoodMenu_db');
+    foodmenuDb.clear();
+  resetdbprovider.  cartitems.clear();
 
     Navigator.pushReplacement(
         context,

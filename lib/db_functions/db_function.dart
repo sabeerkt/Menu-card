@@ -1,86 +1,38 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:foodmenu/model/model.dart';
 
-import 'package:hive/hive.dart';
-
-const foodtransactionDbName = 'data';
-
-class DbFunctionProvider extends ChangeNotifier {
-  List<Food> foodtransactionList = [];
-//ValueNotifier<List<Food>> FoodListNotifier = ValueNotifier([]);
-  List<Food> cartitems = [];
+class dbfunction extends ChangeNotifier {
+  List<Food> fooddata = [];
+  List<Food> foundrecipe = [];
 
   Future<void> addFood(Food value) async {
-    final Fooddb = await Hive.openBox<Food>(foodtransactionDbName);
+    final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
     Fooddb.add(value);
-    getFood();
+    fooddata.add(value);
     notifyListeners();
   }
 
-  getFood() async {
-    final Fooddb = await Hive.openBox<Food>(foodtransactionDbName);
-    foodtransactionList.clear();
-    foodtransactionList.addAll(Fooddb.values);
+  Future<void> getFood() async {
+    final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
+    fooddata.clear();
+    fooddata.addAll(Fooddb.values);
     notifyListeners();
   }
 
   Future<void> updateFood(int index, Food newValue) async {
-    final Fooddb = await Hive.openBox<Food>(foodtransactionDbName);
-    foodtransactionList.clear();
-    foodtransactionList.addAll(Fooddb.values);
+    final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
     await Fooddb.putAt(index, newValue);
-
-    // print(Fooddb.values);
-    getFood();
-    // Refresh the list after update
+    await getFood(); // Refresh the list after update
     notifyListeners();
   }
 
   Future<void> deletfood(int index) async {
-    final Fooddb = await Hive.openBox<Food>(foodtransactionDbName);
+    final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
     await Fooddb.deleteAt(index);
-    getFood();
+    await getFood();
     notifyListeners();
   }
-
-//cart
-  Future<void> addToCart(Food data) async {
-    final cartdb = await Hive.openBox<Food>(foodtransactionDbName);
-    data.count = 1;
-    cartitems.add(data);
-    cartdb.add(data);
-    loadCart();
-    notifyListeners();
-  }
-
-//load the cart
-
-  loadCart() async {
-    final cartdb = await Hive.openBox<Food>(foodtransactionDbName);
-
-    final values = cartdb.values;
-
-    cartitems.clear();
-    cartitems = values.toList();
-    notifyListeners();
-  }
-
-  deleteCartItem(int id) async {
-    final cartdb = await Hive.openBox<Food>(foodtransactionDbName);
-    cartdb.deleteAt(id);
-    cartitems.removeAt(id);
-    loadCart();
-    notifyListeners();
-  }
-
-  void clearCart() async {
-    final cartdb = await Hive.openBox<Food>(foodtransactionDbName);
-    cartdb.clear();
-    cartitems.clear();
-    notifyListeners();
-  }
-//chart calcultion
 
   double calculateTotalCost(List<Food> foods) {
     double totalCost = 0;
@@ -90,12 +42,22 @@ class DbFunctionProvider extends ChangeNotifier {
     return totalCost;
   }
 
-//totaling of the cart prodct
-  double calculateTotalCostt() {
-    double totalCost = 0;
-    for (var food in cartitems) {
-      totalCost += double.parse(food.cost) * (food.count ?? 0);
+  loadrecipes() {
+    final allrecipes = fooddata;
+    foundrecipe = allrecipes;
+    notifyListeners();
+  }
+
+  filterRecipes(String searchterm) {
+    if (searchterm.isEmpty) {
+      foundrecipe = fooddata;
+      notifyListeners();
+    } else {
+      foundrecipe = fooddata
+          .where((Food recipe) =>
+              recipe.name.toLowerCase().contains(searchterm.toLowerCase()))
+          .toList();
+      notifyListeners();
     }
-    return totalCost;
   }
 }

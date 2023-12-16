@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_glow/flutter_glow.dart';
-import 'package:foodmenu/controller/add_screen_provider.dart';
 
 import 'package:foodmenu/db_functions/db_function.dart';
 import 'package:foodmenu/model/model.dart';
@@ -21,14 +20,13 @@ class NewDish extends StatefulWidget {
 }
 
 class _NewDishState extends State<NewDish> {
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _costController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
-  // String selectedFoodType = 'breakfast';
+  String selectedFoodType = 'breakfast';
 
-   final List<String> _foodTypeList = ['breakfast', 'desserts', 'drinks'];
+  final List<String> _foodTypeList = ['breakfast', 'desserts', 'drinks'];
 
   XFile? pickedImage;
 
@@ -80,9 +78,8 @@ class _NewDishState extends State<NewDish> {
                   Navigator.pop(context);
                   XFile? picked =
                       await ImagePicker().pickImage(source: ImageSource.camera);
-                  setState(() {
-                    pickedImage = picked;
-                  });
+
+                  pickedImage = picked;
                 },
                 child: const Text('Camera'),
               ),
@@ -91,9 +88,8 @@ class _NewDishState extends State<NewDish> {
                   Navigator.pop(context);
                   XFile? picked = await ImagePicker()
                       .pickImage(source: ImageSource.gallery);
-                  setState(() {
-                    pickedImage = picked;
-                  });
+
+                  pickedImage = picked;
                 },
                 child: const Text('Gallery'),
               ),
@@ -103,21 +99,13 @@ class _NewDishState extends State<NewDish> {
       },
     );
   }
-   void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, () {
-      Provider.of<AddScreenProvider>(context, listen: false)
-          .resetselecteditems();
-      //Provider.of<AddScreenProvider>(context, listen: false).resetdate();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    final addprovider=Provider.of<AddScreenProvider>(context);
+   
+
     return SafeArea(
       child: Scaffold(
-        
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
@@ -133,7 +121,6 @@ class _NewDishState extends State<NewDish> {
           ),
         ),
         body: SingleChildScrollView(
-          
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
@@ -247,7 +234,7 @@ class _NewDishState extends State<NewDish> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Row(
@@ -265,52 +252,44 @@ class _NewDishState extends State<NewDish> {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Consumer<AddScreenProvider>(
-                          builder: (context, value, child) {
-                            return DropdownButton<String>(
-                              value: addprovider.selectedFoodType,
-                              items:_foodTypeList.map((e) {
-                                return DropdownMenuItem<String>(
-                                  value: e,
-                                  child: Row(
-                                    children: [
-                                      const SizedBox(width: 10),
-                                      Text(e,
-                                          style: const TextStyle(fontSize: 18)),
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                              selectedItemBuilder: (BuildContext context) {
-                                return _foodTypeList.map((e) {
-                                  return Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      const SizedBox(width: 10),
-                                      Text(e,
-                                          style: const TextStyle(fontSize: 18)),
-                                    ],
-                                  );
-                                }).toList();
-                              },
-                              hint: const Text(
-                                'Select',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red,
-                                ),
+                        DropdownButton<String>(
+                          value: selectedFoodType,
+                          items: _foodTypeList.map((e) {
+                            return DropdownMenuItem<String>(
+                              value: e,
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 10),
+                                  Text(e, style: const TextStyle(fontSize: 18)),
+                                ],
                               ),
-                              dropdownColor: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
-                              underline: Container(),
-                              onChanged: (value) {
-                                
-                                  addprovider.selectedFoodType = value!;
-                                  _categoryController.text = value;
-                                
-                              },
                             );
+                          }).toList(),
+                          selectedItemBuilder: (BuildContext context) {
+                            return _foodTypeList.map((e) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  const SizedBox(width: 10),
+                                  Text(e, style: const TextStyle(fontSize: 18)),
+                                ],
+                              );
+                            }).toList();
+                          },
+                          hint: const Text(
+                            'Select',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                            ),
+                          ),
+                          dropdownColor: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                          underline: Container(),
+                          onChanged: (value) {
+                            selectedFoodType = value!;
+                            _categoryController.text = value;
                           },
                         ),
                       ],
@@ -370,13 +349,12 @@ class _NewDishState extends State<NewDish> {
     final _name = _nameController.text.trim();
     final _cost = _costController.text.trim();
     final _description = _descriptionController.text.trim();
-    final _category =  Provider.of<AddScreenProvider>(context, listen: false).selectedFoodType;
-
+    final _category = _categoryController.text.trim();
 
     if (_name.isEmpty ||
         _cost.isEmpty ||
         _description.isEmpty ||
-        _category!.isEmpty ||
+        _category.isEmpty ||
         pickedImage == null) {
       _showAlertDialog('All fields, including the image, are required.');
       return;
@@ -390,21 +368,24 @@ class _NewDishState extends State<NewDish> {
       image: pickedImage?.path ?? '',
     );
 
-    addFood(food);
+    Provider.of<dbfunction>(context, listen: false).addFood(food);
 
     // Clear the text fields and reset selected values
-    // _nameController.clear();
-    // _costController.clear();
-    // _descriptionController.clear();
-    // _categoryController.clear();
-    // selectedFoodType = 'breakfast';
-    // pickedImage = null;
+    _nameController.clear();
+    _costController.clear();
+    _descriptionController.clear();
+    _categoryController.clear();
+    selectedFoodType = 'breakfast';
+    pickedImage = null;
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => const BottomBar(name: '', cost: '', image: ''),
+        builder: (ctx) => BottomBar(
+          name: '',
+          cost: '',
+          image: '',
+        ),
       ),
-
     );
   }
 }

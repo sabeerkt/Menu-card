@@ -1,21 +1,15 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodmenu/view/newdish_screen/newdish.dart';
 import 'package:foodmenu/view/reset_screen/reset.dart';
+
 import 'package:foodmenu/view/terms_screen/term.dart';
-
-
-
 import 'package:lottie/lottie.dart';
 
-class Setting extends StatefulWidget {
-  const Setting({Key? key}) : super(key: key);
+class Setting extends StatelessWidget {
+  Setting({Key? key}) : super(key: key);
 
-  @override
-  State<Setting> createState() => _SettingState();
-}
-
-class _SettingState extends State<Setting> {
   final List<ItemData> itemsList = [
     ItemData(Icons.notes, 'Terms and Conditions'),
     ItemData(Icons.food_bank_outlined, 'New dish'),
@@ -42,9 +36,8 @@ class _SettingState extends State<Setting> {
       body: Column(
         children: [
           Lottie.asset(
-            'assets/setting.json', // Replace with the actual path to your image
-            // height: 200, // Set the height as per your requirement
-            width: double.infinity, // Take the full width of the body
+            'assets/setting.json',
+            width: double.infinity,
             fit: BoxFit.cover,
           ),
           Expanded(
@@ -75,7 +68,7 @@ class _SettingState extends State<Setting> {
                                 ),
                               ),
                               onTap: () {
-                                tap(item);
+                                tap(context, item);
                               },
                             ),
                           ],
@@ -92,7 +85,7 @@ class _SettingState extends State<Setting> {
     );
   }
 
-  void tap(ItemData item) {
+  void tap(BuildContext context, ItemData item) {
     switch (item.name) {
       case 'Terms and Conditions':
         Navigator.push(
@@ -124,3 +117,7 @@ class ItemData {
 
   ItemData(this.icon, this.name);
 }
+
+// void resetDB(BuildContext context) {
+//   // Implement your reset logic here
+// }
