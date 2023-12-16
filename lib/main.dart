@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/controller/add_screen_provider.dart';
 import 'package:foodmenu/db_functions/db_function.dart';
 import 'package:foodmenu/model/model.dart';
 
@@ -6,6 +7,7 @@ import 'package:foodmenu/widgets/splash.dart';
 
 
 import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +17,7 @@ Future<void> main() async {
     Hive.registerAdapter(FoodAdapter());
   }
   runApp(MyApp());
-  loadCart();
+ // loadCart();
 }
 
 class MyApp extends StatelessWidget {
@@ -23,10 +25,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'food',
-      home: SplashScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context)=> AddScreenProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'food',
+        home: SplashScreen(),
+      ),
     );
   }
 }

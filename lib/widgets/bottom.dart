@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodmenu/view/cart_screen/cart.dart';
 import 'package:foodmenu/view/chart_screen/chart.dart';
-import 'package:foodmenu/view/home_screen/home.dart';
+import 'package:foodmenu/view/newdish_screen/home.dart';
 import 'package:foodmenu/view/item_screen/item.dart';
 import 'package:foodmenu/view/setting_screen/setting.dart';
 

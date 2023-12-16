@@ -11,6 +11,7 @@ import 'package:foodmenu/view/detail_screen/detial.dart';
 import 'package:foodmenu/view/item_screen/widgets/All_item.dart';
 
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -23,10 +24,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final fooddata = FoodListNotifier.value;
+  final fooddata = 
 
   @override
   Widget build(BuildContext context) {
+    final dbprovider=Provider.of<DbFunctionProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -60,7 +62,7 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: ValueListenableBuilder(
-                valueListenable: FoodListNotifier,
+                valueListena,
                 builder:
                     (BuildContext context, List<Food> value, Widget? child) {
                   return SizedBox(
@@ -107,21 +109,36 @@ class _HomeState extends State<Home> {
             const SizedBox(
               height: 10,
             ),
-            ValueListenableBuilder(
-              valueListenable: FoodListNotifier,
-              builder: (BuildContext ctx, List<Food> foodList, Widget? child) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: fooddata.length,
+           
+                 Expanded(
+                  child: (Provider.of<DbFunctionProvider>(context)
+                .foodtransactionList
+                .isEmpty)?const Padding(
+                padding: EdgeInsets.only(left: 95, top: 500),
+                child: Text(
+                  'No transactions available',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              )  
+                : ListView.builder(
+                    itemCount:Provider.of<DbFunctionProvider>(context)
+                                .foodtransactionList
+                                .length, 
                     itemBuilder: (context, index) {
-                      final reversedIndex = fooddata.length - 1 - index;
-                      final data = fooddata[reversedIndex];
+                       final data = Provider.of<DbFunctionProvider>(context)
+                          .foodtransactionList
+                          .reversed
+                          .toList()[index];
+
+
+                      // final reversedIndex = fooddata.length - 1 - index;
+                      // final data = fooddata[reversedIndex];
                       return Slidable(
                         startActionPane: ActionPane(
                           motion: const StretchMotion(),
                           children: [
                             SlidableAction(
-                              onPressed: (context) {
+                                  onPressed: (context) {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {

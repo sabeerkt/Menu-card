@@ -6,6 +6,7 @@ import 'package:foodmenu/view/item_screen/widgets/Deserts.dart';
 import 'package:foodmenu/view/item_screen/widgets/breakfast.dart';
 import 'package:foodmenu/view/item_screen/widgets/drinks.dart';
 import 'package:foodmenu/view/sesrch_screen/search.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -34,7 +35,11 @@ class _itemState extends State<item> {
   @override
   Widget build(BuildContext context) {
     //to get show the iteam that saved
-    getFood();
+   // getFood();
+    void initState() {
+    super.initState();
+    Provider.of<DbFunctionProvider>(context, listen: false).getFood();
+  }
     return DefaultTabController(
       initialIndex: 0,
       length: 4,

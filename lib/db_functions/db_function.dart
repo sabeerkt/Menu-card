@@ -4,85 +4,98 @@ import 'package:foodmenu/model/model.dart';
 
 import 'package:hive/hive.dart';
 
-ValueNotifier<List<Food>> FoodListNotifier = ValueNotifier([]);
-List<Food> cartitems = [];
+const foodtransactionDbName = 'data';
 
-Future<void> addFood(Food value) async {
-  final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
-  Fooddb.add(value);
-  FoodListNotifier.value.add(value);
-  FoodListNotifier.notifyListeners();
-}
+class DbFunctionProvider extends ChangeNotifier {
+  List<Food> foodtransactionList = [];
+//ValueNotifier<List<Food>> FoodListNotifier = ValueNotifier([]);
+  List<Food> cartitems = [];
 
-getFood() async {
-  final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
-  FoodListNotifier.value.clear();
-  FoodListNotifier.value.addAll(Fooddb.values);
-  FoodListNotifier.notifyListeners();
-  
-}
+  Future<void> addFood(Food value) async {
+    final Fooddb = await Hive.openBox<Food>(foodtransactionDbName);
+    Fooddb.add(value);
+    getFood();
+    notifyListeners();
+  }
 
-Future<void> updateFood(int index, Food newValue) async {
-  final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
-  await Fooddb.putAt(index, newValue);
+  getFood() async {
+    final Fooddb = await Hive.openBox<Food>(foodtransactionDbName);
+    foodtransactionList.clear();
+    foodtransactionList.addAll(Fooddb.values);
+    notifyListeners();
+  }
 
-  print(Fooddb.values);
-  getFood(); // Refresh the list after update
-}
+  Future<void> updateFood(int index, Food newValue) async {
+    final Fooddb = await Hive.openBox<Food>(foodtransactionDbName);
+    foodtransactionList.clear();
+    foodtransactionList.addAll(Fooddb.values);
+    await Fooddb.putAt(index, newValue);
 
-Future<void> deletfood(int index) async {
-  final Fooddb = await Hive.openBox<Food>('FoodMenu_db');
-  await Fooddb.deleteAt(index);
-  getFood();
-}
+    // print(Fooddb.values);
+    getFood();
+    // Refresh the list after update
+    notifyListeners();
+  }
+
+  Future<void> deletfood(int index) async {
+    final Fooddb = await Hive.openBox<Food>(foodtransactionDbName);
+    await Fooddb.deleteAt(index);
+    getFood();
+    notifyListeners();
+  }
 
 //cart
-Future<void> addToCart(Food data) async {
-  final cartdb = await Hive.openBox<Food>('cart_db');
-  data.count = 1;
-  cartitems.add(data);
-  cartdb.add(data);
-  FoodListNotifier.notifyListeners();
-}
+  Future<void> addToCart(Food data) async {
+    final cartdb = await Hive.openBox<Food>(foodtransactionDbName);
+    data.count = 1;
+    cartitems.add(data);
+    cartdb.add(data);
+    loadCart();
+    notifyListeners();
+  }
 
 //load the cart
 
-loadCart() async {
-  final cartdb = await Hive.openBox<Food>('cart_db');
+  loadCart() async {
+    final cartdb = await Hive.openBox<Food>(foodtransactionDbName);
 
-  final values = cartdb.values;
+    final values = cartdb.values;
 
-  cartitems.clear();
-  cartitems = values.toList();
-}
+    cartitems.clear();
+    cartitems = values.toList();
+    notifyListeners();
+  }
 
-deleteCartItem(int id) async {
-  final cartdb = await Hive.openBox<Food>('cart_db');
-  cartdb.deleteAt(id);
-  cartitems.removeAt(id);
-  loadCart();
-}
+  deleteCartItem(int id) async {
+    final cartdb = await Hive.openBox<Food>(foodtransactionDbName);
+    cartdb.deleteAt(id);
+    cartitems.removeAt(id);
+    loadCart();
+    notifyListeners();
+  }
 
-void clearCart() async {
-  final cartdb = await Hive.openBox<Food>('cart_db');
-  cartdb.clear();
-  cartitems.clear();
-}
+  void clearCart() async {
+    final cartdb = await Hive.openBox<Food>(foodtransactionDbName);
+    cartdb.clear();
+    cartitems.clear();
+    notifyListeners();
+  }
 //chart calcultion
 
-double calculateTotalCost(List<Food> foods) {
-  double totalCost = 0;
-  for (var food in foods) {
-    totalCost += double.parse(food.cost);
+  double calculateTotalCost(List<Food> foods) {
+    double totalCost = 0;
+    for (var food in foods) {
+      totalCost += double.parse(food.cost);
+    }
+    return totalCost;
   }
-  return totalCost;
-}
 
 //totaling of the cart prodct
-double calculateTotalCostt() {
-  double totalCost = 0;
-  for (var food in cartitems) {
-    totalCost += double.parse(food.cost) * (food.count ?? 0);
+  double calculateTotalCostt() {
+    double totalCost = 0;
+    for (var food in cartitems) {
+      totalCost += double.parse(food.cost) * (food.count ?? 0);
+    }
+    return totalCost;
   }
-  return totalCost;
 }
